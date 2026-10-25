@@ -1,0 +1,168 @@
+
+===== ('我们->端侧(注入 seq-adopt)', 0, 'canvas_tag')  count=79 =====
+{"cId": "179B00010", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\"taskId\": \"1349658\", \"resourceId\": \"1349658\", \"sourceId\": \"1349658\", \"desktopId\": 1349658, \"classroomId\": \"UXHOVJJF\", \"classId\": 0, \"schoolId\": 0, \"content\": \"http://192.168.137.1:80/xh/ztktv4_resource/et0.7z\", \"zipUrl\": \"http://192.168.137.1:80/xh/ztktv4_resource/et0.7z\", \"name\": \"et0.7z\", \"itemType\": 31, \"type\": 1, \"status\": 1, \"isNeedDownLoad\": true, \"needDecode\": true, \"memo\": \"et\", \"createTime\": 0, \"updateTime\": 0}", "forward": 0, "senderId": 0, "type": 0, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 0, 'default_tag')  count=25 =====
+{"cId": "1797B01", "cmd": 11, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "", "forward": 0, "senderId": 0, "type": 0, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 100000, 'canvas_tag')  count=1 =====
+{"cId": "179E9900", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"url\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"fileUrl\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"downloadUrl\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"zipUrl\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"cwpUrl\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"path\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"id\\\": \\\"1349658\\\", \\\"taskId\\\": \\\"1349658\\\", \\\"resourceId\\\": \\\"1349658\\\", \\\"sourceId\\\": \\\"1349658\\\", \\\"desktopId\\\": 1349658, \\\"classroomId\\\": \\\"UXHOVJJF\\\", \\\"content\\\": \\\"http://192.168.137.1:80/sw100000.7z\\\", \\\"name\\\": \\\"sw.7z\\\", \\\"itemType\\\": 31, \\\"type\\\": 1, \\\"status\\\": 1, \\\"isNeedDownLoad\\\": true, \\\"needDecode\\\": true}", "forward": 0, "senderId": 0, "type": 100000, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 10010, 'server_tag')  count=1 =====
+{"cmd": 0, "ct": "", "from": "teacher", "gt": 0, "cId": "179P00081", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "{\"classroomId\": \"UXHOVJJF\", \"desktopId\": \"LAB_D1\", \"classId\": \"UXHOVJJF\", \"status\": 2, \"attendClass\": 1, \"classStatus\": 2, \"time\": 1792835450322}", "forward": 0, "senderId": 0, "type": 10010, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入 seq-adopt)', 1020007, 'simple_tea')  count=20 =====
+{"cmd": 2, "ct": "", "from": "teacher", "gt": 0, "cId": "179PA0000", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "simple_tea", "data": "[{\"index\": 1, \"localPath\": \"\", \"onlineUrl\": \"http://192.168.137.1/x.png\"}]", "forward": 0, "senderId": 0, "type": 1020007, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入 seq-adopt)', 1041000, 'server_tag')  count=28 =====
+{"cmd": 0, "ct": "", "from": "teacher", "gt": 0, "cId": "179P00080", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "{\"classroomId\": \"UXHOVJJF\", \"desktopId\": \"LAB_D1\", \"classId\": \"UXHOVJJF\", \"status\": 2, \"attendClass\": 1, \"classStatus\": 2, \"time\": 1792835450322}", "forward": 0, "senderId": 0, "type": 1041000, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入 seq-adopt)', 2, 'canvas_tag')  count=3 =====
+{"cId": "179E0200", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"url\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"fileUrl\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"downloadUrl\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"zipUrl\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"cwpUrl\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"path\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"id\\\": \\\"1349658\\\", \\\"taskId\\\": \\\"1349658\\\", \\\"resourceId\\\": \\\"1349658\\\", \\\"sourceId\\\": \\\"1349658\\\", \\\"desktopId\\\": 1349658, \\\"classroomId\\\": \\\"UXHOVJJF\\\", \\\"content\\\": \\\"http://192.168.137.1:80/sw2.7z\\\", \\\"name\\\": \\\"sw.7z\\\", \\\"itemType\\\": 31, \\\"type\\\": 1, \\\"status\\\": 1, \\\"isNeedDownLoad\\\": true, \\\"needDecode\\\": true}", "forward": 0, "senderId": 0, "type": 2, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 2, 'default_tag')  count=2 =====
+{"cId": "179P00061", "cmd": 0, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"taskId\": \"LAB_T1\", \"subTaskId\": \"LAB_S1\", \"allTaskId\": \"LAB_T1\", \"classroomId\": \"UXHOVJJF\", \"classroomName\": \"lab\", \"desktopId\": \"LAB_D1\", \"subDesktopId\": \"LAB_D1\", \"defaultDesktopId\": \"LAB_D1\", \"defaultDesktopName\": \"lab\", \"sourceId\": \"LAB_R1\", \"taskStatus\": 0, \"taskType\": 1, \"taskCreateMode\": 1, \"pptSource\": 1, \"isFromPPT\": 1, \"number\": 1, \"originTotalNumber\": 1, \"content\": \"lab\", \"memo\": \"\", \"createTime\": 1792831254536, \"expectedSendDate\": 1792831254536, \"completed\": false, \"showStatus\": 1, \"percent\": 0, \"progress\": \"0\", \"positive\": 1, \"negative\": 0, \"score\": 0.0, \"studyTime\": 0, \"viewedIds\": \"\", \"viewedNum\": 0, \"resourceInfo\": {\"sourceId\": \"LAB_R1\", \"taskId\": \"LAB_T1\", \"name\": \"poc7z\", \"type\": 1, \"zipUrl\": \"http://192.168.137.1/poc7z.7z\", \"createTime\": 1792831254536, \"downloadFilePath\": \"\", \"localPath\": \"\"}}", "forward": 0, "senderId": 0, "type": 2, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 20003, 'server_tag')  count=13 =====
+{"cId": "1797B07", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "", "forward": 0, "senderId": 0, "type": 20003, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 20005, 'canvas_tag')  count=5 =====
+{"cId": "179P00022", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "[{\"resourceId\": \"LAB_R1\", \"taskId\": \"LAB_T1\", \"subTaskId\": \"LAB_S1\", \"deskTopId\": \"\", \"status\": 1, \"resourceType\": 1, \"taskStatus\": 1, \"pptSource\": 1, \"name\": \"poc.cwp\", \"type\": \".cwp\", \"size\": 7282, \"viewedIds\": \"\", \"viewedNum\": 0, \"originTotalNumber\": 1, \"url\": \"http://192.168.137.1/poc.cwp\", \"fileUrl\": \"http://192.168.137.1/poc.cwp\", \"downloadUrl\": \"http://192.168.137.1/poc.cwp\", \"resourceUrl\": \"http://192.168.137.1/poc.cwp\", \"path\": \"http://192.168.137.1/poc.cwp\", \"sourceUrl\": \"http://192.168.137.1/poc.cwp\", \"cwpUrl\": \"http://192.168.137.1/poc.cwp\"}]", "forward": 0, "senderId": 0, "type": 20005, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 20005, 'server_tag')  count=32 =====
+{"cId": "1797B08", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "{\"id\": \"1349658\", \"answerName\": \"t\", \"imgUrl\": \"http://192.168.137.1:80/b3.png\", \"paintUrl\": \"http://192.168.137.1:80/b3.txt\"}", "forward": 0, "senderId": 0, "type": 20005, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 20008, 'server_tag')  count=2 =====
+{"cId": "179B00022", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "{\"id\": \"1349658\", \"imgUrl\": \"http://192.168.137.1:80/et2.png\", \"paintUrl\": \"http://192.168.137.1:80/et2.txt\", \"userId\": 2112229, \"isOpen\": 1}", "forward": 0, "senderId": 0, "type": 20008, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 20009, 'server_tag')  count=10 =====
+{"cId": "179C00002", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "{\"id\": \"1349658\", \"smallClassUrl\": \"[{\\\"time\\\": 1, \\\"url\\\": \\\"http://192.168.137.1:80/sc_test.mp4\\\"}]\"}", "forward": 0, "senderId": 0, "type": 20009, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 225, 'simple_tea')  count=7 =====
+{"cmd": 2, "ct": "", "from": "teacher", "gt": 0, "cId": "179PB0000", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "simple_tea", "data": "[{\"index\": 1, \"localPath\": \"\", \"onlineUrl\": \"http://192.168.137.1/x.png\"}]", "forward": 0, "senderId": 0, "type": 225, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入 seq-adopt)', 226, 'simple_tea')  count=14 =====
+{"cmd": 0, "ct": "", "from": "teacher", "gt": 0, "cId": "179PC1226", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "simple_tea", "data": "[{\"index\": 1, \"localPath\": \"\", \"onlineUrl\": \"http://192.168.137.1/x.png\"}]", "forward": 0, "senderId": 0, "type": 226, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入 seq-adopt)', 3, 'canvas_tag')  count=159 =====
+{"cId": "1797B03", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\"voiceId\": \"b1\", \"voiceUrl\": \"http://192.168.137.1:80/b1.7z\"}", "forward": 0, "senderId": 0, "type": 3, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 4, 'canvas_tag')  count=1 =====
+{"cId": "179E0400", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"url\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"fileUrl\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"downloadUrl\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"zipUrl\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"cwpUrl\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"path\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"id\\\": \\\"1349658\\\", \\\"taskId\\\": \\\"1349658\\\", \\\"resourceId\\\": \\\"1349658\\\", \\\"sourceId\\\": \\\"1349658\\\", \\\"desktopId\\\": 1349658, \\\"classroomId\\\": \\\"UXHOVJJF\\\", \\\"content\\\": \\\"http://192.168.137.1:80/sw4.7z\\\", \\\"name\\\": \\\"sw.7z\\\", \\\"itemType\\\": 31, \\\"type\\\": 1, \\\"status\\\": 1, \\\"isNeedDownLoad\\\": true, \\\"needDecode\\\": true}", "forward": 0, "senderId": 0, "type": 4, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 5, 'canvas_tag')  count=1 =====
+{"cId": "179E0500", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"url\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"fileUrl\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"downloadUrl\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"zipUrl\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"cwpUrl\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"path\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"id\\\": \\\"1349658\\\", \\\"taskId\\\": \\\"1349658\\\", \\\"resourceId\\\": \\\"1349658\\\", \\\"sourceId\\\": \\\"1349658\\\", \\\"desktopId\\\": 1349658, \\\"classroomId\\\": \\\"UXHOVJJF\\\", \\\"content\\\": \\\"http://192.168.137.1:80/sw5.7z\\\", \\\"name\\\": \\\"sw.7z\\\", \\\"itemType\\\": 31, \\\"type\\\": 1, \\\"status\\\": 1, \\\"isNeedDownLoad\\\": true, \\\"needDecode\\\": true}", "forward": 0, "senderId": 0, "type": 5, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 50001, 'default_tag')  count=56 =====
+{"cId": "1797B05", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"port\": 80, \"hostName\": \"192.168.137.1\", \"rootPath\": \"/xh\", \"downloadWaitTime\": 0, \"startLimitRate\": 1.0}", "forward": 0, "senderId": 0, "type": 50001, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 50002, 'default_tag')  count=3 =====
+{"cId": "179D00001", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "", "forward": 0, "senderId": 0, "type": 50002, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 6, 'canvas_tag')  count=18 =====
+{"cId": "1797B04", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "ws://192.168.137.1:8890", "forward": 0, "senderId": 0, "type": 6, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入 seq-adopt)', 9144, 'server_tag')  count=15 =====
+{"cId": "1797B02", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "canary", "forward": 0, "senderId": 0, "type": 9144, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', '?', '\ufeff{"cId":"1791108584999","cmd":2,"from":"')  count=1 =====
+﻿{"cId":"1791108584999","cmd":2,"from":"2112229","gt":0,"id":"1349658","rt":1,"smsg":{"createTag":"canvas_tag","data":"MARVIS-INJECT-OK","forward":0,"senderId":0,"type":100000},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', '?', '{"cId":"179200002001","cmd":2,"from":"10')  count=2 =====
+{"cId":"179200002001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\\"taskId\\":\\"t1\\",\\"questionId\\":\\"q1\\",\\"zipUrl\\":\\"http://192.168.137.1/q.cwp\\",\\"url\\":\\"http://192.168.137.1/q.cwp\\",\\"type\\":1}","forward":0,"senderId":0,"type":20003,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', '?', '{"cId":"179200004001","cmd":2,"from":"10')  count=1 =====
+{"cId":"179200004001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\\"surveyId\\":\\"s1\\",\\"url\\":\\"http://192.168.137.1/survey.html\\",\\"title\\":\\"??\\"}","forward":0,"senderId":0,"type":40001,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', '?', '{"cId":"179200006001","cmd":2,"from":"10')  count=1 =====
+{"cId":"179200006001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\\"taskId\\":\\"t3\\",\\"questionId\\":\\"q3\\",\\"zipUrl\\":\\"http://192.168.137.1/q3.cwp\\",\\"url\\":\\"http://192.168.137.1/q3.cwp\\"}","forward":0,"senderId":0,"type":60001,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', '?', '{')  count=1 =====
+{
+
+===== ('我们->端侧(注入)', 0, 'canvas_tag')  count=3 =====
+{"cId": "90000", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"voiceId\\\": \\\"sw00\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw00_59458.7z\\\"}", "forward": 0, "senderId": 0, "type": 0, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 0, 'default_tag')  count=4 =====
+{"cId":"179201100001","cmd":11,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"","forward":0,"senderId":0,"type":0,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 1, 'canvas_tag')  count=2 =====
+{"cId": "90100", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\\\"voiceId\\\": \\\"sw01\\\", \\\"voiceUrl\\\": \\\"http://192.168.137.1:80/sw01_59476.7z\\\"}", "forward": 0, "senderId": 0, "type": 1, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 1, 'default_tag')  count=10 =====
+{"cId": "1791000000001", "cmd": 2, "from": "10001", "gt": 1, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "1", "forward": 0, "senderId": 0, "type": 1, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 1000004, 'default_tag')  count=174 =====
+{"cId": "1793000000001", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "1", "forward": 0, "senderId": 0, "type": 1000004, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 1007, 'wangwz_tag')  count=478 =====
+{"cId": "179200000030", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "wangwz_tag", "data": "{\"isOnLine\": false, \"onLine\": false}", "forward": 0, "senderId": 0, "type": 1007, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 2, 'default_tag')  count=4 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 2, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20003, 'default_tag')  count=1 =====
+{"cId":"179200003001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\"id\":\"1001\",\"userId\":2112229,\"isOpen\":1,\"imgUrl\":\"http://192.168.137.1/img1.png\",\"paintUrl\":\"http://192.168.137.1/paint1.png\",\"smallClassUrl\":\"http://192.168.137.1/small1.zip\",\"questionStatus\":1}","forward":0,"senderId":0,"type":20003,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20003, 'server_tag')  count=2 =====
+{"cId": "1797B07", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "server_tag", "data": "", "forward": 0, "senderId": 0, "type": 20003, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20005, 'default_tag')  count=1 =====
+{"cId":"179200005001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\"id\":\"1001\",\"userId\":2112229,\"isOpen\":1,\"imgUrl\":\"http://192.168.137.1/img1.png\",\"paintUrl\":\"http://192.168.137.1/paint1.png\",\"smallClassUrl\":\"http://192.168.137.1/small1.zip\",\"questionStatus\":1}","forward":0,"senderId":0,"type":20005,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20005, 'server_tag')  count=8 =====
+{"cId":"179200050001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"server_tag","data":"{\"id\":\"1349658\",\"answerName\":\"test\",\"imgUrl\":\"http://192.168.137.1/img_a.png\",\"paintUrl\":\"http://192.168.137.1/paint_a.txt\"}","forward":0,"senderId":0,"type":20005,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20007, 'default_tag')  count=1 =====
+{"cId":"179200007001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"{\"id\":\"1001\",\"userId\":2112229,\"isOpen\":1,\"imgUrl\":\"http://192.168.137.1/img1.png\",\"paintUrl\":\"http://192.168.137.1/paint1.png\",\"smallClassUrl\":\"http://192.168.137.1/small1.zip\",\"questionStatus\":1}","forward":0,"senderId":0,"type":20007,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20008, 'server_tag')  count=3 =====
+{"cId":"179200080001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"server_tag","data":"{\"id\":\"1349658\",\"imgUrl\":\"http://192.168.137.1/img_b.png\",\"paintUrl\":\"http://192.168.137.1/paint_b.txt\",\"userId\":2112229,\"isOpen\":1}","forward":0,"senderId":0,"type":20008,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 20009, 'server_tag')  count=2 =====
+{"cId":"179200090001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"server_tag","data":"{\"id\":\"1349658\",\"smallClassUrl\":\"[{\\\\\"time\\\\\":12,\\\\\"url\\\\\":\\\\\"http://192.168.137.1/small_a.7z\\\\\"}]\"}","forward":0,"senderId":0,"type":20009,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 2021, 'fangzl_tag')  count=103 =====
+{"cId": "1793000000001", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "fangzl_tag", "data": "1", "forward": 0, "senderId": 0, "type": 2021, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 3, 'canvas_tag')  count=17 =====
+{"cId":"179200003001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"canvas_tag","data":"{\"voiceId\":\"poc0001\",\"voiceUrl\":\"http://192.168.137.1:80/poc0001.7z\"}","forward":0,"senderId":0,"type":3,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 50001, 'default_tag')  count=243 =====
+{"cmd": 0, "ct": "", "from": "teacher", "gt": 0, "cId": "", "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"hostName\": \"192.168.137.1\", \"port\": 8080, \"rootPath\": \"/sdcard/xuehai/share\", \"downloadWaitTime\": 3, \"startLimitRate\": 0.015}", "forward": 0, "senderId": 0, "type": 50001, "userIds": "2112229"}}
+
+===== ('我们->端侧(注入)', 50002, 'default_tag')  count=2 =====
+{"cId":"179205000002","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"default_tag","data":"","forward":0,"senderId":0,"type":50002,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 6, '')  count=2 =====
+{"cId":"179200006076","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"","data":"ws://192.168.137.1:8890","forward":0,"senderId":0,"type":6,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 6, 'canvas_tag')  count=2 =====
+{"cId": "1797B04", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "ws://192.168.137.1:8890", "forward": 0, "senderId": 0, "type": 6, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 610, 'default_tag')  count=3 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 610, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 624, 'default_tag')  count=3 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 624, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 625, 'canvas_tag')  count=2 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "canvas_tag", "data": "{\"url\": \"http://192.168.137.1/micro.cwp\", \"microPath\": \"http://192.168.137.1/micro.cwp\", \"path\": \"http://192.168.137.1/micro.cwp\", \"fileUrl\": \"http://192.168.137.1/micro.cwp\", \"downloadUrl\": \"http://192.168.137.1/micro.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 625, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 627, 'default_tag')  count=3 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 627, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 628, 'default_tag')  count=3 =====
+{"cId": "179400000209", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 628, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 711, 'default_tag')  count=2 =====
+{"cId": "179400000009", "cmd": 2, "from": "10001", "gt": 0, "id": "1349658", "rt": 1, "smsg": {"classRoomId": "UXHOVJJF", "createTag": "default_tag", "data": "{\"url\": \"http://192.168.137.1/wenda.cwp\", \"microPath\": \"http://192.168.137.1/wenda.cwp\", \"path\": \"http://192.168.137.1/wenda.cwp\", \"fileUrl\": \"http://192.168.137.1/wenda.cwp\", \"downloadUrl\": \"http://192.168.137.1/wenda.cwp\", \"fileName\": \"wenda.cwp\", \"type\": 1, \"wendaId\": \"90001\"}", "forward": 0, "senderId": 0, "type": 711, "userIds": "2112229"}, "tags": ["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', 9144, 'server_tag')  count=3 =====
+{"cId":"179209144001","cmd":2,"from":"10001","gt":0,"id":"1349658","rt":1,"smsg":{"classRoomId":"UXHOVJJF","createTag":"server_tag","data":"canary","forward":0,"senderId":0,"type":9144,"userIds":"2112229"},"tags":["RWYZKUIF"]}
+
+===== ('我们->端侧(注入)', None, None)  count=1 =====
+{"type":50001,"data":"{\"hostName\":\"192.168.137.1\",\"port\":10000,\"rootPath\":\"/\",\"downloadWaitTime\":3,\"startLimitRate\":1.0}","classRoomId":"UXHOVJJF","createTag":"default_tag","senderId":10001,"forward":1,"userIds":""}
+
+===== ('端侧->我们', 100000, 'canvas_tag')  count=287 =====
+{"cId":"1791108584771","cmd":2,"from":"2112229","gt":0,"id":"1349658","rt":1,"smsg":{"createTag":"canvas_tag","data":"2112229","forward":0,"senderId":0,"type":100000},"tags":["RWYZKUIF"]}

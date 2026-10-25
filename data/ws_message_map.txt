@@ -1,0 +1,99 @@
+
+##### MessageHandleForCanvasHelper   tag=canvas_tag   entries=0
+
+##### MessageHandleForDefaultHelper   tag=default_tag   entries=0
+
+##### MessageHandleForFzlHelper   tag=fangzl_tag   entries=4
+  type=705        (0x2c1)  pswitch_3      action_change_emoji_permission
+  type=706        (0x2c2)  pswitch_2      action_change_enter_tip
+  type=707        (0x2c3)  pswitch_1      action_materials_praise
+  type=708        (0x2c4)  pswitch_0      action_red_green_light
+
+##### MessageHandleForOnlineHelper   tag=online_tag   entries=10
+  type=402        (0x192)  pswitch_a      code_tea_finish_sign_task
+  type=403        (0x193)  pswitch_9      code_stu_volume_quality
+  type=404        (0x194)  pswitch_8      code_tea_silent
+  type=405        (0x195)  pswitch_7      code_tea_silent_off
+  type=406        (0x196)  pswitch_6      code_tea_update_greetion
+  type=408        (0x198)  pswitch_4      action_code_set_play_music_pause
+  type=409        (0x199)  pswitch_3      action_code_set_play_music_start
+  type=410        (0x19a)  pswitch_2      code_get_room_id_from_tea
+  type=411        (0x19b)  pswitch_1      code_send_room_id_to_stu
+  type=412        (0x19c)  pswitch_0      code_send_enter_sign_to_stu
+
+##### MessageHandleForServerHelper   tag=server_tag   entries=18
+  type=10001      (0x2711)  pswitch_16     teacher_outline_action
+  type=10003      (0x2713)  pswitch_14     action_socket_person_change
+  type=10004      (0x2714)  pswitch_13     code_stu_report_sign_result_to_tea
+  type=10005      (0x2715)  pswitch_12     action_code_online_new_msg
+  type=10010      (0x271a)  pswitch_11     action_server_class
+  type=10011      (0x271b)  pswitch_10     action_seating_plan_update
+  type=10012      (0x271c)  pswitch_f      action_seating_plan_lock
+  type=100001     (0x186a1)  pswitch_e      action_photo_sign_like
+  type=100002     (0x186a2)  pswitch_d      action_sign_pic_status_change
+  type=110001     (0x1adb1)  pswitch_c      action_tea_class_record
+  type=110002     (0x1adb2)  pswitch_b      action_stu_class_record
+  type=110003     (0x1adb3)  pswitch_a      teacher_score
+  type=110004     (0x1adb4)  pswitch_a      teacher_score
+  type=1031000    (0xfbb58)  pswitch_9      action_tea_apply_join
+  type=1031004    (0xfbb5c)  pswitch_5      action_assistant_exit_linkage
+  type=1031005    (0xfbb5d)  pswitch_4      action_refresh_assistant_class
+  type=1041000    (0xfe268)  pswitch_1      action_tea_studying_start
+  type=1041001    (0xfe269)  pswitch_0      action_tea_studying_stop
+
+##### MessageHandleForWwzHelper   tag=action_simple_red_green_light_time   entries=17
+  type=302        (0x12e)  pswitch_1f     school_out_2_in_step1
+  type=303        (0x12f)  pswitch_1d     school_out_2_in_step2
+  type=304        (0x130)  pswitch_1c     school_out_2_in_step3
+  type=305        (0x131)  pswitch_1b     StudentDeskTopActivity doHandleMsg: CODE_SCHOOL_OUT_2_IN_FAIL
+  type=306        (0x132)  pswitch_1a     school_in_2_out_step1
+  type=307        (0x133)  pswitch_19     school_in_2_out_step2
+  type=308        (0x134)  pswitch_18     school_in_2_out_step3
+  type=309        (0x135)  pswitch_17     StudentDeskTopActivity doHandleMsg: CODE_SCHOOL_IN_2_OUT_FAIL
+  type=604        (0x25c)  pswitch_16     action_stu_send_quick_write_strokes_to_other
+  type=605        (0x25d)  pswitch_15     code_tea_send_msg_to_save_explain_strokes
+  type=606        (0x25e)  pswitch_14     action_code_tea_send_syn_quick_write_detail_to_stu
+  type=607        (0x25f)  pswitch_13     action_changed_quick_write_status
+  type=630        (0x276)  pswitch_12     action_tea_seating_plan_status
+  type=631        (0x277)  pswitch_11     action_simple_red_green_light_time
+  type=632        (0x278)  pswitch_10     action_red_green_light_data
+  type=3003       (0xbbb)  pswitch_d      action_remove_choice_detail
+  type=4003       (0xfa3)  pswitch_5      action_remove_completion_detail
+
+##### MessageHandleHelperForStudentList   tag=MessageHandleForStudentList   entries=0
+
+##### MessageHelperFromSimpleStudent   tag=action_simple_topic_all_clear   entries=0
+
+##### MessageHelperFromSimpleTeacher   tag=action_socket_simple_to_teacher_change_student_answer   entries=32
+  type=203        (0xcb)  pswitch_22     action_socket_tea_update_vote_result
+  type=205        (0xcd)  pswitch_20     action_socket_tea_end_vote
+  type=206        (0xce)  pswitch_1f     action_socket_tea_open_or_close_audio
+  type=221        (0xdd)  pswitch_1e     action_socket_tea_start_total_modify
+  type=222        (0xde)  pswitch_1d     action_socket_tea_start_single_modify
+  type=225        (0xe1)  pswitch_1b     action_socket_tea_correct_answer
+  type=226        (0xe2)  pswitch_1a     action_socket_tea_set_or_update_tea_answer
+  type=227        (0xe3)  pswitch_19     action_socket_tea_confirm_or_cancel_like
+  type=228        (0xe4)  pswitch_18     action_socket_tea_open_or_close_final_score
+  type=281        (0x119)  pswitch_17     action_socket_tea_send_geometry_stokes
+  type=282        (0x11a)  pswitch_16     action_socket_tea_send_geometry_stokes_gs
+  type=283        (0x11b)  pswitch_15     action_socket_tea_send_area_stokes
+  type=289        (0x121)  pswitch_14     action_socket_tea_send_one_page_all_info
+  type=290        (0x122)  pswitch_13     action_socket_tea_send_material_page_scale_info
+  type=291        (0x123)  pswitch_12     action_socket_tea_send_one_student_score
+  type=292        (0x124)  pswitch_11     action_socket_tea_send_handwriting_tool_more_config_change
+  type=293        (0x125)  pswitch_10     action_socket_simple_to_teacher_change_student_answer
+  type=294        (0x126)  pswitch_f      tea_send_can_not_found_student_answer_msg
+  type=295        (0x127)  pswitch_e      action_socket_tea_send_handwriting_tool_more_config_change_Explain
+  type=1020001    (0xf9061)  pswitch_d      action_tea_ask_stu_modify
+  type=1020002    (0xf9062)  pswitch_c      action_tea_correct_stu_homework
+  type=1020003    (0xf9063)  pswitch_b      action_doc_tea_ask_student_upload_curr_answer_msg
+  type=1020005    (0xf9065)  pswitch_a      action_tea_add_stu_homework_to_good_show_msg
+  type=1020006    (0xf9066)  pswitch_9      action_tea_update_document_strokes_msg
+  type=1020007    (0xf9067)  pswitch_8      action_tea_update_document_answer_msg
+  type=1021001    (0xf9449)  pswitch_6      action_tea_clear_ask_list
+  type=1021002    (0xf944a)  pswitch_5      action_tea_set_enable_visible
+  type=1021003    (0xf944b)  pswitch_4      action_newly_add_ask_msg
+  type=1021004    (0xf944c)  pswitch_3      action_enable_take_photo_msg
+  type=1021005    (0xf944d)  pswitch_2      action_enable_voice_msg
+  type=1021006    (0xf944e)  pswitch_1      action_enable_ai_msg
+  type=1021007    (0xf944f)  pswitch_0      action_enable_send_ask

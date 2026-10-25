@@ -1,0 +1,835 @@
+
+=== smali_classes11|com|xh|new_wenda|stu|presenter|ISingleAskQuestionPresenter.smali :25 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes11|com|xh|new_wenda|stu|presenter|ITotalAskQuestionPresenter.smali :21 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes11|com|xh|new_wenda|stu|presenter|impl|SingleAskQuestionPresenter.smali :629 ===
+actions: action_upload_question_filed, action_upload_question_success
+danger : 
+calls  : Lcom/xh/common/dialog/CommonDialogHelper;->getInstance(), Lcom/xh/common/dialog/CommonDialogHelper;->hideProgress(), Lcom/xh/new_wenda/stu/model/IStudentAskQuestionModel;->goToAskQuestion(Ljava/lang/String;Lcom/xh/new_wenda/stu/bean/req/AskQuestionReqBean;), Lcom/xh/new_wenda/stu/ui/ISingleAskQuestionView;->setSendClickEnable(Z)
+
+=== smali_classes11|com|xh|new_wenda|stu|presenter|impl|TotalAskQuestionPresenter.smali :248 ===
+actions: action_teacher_change_question_status, onMsgEvent: mAskEnable=
+danger : 
+calls  : Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/new_wenda/stu/ui/ITotalAskQuestionView;->setAskClickEnable(Z), Lcom/xh/new_wenda/stu/ui/ITotalAskQuestionView;->setSendClickEnable(ZZ)
+
+=== smali_classes11|com|xh|new_wenda|stu|ui|impl|SingleAskQuestionActivity.smali :1180 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/new_wenda/stu/presenter/impl/SingleAskQuestionPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes11|com|xh|new_wenda|stu|ui|impl|StuWendaListActivity.smali :1775 ===
+actions: action:, action_new_wenda_refresh_stu, action_new_wenda_single_info, cb, mTaskId:, prePareTaskId:, prepare_tool_class_syn, this:
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/new_wenda/common/ui/BaseWendaListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/new_wenda/stu/presenter/impl/StuWendaListPresenter;->getSingleInfo(Ljava/lang/String;Ljava/util/List;), Lcom/xh/new_wenda/stu/ui/impl/StuWendaListActivity;->onRefresh()
+
+=== smali_classes11|com|xh|new_wenda|stu|ui|impl|TotalAskQuestionActivity.smali :805 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/new_wenda/stu/presenter/impl/TotalAskQuestionPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes11|com|xh|new_wenda|tea|ui|impl|TeaWendaListActivity.smali :2318 ===
+actions: action_new_wenda_single_info, prepare_existence_syn, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/new_wenda/common/ui/BaseWendaListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/new_wenda/tea/presenter/impl/TeaWendaListPresenter;->getSingleInfo(Ljava/lang/String;Ljava/util/List;)
+
+=== smali_classes11|com|xh|newclassrecord|tea|ui|TeaClassrecordListActivity.smali :1549 ===
+actions: 
+danger : 
+calls  : Lcom/xh/newclassrecord/tea/adapter/TeaClassRecordListAdapter;->notifyItemChanged(I), Lcom/xh/newclassrecord/tea/bean/ClassRecordBean;->getEventId(), Lcom/xh/newclassrecord/tea/viewmodel/TeaClassrecordListViewModel;->getClassrecordIndex(Ljava/lang/String;Ljava/util/List;)
+
+=== smali_classes11|com|xh|pdf|cloudbean|ui|SimpleCloudBeanActivity.smali :293 ===
+actions: ACTION_PDF_SCROLL_STOP, action_pdf_page_scroll, action_pdf_zoom, action_socket_tea_send_handwriting_tool_more_config_change, handwriting_callback_data_action
+danger : 
+calls  : Lcom/xh/handwritingtool/weiget/HandWritingToolView;->restoreHandWritingConfig(Lcom/xh/handwritingtool/bean/HandWritingToolMoreConfig;), Lcom/xh/pdf/cloudbean/ui/StuCloudBeanActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pdf/presenter/impl/PdfPresenter;->onLocalDataChanged(Ljava/util/Vector;), Lcom/xh/pdf/presenter/impl/PdfPresenter;->setIgnore(Z)
+
+=== smali_classes11|com|xh|pdf|cloudbean|ui|StuCloudBeanActivity.smali :2283 ===
+actions: ACTION_SHOW_STU_ANSWER_CARD, InviteCorrectsPapersDialog, StuCloudBeanActivity, \u622a\u53d6\u4e91\u8c46\u5fae\u5f55\u4e2d\u7684\u56fe\u7247, action_pdf_page_scroll, action_pdf_zoom, action_socket_pdf_sync, action_stu_answer_card_result, action_tea_cloud_bean_pause, action_tea_cloud_bean_resume, action_tea_cloud_bean_start_comment, action_tea_cloud_bean_stop_comment, action_tea_invite_stu_correct_cloud_homework, action_tea_invite_stu_correct_cloud_homework2, action_tea_send_score_switch_msg, bundle, recover_current_page_handwriting, recover_note_cache_success, stu_start_screen_shot, sync, update_student_noconnection_status
+danger : save
+calls  : Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->classIsOver(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/comm/bean/channel/CloudInviteCorrectBean;->getCloudBeanId(), Lcom/xh/comm/bean/channel/CloudInviteCorrectBean;->isInvite(), Lcom/xh/comm/bean/channel/ScoreSwitchMsgBean;->getCloudBeanId(), Lcom/xh/comm/bean/channel/ScoreSwitchMsgBean;->getEnabledScoring()
+
+=== smali_classes11|com|xh|pdf|cloudbean|ui|StuCorrectCloudBeanActivity.smali :374 ===
+actions: action_tea_send_score_switch_msg, null cannot be cast to non-null type com.xh.comm.bean.channel.ScoreSwitchMsgBean, null cannot be cast to non-null type com.xh.pdf.cloudbean.presenter.StuPdfCloudBeanPresenter
+danger : 
+calls  : Lcom/xh/comm/bean/channel/ScoreSwitchMsgBean;->component4(), Lcom/xh/comm/bean/channel/ScoreSwitchMsgBean;->component5(), Lcom/xh/pdf/cloudbean/presenter/StuPdfCloudBeanPresenter;->getCloudBeanId(), Lcom/xh/pdf/cloudbean/ui/StuCorrectCloudBeanActivity;->showOrHideStuCorrectScoreLayout(Z)
+
+=== smali_classes11|com|xh|pdf|cloudbean|ui|TeaCloudBeanActivity.smali :5950 ===
+actions: ACTION_SAVE_ANSWER_CARD, ACTION_SHOW_TEA_CORRECT_LAYOUT, TeaCloudBeanActivity, action_eye_showing, action_stu_notify_tea_in_correct, cloud_message_enabledscoring_change, null cannot be cast to non-null type com.xh.comm.bean.channel.CloudNotifyCorrectBean, null cannot be cast to non-null type kotlin.Boolean, recover_current_page_handwriting
+danger : save
+calls  : Lcom/xh/comm/bean/channel/CloudNotifyCorrectBean;->getCorrectStuName(), Lcom/xh/comm/bean/channel/CloudNotifyCorrectBean;->getStuId(), Lcom/xh/comm/bean/channel/CloudNotifyCorrectBean;->getTaskId(), Lcom/xh/comm/bean/channel/CloudNotifyCorrectBean;->isStart(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->setVisibility(I)
+
+=== smali_classes11|com|xh|pdf|doc|document|ui|StuReadDocActivity.smali :318 ===
+actions: presenter.subTaskId, this$0
+danger : save
+calls  : Lcom/xh/pdf/doc/document/manager/ReadDocChannelManager;->sendStuUploadSuccess(Ljava/lang/String;), Lcom/xh/pdf/doc/document/manager/ViewDurationHelper;->onProactivelySaveViewDuration(Ljava/lang/String;Z), Lcom/xh/pdf/presenter/impl/PdfPresenter;->getSubTaskId()
+
+=== smali_classes11|com|xh|pdf|doc|document|ui|TeaReadDocActivity.smali :2117 ===
+actions: action_stu_send_upload_success_msg, null cannot be cast to non-null type kotlin.Boolean, tea_doc_answer_record_count_changed
+danger : 
+calls  : Lcom/xh/pdf/doc/document/ui/TeaReadDocActivity;->checkEnableAnswer(Z), Lcom/xh/pdf/doc/document/weiget/StudentListLayout;->increaseMsgCount(), Lcom/xh/pdf/ui/impl/tea/TeaPdfActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes11|com|xh|pdf|doc|homework|ui|StuHomeworkDocActivity.smali :5236 ===
+actions: ,  \u5f53\u524d\u4f5c\u4e1a\u6587\u6863taskId\uff1a , ACTION_SHOW_STU_ANSWER_CARD, StuDocActivity, StuHomeworkDocActivity, \u606d\u559c\uff01\u4f60\u7684\u4f5c\u4e1a\u88ab\u9009\u8fdb\u4f18\u5c55\uff01, \u622a\u53d6\u4e91\u8c46\u5fae\u5f55\u4e2d\u7684\u56fe\u7247, \u6536\u5230\u8001\u5e08\u4f5c\u4e1a\u6587\u6863\u72b6\u6001\u6539\u53d8: , \u786e\u5b9a, \u8001\u5e08\u5173\u95ed\u4e86\u7b54\u6848!, action_code_tea_doc_homework_info, action_doc_tea_ask_student_upload_curr_answer_msg, action_pdf_page_scroll, action_pdf_zoom, action_socket_pdf_sync, action_stu_answer_card_result, action_tea_add_stu_homework_to_good_show_msg, action_tea_ask_stu_modify, action_tea_cloud_bean_pause, action_tea_cloud_bean_resume, action_tea_cloud_bean_start_comment, action_tea_cloud_bean_stop_comment, action_tea_correct_stu_homework, action_tea_invite_stu_correct_doc_homework_msg, action_tea_invite_stu_correct_doc_homework_msg2, action_tea_invite_stu_correct_doc_homework_msg3, action_tea_update_document_strokes_msg, bundle, null cannot be cast to non-null type android.view.ViewGroup, recover_current_page_handwriting, stu_start_screen_shot, sync, update_student_noconnection_status
+danger : save, startService
+calls  : Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->classIsOver(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->startRecoverNoteCacheService(Ljava/lang/String;), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaAddGoodShowMsgBean;->getWorkId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaAddGoodShowMsgBean;->isAdd()
+
+=== smali_classes11|com|xh|pdf|doc|homework|ui|TeaHomeworkDocActivity.smali :6292 ===
+actions: ACTION_SAVE_ANSWER_CARD, ACTION_SHOW_TEA_CORRECT_LAYOUT, \u4fdd\u5b58, action_doc_tea_correct_stu_homework, action_socket_teacher_update_document_strokes_success, action_stu_notify_tea_in_correct_doc_msg, action_stu_submit_success, doc_message_enabledscoring_change, null cannot be cast to non-null type com.xh.business_module.db.StrokesCacheEntity, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocNotifyCorrectBean, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocSubmitSuccessMsgBean, null cannot be cast to non-null type kotlin.Boolean, null cannot be cast to non-null type kotlin.String, recover_current_page_handwriting, tea_doc_answer_record_count_changed, upload_correct_cache_success
+danger : save
+calls  : Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineScore(), Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineUrl(), Lcom/xh/business_module/db/StrokesCacheEntity;->getStuId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getCorrStuId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getCorrectStuName(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getOnlineFileUrl()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|SinglePagerActivity.smali :3039 ===
+actions: CANCEL_ANSWER, REFRESH_CROP_LIST, action_stu_notify_tea_in_correct_doc_msg, action_stu_submit_success, mSharedViewModel, null cannot be cast to non-null type com.xh.business_module.db.StrokesCacheEntity, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocNotifyCorrectBean, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocSubmitSuccessMsgBean, null cannot be cast to non-null type com.xh.pdf.papercorrect.ui.fragment.SingleTeaPagerFragment, upload_correct_cache_success
+danger : 
+calls  : Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineScore(), Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineUrl(), Lcom/xh/business_module/db/StrokesCacheEntity;->getStuId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getCorrStuId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getCorrectStuName(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getOnlineFileUrl()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|StuCorrectPagerActivity.smali :1039 ===
+actions: \u6536\u5230\u8001\u5e08\u4f5c\u4e1a\u6587\u6863\u72b6\u6001\u6539\u53d8: , action_code_tea_doc_homework_info, action_tea_invite_stu_correct_doc_homework_msg
+danger : 
+calls  : Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaInviteCorrectMsgBean;->getWorkId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaInviteCorrectMsgBean;->isInvite(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/pdf/doc/homework/weiget/DocStuCorrectScoreLayout2;->showOrHideCorrectScoreLayout(Ljava/lang/Boolean;), Lcom/xh/pdf/papercorrect/ui/StuCorrectPagerActivity;->hideInviteHelpCorrectDialog()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|StuPagerActivity.smali :527 ===
+actions: \u786e\u5b9a, \u8001\u5e08\u8981\u6c42\u4f60\u91cd\u62cd\u554a\uff01, action_tea_delete_and_retake_msg, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/CloudBeanDaoHelper;->clearStuStrokes(Ljava/lang/String;), Lcom/xh/business_module/dbhelper/CloudBeanDaoHelper;->getInstance(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaSendMsgBean;->getWorkId(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pdf/papercorrect/util/PagerRemindDialogHelper;->showOneButtonDialog(Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/functions/Function0;)
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|TotalPagerActivity.smali :2198 ===
+actions: action_stu_notify_tea_in_correct_doc_msg, action_stu_submit_success, message_sort_type_change, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocNotifyCorrectBean, null cannot be cast to non-null type com.xh.comm.bean.channel.IDocSocketCode.DocSubmitSuccessMsgBean, null cannot be cast to non-null type kotlin.String, prepare_existence_syn, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getCorrStuId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getOnlineFileUrl(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getScore(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocNotifyCorrectBean;->getStuId()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|fragment|PagerCompleteFragment.smali :1668 ===
+actions: \u606d\u559c\uff01\u4f60\u7684\u4f5c\u4e1a\u88ab\u9009\u8fdb\u4f18\u5c55\uff01, \u6536\u5230\u8001\u5e08\u4f5c\u4e1a\u6587\u6863\u72b6\u6001\u6539\u53d8: , action_code_tea_doc_homework_info, action_tea_add_stu_homework_to_good_show_msg, action_tea_correct_stu_homework, action_tea_delete_and_retake_msg, action_tea_invite_stu_correct_doc_homework_msg, action_tea_invite_stu_correct_doc_homework_msg2, action_tea_invite_stu_correct_doc_homework_msg3, message_delivery_time_has_passed, message_good_show_num_change, null cannot be cast to non-null type kotlin.Int
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/CloudBeanDaoHelper;->clearStuStrokes(Ljava/lang/String;), Lcom/xh/business_module/dbhelper/CloudBeanDaoHelper;->getInstance(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaAddGoodShowMsgBean;->getWeightCount(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaAddGoodShowMsgBean;->getWorkId(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaAddGoodShowMsgBean;->isAdd(), Lcom/xh/comm/bean/channel/IDocSocketCode$DocTeaCorrectMsgBean;->getWorkId()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|fragment|PagerIncompleteFragment.smali :2109 ===
+actions: \u6536\u5230\u8001\u5e08\u4f5c\u4e1a\u6587\u6863\u72b6\u6001\u6539\u53d8: , action_code_tea_doc_homework_info
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/stu/bean/other/DocHomeworkSetInfo;->getEnabledSubmit(), Lcom/xh/stu/bean/other/DocHomeworkSetInfo;->getTaskId(), Lcom/xh/stu/bean/other/DocHomeworkSetInfo;->getType()
+
+=== smali_classes11|com|xh|pdf|papercorrect|ui|fragment|SingleTeaPagerFragment.smali :609 ===
+actions: null cannot be cast to non-null type com.xh.business_module.db.StrokesCacheEntity, upload_correct_cache_success
+danger : 
+calls  : Lcom/xh/business_module/db/StrokesCacheEntity;->getLocalScore(), Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineScore(), Lcom/xh/business_module/db/StrokesCacheEntity;->getOnlineUrl(), Lcom/xh/business_module/db/StrokesCacheEntity;->getStuId(), Lcom/xh/pdf/doc/homework/manager/req/DocCommonReqManager$StuHomeworkResBean$StuHomeworkBean;->getStudentId(), Lcom/xh/pdf/doc/homework/manager/req/DocCommonReqManager$StuHomeworkResBean$StuHomeworkBean;->setReply(Ljava/lang/String;)
+
+=== smali_classes11|com|xh|pdf|ui|impl|stu|SimplePdfActivity.smali :469 ===
+actions: ACTION_PDF_SCROLL_STOP, action_pdf_page_scroll, action_pdf_zoom, action_socket_pdf_sync, action_socket_tea_send_handwriting_tool_more_config_change, handwriting_callback_data_action
+danger : 
+calls  : Lcom/xh/business_module/customview/SynHeadBar;->getHandWritingTool(), Lcom/xh/commbean/PdfSyncBean;->getCommand(), Lcom/xh/commbean/PdfSyncBean;->getTaskId(), Lcom/xh/commbean/PdfSyncBean;->isDraftS(), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->restoreHandWritingConfig(Lcom/xh/handwritingtool/bean/HandWritingToolMoreConfig;), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->setScratchPaperSelected(Z)
+
+=== smali_classes11|com|xh|pdf|ui|impl|stu|StuPdfActivity.smali :2690 ===
+actions: ACTION_SHOW_STU_ANSWER_CARD, action_new_syn_task, null cannot be cast to non-null type com.xh.business_module.division_class.PrePareToolAction.PrePareToolTaskModule, prepare_tool_class_syn, recover_current_page_handwriting, recover_note_cache_success
+danger : write
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/pdf/presenter/impl/PdfPresenter;->loadNote(I), Lcom/xh/pdf/presenter/impl/PdfPresenter;->recoverNoteCache(Ljava/lang/Object;), Lcom/xh/pdf/presenter/impl/PdfPresenter;->setPageNum(I), Lcom/xh/pdf/ui/impl/base/BasePdfActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pdf/ui/impl/stu/StuPdfActivity;->finish()
+
+=== smali_classes11|com|xh|pdf|ui|impl|stu|SynStuPdfActivity.smali :2419 ===
+actions: ACTION_PDF_SCROLL_STOP, SynStuPdfActivity, \u53f3\u4fa7\u6309\u94ae\u72b6\u6001isPlaying: , \u6536\u5230\u8001\u5e08\u906e\u6321\u53d8\u5316\u6307\u4ee4\uff1a, \u8001\u5e08\u53d1\u8d77\u4e86\u4fee\u6539\uff0c\u8bf7\u4fee\u6539\u540e\u91cd\u65b0\u4e0a\u4ea4, action_Can_exit_link, action_changed_quick_write_status_for_activity, action_new_syn_task, action_pdf_cover_change, action_pdf_page_scroll, action_pdf_zoom, action_prepare_exit_link, action_socket_pdf_sync, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes, action_study_modify, action_syn_channel_action, action_tea_start_explain, null cannot be cast to non-null type kotlin.Boolean, null cannot be cast to non-null type kotlin.Int, pdf, stu_screen_shoot_num, stu_screenshoot_num, stu_start_screen_shot, syn_tea_start_right_tools
+danger : save, write
+calls  : Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->doChangedStatus(Z), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->getInstance(), Lcom/xh/business_module/helper/SynRecoverHelper;->recoverComplete(), Lcom/xh/business_module/resourcehelper/ResourceHelper;->getInstance(), Lcom/xh/business_module/resourcehelper/ResourceHelper;->isDownloading(), Lcom/xh/comm/utils/ScreenshotViewUtil;->getInstance()
+
+=== smali_classes11|com|xh|pdf|ui|impl|tea|SelectClassesActivity.smali :974 ===
+actions: action_tea_cloud_bean_create_review
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pdf/ui/impl/tea/SelectClassesActivity;->finish()
+
+=== smali_classes11|com|xh|pdf|ui|impl|tea|TeaPdfActivity.smali :5208 ===
+actions: ACTION_SAVE_ANSWER_CARD, ACTION_SHOW_TEA_ANSWER_CARD, SHOW_OR_HIDE_SYN_HEAD_BAR, \u6536\u5230\u52a0\u9501\u89e3\u9501\u6d88\u606f\u4e86, action_create_callback_suc, action_donw_key, action_prepare_exit_link, action_socket_notifi_teacher_pdf_has_entry, action_socket_stu_get_sync_task_action, action_socket_tea_send_handwriting_tool_more_config_change, action_task_create_success, action_teacher_connect_lost, cb, close_explain_merging_strokes, handwriting_callback_data_action, homekey, prepare_existence_syn, prepare_tool_class_syn, recentapps, recover_current_page_handwriting, recover_note_cache_success, tea_black_open_record_last_syn_task, teacher_connbax_status, update_content_remarkes_task
+danger : save
+calls  : Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getClassRoomViewpagerDefaultPosition(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->setLastSynTaskId(Ljava/lang/String;), Lcom/xh/business_module/customview/SynHeadBar;->getAnswerCardView(Lcom/xh/business_module/customview/UnSynHeadBar$AnswerCardState;), Lcom/xh/business_module/customview/SynHeadBar;->getModifyBtn(), Lcom/xh/business_module/customview/UnSynHeadBar;->getAnswerCardView(Lcom/xh/business_module/customview/UnSynHeadBar$AnswerCardState;)
+
+=== smali_classes12|com|xh|pictureprocess|ui|impl|CropImageActivity.smali :913 ===
+actions: action_socket_tea_camera_change_permission, fromWs, simple_student_submit_answer_success, status
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pictureprocess/ui/impl/CropImageActivity;->finish()
+
+=== smali_classes12|com|xh|pictureprocess|ui|impl|ImageGalleryActivity.smali :2098 ===
+actions: action_socket_remove_image_path, image_gallery_finish_msg
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pictureprocess/adapter/ImageGalleryAdapter;->getMSelectedImageList(), Lcom/xh/pictureprocess/adapter/ImageGalleryAdapter;->notifyDataSetChanged(), Lcom/xh/pictureprocess/ui/impl/ImageGalleryActivity;->finish(), Lcom/xh/pictureprocess/ui/impl/ImageGalleryActivity;->setSelectImageSize(I)
+
+=== smali_classes12|com|xh|pictureprocess|ui|impl|TakeCameraActivity.smali :883 ===
+actions: action_socket_tea_camera_change_permission, fromWs, simple_student_submit_answer_success, status
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/pictureprocess/ui/impl/TakeCameraActivity;->finish()
+
+=== smali_classes12|com|xh|ppt|ui|impl|stu|StuPptDisplayActivity.smali :702 ===
+actions: \u65b0\u9875\u7b14\u8bb0\u5df2\u6062\u590d\uff0c\u67e5\u8be2\u6709\u6ca1\u6709\u8981\u6062\u590d\u7684\u6570\u636e, \u7b14\u8ff9\u64cd\u4f5c:\u9875\u7801\u66f4\u65b0\u6e05\u7a7a\u6240\u6709, prepare_tool_class_syn, recover_current_page_handwriting, recover_note_cache_success, update_current_page_handwriting
+danger : save, startService, write
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/notemanager/NoteFileManager;->checkFileHasExit(Ljava/lang/String;IZ), Lcom/xh/business_module/notemanager/NoteFileManager;->getInstance(), Lcom/xh/business_module/notemanager/bean/GetNoteCacheDataResponseBean;->getTaskId(), Lcom/xh/business_module/notemanager/bean/GetNoteCacheDataResponseBean;->getTeaAreaHeight(), Lcom/xh/business_module/notemanager/bean/GetNoteCacheDataResponseBean;->getTeaAreaWidth()
+
+=== smali_classes12|com|xh|ppt|ui|impl|sync|SimplePPTActivity.smali :505 ===
+actions: action_socket_ppt_sync, action_socket_tea_send_handwriting_tool_more_config_change, handwriting_callback_data_action
+danger : 
+calls  : Lcom/xh/business_module/customview/SynHeadBar;->getHandWritingTool(), Lcom/xh/commbean/PptSyncBean;->getCommand(), Lcom/xh/commbean/PptSyncBean;->getTaskId(), Lcom/xh/commbean/PptSyncBean;->isDraftS(), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->restoreHandWritingConfig(Lcom/xh/handwritingtool/bean/HandWritingToolMoreConfig;), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->setScratchPaperSelected(Z)
+
+=== smali_classes12|com|xh|ppt|ui|impl|sync|SyncPptDisplayActivity.smali :554 ===
+actions: SynStuPdfActivity, SyncPptDisplayActivity, \u53f3\u4fa7\u6309\u94ae\u72b6\u6001isPlaying: , \u5b66\u751f\u622a\u56fe rlContainer, \u81ea\u52a8\u4fee\u590d\u5b8c\u6210, action_Can_exit_link, action_changed_quick_write_status_for_activity, action_new_syn_task, action_prepare_exit_link, action_restart_sign_stu_activity, action_socket_ppt_sync, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes, action_syn_channel_ppt_action, action_tea_start_explain, cb, code_syn_start_sign, ppt_close sync, stu_screen_shoot_num, stu_screenshoot_num, stu_start_screen_shot, syn_tea_start_right_tools
+danger : save, write
+calls  : Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->doChangedStatus(Z), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->getInstance(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->isStuSyncStatus(), Lcom/xh/business_module/helper/SynRecoverHelper;->recoverComplete(), Lcom/xh/business_module/resourcehelper/ResourceHelper;->getInstance()
+
+=== smali_classes12|com|xh|ppt|ui|impl|tea|TeaPptDisplayActivity.smali :2084 ===
+actions: action_create_callback_suc, action_prepare_exit_link, action_quick_write_open_or_close, action_socket_notifi_teacher_ppt_has_entry, action_socket_stu_get_sync_task_action, action_socket_tea_send_handwriting_tool_more_config_change, action_task_create_success, action_teacher_connect_lost, close_explain_merging_strokes, handwriting_callback_data_action, ppt_stop_sync_save_currentpage_success, prepare_existence_syn, prepare_tool_class_syn, recover_current_page_handwriting, tea_black_open_record_last_syn_task, teacher_connbax_status, update_content_remarkes_task, update_current_page_handwriting
+danger : save, write
+calls  : Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->setLastSynTaskId(Ljava/lang/String;), Lcom/xh/business_module/db/TaskDetail;->getIsRelated(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/business_module/synchronous/manager/SynChannelManager;->getInstance()
+
+=== smali_classes13|com|xh|record_sound|ui|impl|base|BaseRecordSoundActivity.smali :1068 ===
+actions: action_socket_record_sound_sync
+danger : 
+calls  : Lcom/xh/comm/AudioPlayerManager;->seekToProgress(I), Lcom/xh/comm/weiget/CommonSeekBar;->setProgress(I), Lcom/xh/commbean/RecordSoundSyncBean;->getCommand(), Lcom/xh/commbean/RecordSoundSyncBean;->getCurrentProgress(), Lcom/xh/commbean/RecordSoundSyncBean;->getCurrentSpeed(), Lcom/xh/commbean/RecordSoundSyncBean;->getTaskId()
+
+=== smali_classes13|com|xh|record_sound|ui|impl|simple|SimpleRecordSoundActivity.smali :52 ===
+actions: action_syn_lock
+danger : 
+calls  : Lcom/xh/record_sound/ui/impl/simple/SimpleRecordSoundActivity;->initUnlockLayout(), Lcom/xh/record_sound/ui/impl/stu/StuRecordSoundActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|record_sound|ui|impl|stu|StuRecordSoundActivity.smali :461 ===
+actions: action_changed_quick_write_status_for_activity, action_new_syn_task, action_socket_record_sound_sync, syn_tea_start_right_tools
+danger : write
+calls  : Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->doChangedStatus(Z), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->getInstance(), Lcom/xh/business_module/helper/SynRecoverHelper;->recoverComplete(), Lcom/xh/business_module/resourcehelper/ResourceHelper;->getInstance(), Lcom/xh/business_module/resourcehelper/ResourceHelper;->isDownloading(), Lcom/xh/comm/AudioPlayerManager;->seekToProgress(I)
+
+=== smali_classes13|com|xh|record_sound|ui|impl|tea|TeaRecordSoundActivity.smali :292 ===
+actions:  this:, SHOW_OR_HIDE_SYN_HEAD_BAR, action:, action_create_callback_suc, action_eye_showing, action_socket_stu_get_sync_task_action, action_socket_student_syn_feedback_to_teacher, cb, mTaskId:, prePareTaskId:, prepare_existence_syn, prepare_tool_class_syn, taskId:, tea_black_open_record_last_syn_task, teacher_connbax_status, this:
+danger : 
+calls  : Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->setLastSynTaskId(Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/synchronous/bean/SynStuFeedbackToTeaBean;->getStuIds(), Lcom/xh/business_module/upload/manager/ScreenshotManager;->startScreenShot(Landroid/view/View;Lcom/xh/business_module/db/ScreenshotBean;)
+
+=== smali_classes13|com|xh|sign|CreateSignDialog.smali :271 ===
+actions: prepare_close_fragment_action, task_create_sign_action
+danger : 
+calls  : Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getClassRoomId(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getDesktopIdByViewPagerPosition(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getInstance(), Lcom/xh/business_module/helper/CreateTaskHelper;->createTaskNotSendTo(ILjava/lang/Object;ZLcom/xh/business_module/helper/CreateTaskHelper$ICreateTaskCallBackListener;), Lcom/xh/business_module/helper/CreateTaskHelper;->getInstance(), Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|comm|presenter|ISimpleTeaAnswerPresenter.smali :22 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|comm|presenter|impl|SimpleTeaAnswerPresenter.smali :698 ===
+actions: action_stu_download_teacher_answer
+danger : 
+calls  : Lcom/xh/simple/comm/presenter/impl/SimpleTeaAnswerPresenter;->initTeacherAnswerBean()
+
+=== smali_classes13|com|xh|simple|stu|presenter|ISimpleAnswerListPresenter.smali :19 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|stu|presenter|ISimpleStudentAnswerPresenter.smali :117 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|stu|presenter|IStudentCorrectPresenter.smali :58 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|stu|presenter|impl|SimpleAnswerListPresenter.smali :169 ===
+actions: action_reply_file_all_download_success, action_socket_tea_open_or_close_final_score, action_student_update_list_like_num, onMsgEvent: \u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u66f4\u65b0\u9875\u9762
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/StudentAnswerSheetDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/StudentAnswerSheetDaoHelper;->querySingleStuAnswer(Ljava/lang/String;I), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId(), Lcom/xh/comm/bean/channel/FinalScoreChannelBean;->getTaskId(), Lcom/xh/comm/bean/channel/FinalScoreChannelBean;->isOpen()
+
+=== smali_classes13|com|xh|simple|stu|presenter|impl|SimpleStudentAnswerPresenter.smali :4639 ===
+actions: \u4e86\u62cd\u7167\u6743\u9650, \u4e86\u67e5\u770b\u5b66\u751f\u7684\u6743\u9650, \u5173\u95ed, \u53d6\u6d88, \u5f00\u542f, \u8001\u5e08, \u8001\u5e08\u66f4\u65b0\u4e86\u7b54\u6848, action:, action_action_down_audio_success, action_attach_material_update, action_materials_praise, action_reset_weike_item_click_event, action_socket_task_revoke, action_socket_tea_camera_change_permission, action_socket_tea_confirm_or_cancel_like, action_socket_tea_correct_answer, action_socket_tea_invite_stu_correct, action_socket_tea_look_other_permission, action_socket_tea_open_or_close_final_score, action_socket_tea_set_or_update_tea_answer, action_socket_tea_start_one_key_mutual_batch, action_socket_tea_start_single_modify, action_socket_tea_start_total_modify, action_stu_update_head_data, action_student_change_simple_fragment, action_student_close_first_fragment, action_student_reset_input_type, action_student_second_activity_is_start, action_student_update_first_head_like_num, action_student_update_fragment_head, action_student_update_list_like_num, action_teacher_open_force_submit_answer, cb, fromWs, isInterceptSubmitDialog: \u8001\u5e08\u8981\u6c42\u4ea4\u4f5c\u4e1a mAnswerState=, mTaskId:, null cannot be cast to non-null type com.xh.business_module.db.TaskDetail, null cannot be cast to non-null type com.xh.business_module.division_class.PrePareToolAction.PrePareToolTaskModule, null cannot be cast to non-null type com.xh.business_module.synchronous.bean.SocketSendMaterialBean, null cannot be cast to non-null type com.xh.comm.bean.channel.ChannelTeacherAnswerBean, null cannot be cast to non-null type com.xh.comm.bean.channel.ConfirmOrCancelLike, null cannot be cast to non-null type com.xh.comm.bean.channel.CorrectedAnswerChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.FinalScoreChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.InviteCorrectChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.LookOtherPermissionChannelBean, null cannot be cast to non-null type com.xh.common.bean.ChannelForceHandInBean, null cannot be cast to non-null type com.xh.simple.stu.bean.MessageUpdateSelfLikeNumBean, null cannot be cast to non-null type com.xh.tea.intentservice.AudioDownLoadBean, null cannot be cast to non-null type kotlin.String, onMsgEvent: , onMsgEvent: \u6750\u6599\u7b14\u8ff9\u4e0b\u8f7d\u5b8c\u6bd5 \u5237\u65b0\u754c\u9762 mAnswerState=, onMsgEvent: \u8001\u5e08\u6279\u6539\u4e86\u4f60\u4f5c\u4e1a, onMsgEvent: \u8001\u5e08\u66f4\u65b0\u4e86\u7b54\u6848, online_handwriting_download_complete, prePareTaskId:, prepare_tool_class_syn, status, this:
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getType(), Lcom/xh/business_module/db/TaskDetail;->getTaskId(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->insert(Lcom/xh/business_module/db/MaterialInfoEntity;I), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/StudentAnswerSheetDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/StudentAnswerSheetDaoHelper;->openOrCloseFinalScore(Ljava/lang/String;Z)
+
+=== smali_classes13|com|xh|simple|stu|presenter|impl|StudentCorrectPresenter.smali :1089 ===
+actions: \u5f00\u542f\u4e00\u952e\u4e92\u6279\uff0c\u6536\u56de\u542c\u4ee4\u6743\u9650\u3002\u3002\u3002, action_socket_tea_start_one_key_mutual_batch, action_teacher_single_upload_reply_files_end, null cannot be cast to non-null type com.xh.comm.bean.TeacherSingleCorrectUploadBean, null cannot be cast to non-null type kotlin.String, onMsgEvent: \u5f00\u542f\u4e00\u952e\u4e92\u6279\uff0c\u6536\u56de\u542c\u4ee4\u6743\u9650\u3002\u3002\u3002
+danger : 
+calls  : Lcom/xh/comm/bean/TeacherSingleCorrectUploadBean;->getSuccessReplyListBeanList(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/common/util/ToastUtils;->showShort(Ljava/lang/String;[Ljava/lang/Object;), Lcom/xh/simple/stu/presenter/impl/StudentCorrectPresenter;->initTeacherReplyReqBean(Ljava/util/List;)
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleAnswerListFragment.smali :575 ===
+actions: 
+danger : 
+calls  : Lcom/xh/simple/comm/ui/BaseSimpleFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/stu/presenter/impl/SimpleAnswerListPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleHandwritingFragment.smali :1805 ===
+actions: \u7684\u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u53bb\u66f4\u65b0\u6279\u6539\u7b14\u8ff9\u5427, action_reply_file_all_download_success, action_socket_tea_correct_answer, action_socket_tea_open_or_close_final_score, action_student_modify_success, action_student_reset_input_type, action_student_start_modify, action_student_submit_success, action_temp_strokes_file_all_upload_success, onMsgEvent: \u8001\u5e08\u7ed9\u5b66\u751f
+danger : save
+calls  : Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->getTaskId(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->getTempStrokesBeanArrayList(), Lcom/xh/comm/bean/channel/CorrectedAnswerChannelBean;->getTaskId(), Lcom/xh/comm/bean/channel/FinalScoreChannelBean;->getTaskId()
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleImageFragment.smali :1874 ===
+actions: \u7684\u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u53bb\u66f4\u65b0\u6279\u6539\u7b14\u8ff9\u5427, action_reply_file_all_download_success, action_socket_tea_correct_answer, action_socket_tea_open_or_close_final_score, action_student_modify_success, action_student_start_modify, action_student_submit_success, action_temp_strokes_file_all_upload_success, null cannot be cast to non-null type com.xh.comm.bean.DownloadReplyFileSuccessBean, null cannot be cast to non-null type com.xh.comm.bean.UploadTempStrokesFileBean, null cannot be cast to non-null type com.xh.comm.bean.channel.CorrectedAnswerChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.FinalScoreChannelBean, null cannot be cast to non-null type kotlin.Boolean, onMsgEvent: \u8001\u5e08\u7ed9\u5b66\u751f, onlineUrl
+danger : save
+calls  : Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->component1(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->component2(), Lcom/xh/comm/bean/SimpleUploadTempFileBean;->getIndex(), Lcom/xh/comm/bean/SimpleUploadTempFileBean;->getOnlineUrl(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->component1(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->component2()
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleKeyboardFragment.smali :833 ===
+actions:  stuIds=, \u7684\u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u53bb\u66f4\u65b0\u6279\u6539\u7b14\u8ff9\u5427, action_reply_file_all_download_success, action_socket_tea_correct_answer, action_socket_tea_open_or_close_final_score, action_student_modify_success, action_student_start_modify, action_student_submit_success, onMsgEvent: \u4e0b\u8f7d\u5b8c\u6210, onMsgEvent: \u4e0b\u8f7d\u5b8c\u6210 mStuId=, onMsgEvent: \u8001\u5e08\u7ed9\u5b66\u751f
+danger : save
+calls  : Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId(), Lcom/xh/comm/bean/channel/CorrectedAnswerChannelBean;->getTaskId(), Lcom/xh/comm/bean/channel/FinalScoreChannelBean;->getTaskId(), Lcom/xh/comm/bean/channel/FinalScoreChannelBean;->isOpen(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleLargeImageFragment.smali :1747 ===
+actions: \u7684\u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u53bb\u66f4\u65b0\u6279\u6539\u7b14\u8ff9\u5427, action_reply_file_all_download_success, action_socket_tea_correct_answer, action_socket_tea_open_or_close_final_score, action_student_modify_success, action_student_start_modify, action_student_submit_success, action_temp_strokes_file_all_upload_success, null cannot be cast to non-null type com.xh.comm.bean.DownloadReplyFileSuccessBean, null cannot be cast to non-null type com.xh.comm.bean.UploadTempStrokesFileBean, null cannot be cast to non-null type com.xh.comm.bean.channel.CorrectedAnswerChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.FinalScoreChannelBean, null cannot be cast to non-null type kotlin.Boolean, onMsgEvent: \u8001\u5e08\u7ed9\u5b66\u751f, onlineUrl
+danger : save
+calls  : Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId(), Lcom/xh/comm/bean/SimpleUploadTempFileBean;->getIndex(), Lcom/xh/comm/bean/SimpleUploadTempFileBean;->getOnlineUrl(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->getTaskId(), Lcom/xh/comm/bean/UploadTempStrokesFileBean;->getTempStrokesBeanArrayList()
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleStudentAnswerActivity.smali :3123 ===
+actions: action_reload_image_after_clear_image_cache, glideCache onRefreshStateChanged: \u6e05\u9664\u672c\u5730\u7684\u56fe\u7247\u7f13\u5b58\uff0c\u53bb\u91cd\u65b0\u52a0\u8f7d..., isMaterial, null cannot be cast to non-null type android.util.Pair<kotlin.String, kotlin.Boolean>
+danger : 
+calls  : Lcom/xh/comm/material/weiget/MaterialTaskDetailView;->reloadImageUrl(Ljava/lang/String;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/simple/comm/ui/BaseSimpleFragment;->reloadImageUrl(Ljava/lang/String;), Lcom/xh/simple/stu/presenter/impl/SimpleStudentAnswerPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|SimpleTeaAnswerStuActivity.smali :197 ===
+actions: 
+danger : 
+calls  : Lcom/xh/simple/comm/presenter/impl/SimpleTeaAnswerPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/comm/ui/impl/BaseSimpleTeaAnswerActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|stu|ui|impl|StudentCorrectActivity.smali :1000 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/stu/presenter/impl/StudentCorrectPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|tea|presenter|ISingleCorrectPresenter.smali :28 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|tea|presenter|ITotalCorrectPresenter.smali :81 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes13|com|xh|simple|tea|presenter|impl|SingleCorrectPresenter.smali :2383 ===
+actions: action_reply_file_all_download_success, action_socket_stu_correct_stu_answer, action_socket_stu_submit_answer, action_tea_single_correct_up_strokes, action_tea_single_send_enable, action_teacher_single_upload_reply_files_end, answersBeanAnswers, null cannot be cast to non-null type com.xh.comm.bean.DownloadReplyFileSuccessBean, null cannot be cast to non-null type com.xh.comm.bean.TeacherSingleCorrectUploadBean, null cannot be cast to non-null type com.xh.comm.bean.channel.CorrectedAnswerChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.SubmitWorkChannelBean, null cannot be cast to non-null type kotlin.Int, onMsgEvent: \u53e6\u4e00\u4e2a\u5b66\u751f\u6279\u6539\u4e86\u5f53\u524d\u8fd9\u4e2a\u5b66\u751f\u7684\u4f5c\u4e1a, onMsgEvent: \u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u66f4\u65b0\u9875\u9762
+danger : 
+calls  : Lcom/xh/business_module/db/SimpleStuAnswersBean;->getAnswers(), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->equalLocalAndOnlineStrokes(Ljava/lang/String;I), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->querySingleStuAnswer(Ljava/lang/String;I), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId()
+
+=== smali_classes13|com|xh|simple|tea|presenter|impl|TotalCorrectPresenter.smali :2132 ===
+actions: action_action_down_audio_success, action_newest_receive_student_num, action_reply_file_all_download_success, action_socket_stu_confirm_or_cancel_remark, action_socket_stu_submit_answer, action_tea_do_something_to_student_answer, action_tea_support_change_to_student_answer, action_tea_update_tag, action_teacher_total_upload_reply_files_end, null cannot be cast to non-null type com.xh.comm.bean.DownloadReplyFileSuccessBean, null cannot be cast to non-null type com.xh.comm.bean.channel.RemarkChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.SubmitWorkChannelBean, null cannot be cast to non-null type com.xh.comm.bean.channel.UpdateTagChannelBean, null cannot be cast to non-null type com.xh.tea.bean.other.CorrectStudentChannelBean, null cannot be cast to non-null type com.xh.tea.intentservice.AudioDownLoadBean, null cannot be cast to non-null type kotlin.String, null cannot be cast to non-null type kotlin.collections.List<com.xh.tea.bean.req.TeacherReplyReqBean.ReplyListBean>, onMsgEvent: \u6279\u6539\u7b14\u8ff9\u4e0b\u8f7d\u6210\u529f\uff0c\u66f4\u65b0\u9875\u9762, receiveStudentCountChannelBean.unReceiveStuCount
+danger : 
+calls  : Lcom/xh/business_module/db/SimpleStuAnswersBean;->setIsTag(I), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->querySingleStuAnswer(Ljava/lang/String;I), Lcom/xh/business_module/dbhelper/TeacherAnswerSheetDaoHelper;->updateSingleStudentAnswer(Lcom/xh/business_module/db/SimpleStuAnswersBean;), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getStuIds(), Lcom/xh/comm/bean/DownloadReplyFileSuccessBean;->getTaskId()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|BaseTeacherImageFragment.smali :1102 ===
+actions: msg_action_task_is_deleted, msg_action_upload_strokes_success, null cannot be cast to non-null type kotlin.Pair<kotlin.String?, kotlin.Boolean?>, null cannot be cast to non-null type kotlin.String, old_wk_json_delete
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->getTaskDetail(), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->hideProgress(), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->showTaskDeleted(), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->updateImageSuccess()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|CreateBlankBoardActivity.smali :2193 ===
+actions: onMsgEvent: \u4ece\u76f8\u518c\u6765\u7684\u83b7\u53d6\u7684\u5e95\u56fe, simple_teacher_set_answer_crop_image_path, xiaoer
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/common/widget/ExtViewPager;->getCurrentItem(), Lcom/xh/simple/comm/weiget/EditAnswerViewGroup;->addFloatingPicView(Ljava/lang/String;)
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|SimpleTeaAnswerTeaActivity.smali :381 ===
+actions: action_temp_strokes_file_all_upload_success, onMsgEvent: \u4ece\u76f8\u518c\u6765\u7684\u83b7\u53d6\u7684\u5e95\u56fe, onMsgEvent: \u7b14\u8ff9\u4e0a\u4f20\u6210\u529f..., simple_teacher_set_answer_crop_image_path
+danger : 
+calls  : Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/simple/comm/presenter/impl/SimpleTeaAnswerPresenter;->teacherUploadAnswerSuccess(Lcom/xh/comm/bean/UploadTempStrokesFileBean;), Lcom/xh/simple/comm/ui/impl/BaseSimpleTeaAnswerActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/ui/impl/SimpleTeaAnswerTeaActivity;->addFloatingPicView(Ljava/lang/String;), Lcom/xh/simple/tea/ui/impl/SimpleTeaAnswerTeaActivity;->getTAG()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|SingleCorrectActivity.smali :3057 ===
+actions: action_tea_update_tag, image_note_click, null cannot be cast to non-null type com.xh.comm.bean.channel.UpdateTagChannelBean
+danger : 
+calls  : Lcom/xh/comm/bean/channel/UpdateTagChannelBean;->getTaskId(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/comm/weiget/AnimConstraintLayout;->startAnimEvent(), Lcom/xh/simple/tea/presenter/impl/SingleCorrectPresenter;->getMTaskId(), Lcom/xh/simple/tea/presenter/impl/SingleCorrectPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/weiget/LeftDrawerLayout;->onTagChange()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|TeacherImageActivity.smali :1350 ===
+actions: image_note_click, null cannot be cast to non-null type com.xh.business_module.division_class.PrePareToolAction.PrePareToolTaskModule, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/util/AnimHelper;->showOrHideTitle(Landroid/view/View;I)
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|TeacherImageFragment.smali :1897 ===
+actions: image_note_update, null cannot be cast to non-null type com.xh.business_module.db.MaterialInfoEntity, onMsgEvent: PREPARE_EXISTENCE_SYN clearWkListener, online_handwriting_download_complete, prepare_existence_syn, xhhyj
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getImages(), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/ui/impl/TeacherImageFragment;->clearWkListener(), Lcom/xh/simple/tea/ui/impl/TeacherImageFragment;->getMTaskId()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|TeacherLargeImageFragment.smali :2922 ===
+actions: `object` as MaterialInfoEntity).images, image_note_update, newInstance().query(mTaskId), null cannot be cast to non-null type com.xh.business_module.db.MaterialInfoEntity, onMsgEvent: PREPARE_EXISTENCE_SYN clearWkListener, online_handwriting_download_complete, prepare_existence_syn, xhhyj
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getImages(), Lcom/xh/business_module/dbhelper/MaterialInfoDetailEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/MaterialInfoDetailEntityDaoHelper;->query(Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/simple/tea/ui/impl/BaseTeacherImageFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|TotalCollectActivity.smali :392 ===
+actions: action_tea_cancel_collect
+danger : 
+calls  : Lcom/xh/business_module/db/CollectAnswerBean;->getFavoId(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/adapter/TotalCollectListAdapter;->getData(), Lcom/xh/simple/tea/adapter/TotalCollectListAdapter;->notifyDataSetChanged()
+
+=== smali_classes13|com|xh|simple|tea|ui|impl|TotalCorrectActivity.smali :3369 ===
+actions: prepare_existence_syn, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/simple/tea/presenter/impl/TotalCorrectPresenter;->getTaskId(), Lcom/xh/simple/tea/presenter/impl/TotalCorrectPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes14|com|xh|smartclassstu|courselib|ui|StuCourseLibraryDetailActivity.smali :787 ===
+actions: 10415, StuCourseLibraryDetailActivity, \u5b66\u751f\u8bfe\u7a0b\u5e93\u5fae\u8bfe\u89c2\u770b\u57cb\u70b9\u4fe1\u606f\uff1a, action_stu_report_preview_time, curriculum_folder_success, null cannot be cast to non-null type com.xh.smartclassstu.courselib.entity.LectureEntity, null cannot be cast to non-null type com.xh.stusynplayer.stu.bean.CourseLibMp4ViewTimeBean, stu_course_lib_paper_view_mp4_msg, taskId, time, totalDuration
+danger : 
+calls  : Lcom/xh/business_module/helper/DataCollectionHelper;->setBury(ILjava/lang/String;Ljava/lang/String;), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/common/util/GsonUtil;->toJsonStr(Ljava/lang/Object;), Lcom/xh/smartclassstu/courselib/entity/CourseLibCwpViewTimeBean;->setCourse_no(Ljava/lang/String;), Lcom/xh/smartclassstu/courselib/entity/CourseLibCwpViewTimeBean;->setLecture_no(Ljava/lang/String;), Lcom/xh/smartclassstu/courselib/entity/CourseLibCwpViewTimeBean;->setStudy_time(Ljava/lang/Long;)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|AbstractClassWithEditActivity.smali :1666 ===
+actions: data_delete_edit_list, data_recovery_edit_list, refresh_single_classroom, schoolmode_student_update_classlist
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/responsebean/ClassRoomDetail;->getCurrentSystemTime(), Lcom/xh/smartclassstu/adapter/HomeClassRoomAdapter;->setCurrentTimeMillions(J), Lcom/xh/smartclassstu/adapter/HomeClassRoomAdapter;->updateClassRoom(Lcom/xh/responsebean/ClassRoomDetail;), Lcom/xh/smartclassstu/adapter/HomeClassRoomAdapter;->updateSchoolMode(Lcom/xh/commbean/UpdateSchoolModeBean;), Lcom/xh/smartclassstu/homepage/ui/impl/AbstractClassWithEditActivity;->recoverOrDelete(Ljava/lang/Object;Z)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|ClassCalendarFragment$DayCalendarImpl.smali :299 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|ClassCalendarFragment$ICalendarProxy.smali :27 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|ClassCalendarFragment$WeekCalendarImpl.smali :291 ===
+actions: 123, calendar_next_week, onMsgEvent
+danger : 
+calls  : Lcom/xh/common/log/HLog;->e(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|ClassCalendarFragment.smali :318 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/smartclassstu/homepage/ui/impl/ClassCalendarFragment$ICalendarProxy;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|ClassListFragment.smali :2948 ===
+actions: 
+danger : 
+calls  : Lcom/xh/smartclassstu/homepage/ui/impl/ClassListFragment;->getList(ZZ)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|CourseEnterHomePageActivity.smali :1174 ===
+actions: \u8bfe\u7a0b\u751f\u6210\u4e2d\uff0c\u7a0d\u540e\u4e0b\u62c9\u5237\u65b0\uff01, stu_create_course_by_self_success
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/util/ContextMessage;->removeBeforeCurrentActivity(Landroid/app/Activity;), Lcom/xh/common/util/ToastUtils;->showShortSafe(Ljava/lang/String;[Ljava/lang/Object;)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|HomePageActivity.smali :2578 ===
+actions: app_crash_msg, enter_class_detail, enter_course_enter_home_activity, enter_course_enter_home_and_package, is_direct_to, is_enter_self_course, key_package_id, key_package_name, tea_has_class_in_class_ing, tea_recent_new_task_enter_classroom
+danger : 
+calls  : Lcom/xh/common/base/AppModeManager;->getInstance(), Lcom/xh/common/base/AppModeManager;->isOffLine(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/responsebean/ClassRoomDetail;->getClassroomId(), Lcom/xh/responsebean/ClassRoomDetail;->getClassroomName(), Lcom/xh/responsebean/ClassRoomDetail;->getFolderId()
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|collection|CollectionActivity.smali :3163 ===
+actions: data_recovery_edit_list
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes14|com|xh|smartclassstu|homepage|ui|impl|collection|fragment|CollectTaskFragment.smali :2048 ===
+actions: , \u5f53\u524d\u8bfe\u5802ID\uff1a, CollectTaskFragment, \u5b66\u751f\u6536\u85cf\u4efb\u52a1\u8fdb\u5165\u4efb\u52a1\u8be6\u60c5detail\uff1a , null cannot be cast to non-null type kotlin.String, real_enter_class_detail
+danger : 
+calls  : Lcom/xh/business_module/db/TaskDetail;->getClassroomId(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/smartclassstu/homepage/ui/impl/collection/fragment/BaseCollectFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/studesktop/helper/StuTaskJumpHelper;->getInstance(), Lcom/xh/studesktop/helper/StuTaskJumpHelper;->jumpToTask(Lcom/xh/business_module/db/TaskDetail;)
+
+=== smali_classes14|com|xh|smartclassstu|hometask|StuRecentNewTaskActivity.smali :598 ===
+actions: , \u5f53\u524d\u8bfe\u5802ID\uff1a, StuRecentNewTaskActivity, \u6700\u65b0\u4efb\u52a1\u8fdb\u5165\u4efb\u52a1\u8be6\u60c5detail\uff1a , classroomId, null cannot be cast to non-null type com.xh.business_module.db.TaskDetail, null cannot be cast to non-null type kotlin.String, real_enter_class_detail, stu_recent_new_task_click
+danger : 
+calls  : Lcom/xh/business_module/db/TaskDetail;->getClassroomId(), Lcom/xh/business_module/db/TaskDetail;->getItemType(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/common/util/QuickClickCheckHelper;->getInstance(), Lcom/xh/common/util/QuickClickCheckHelper;->interceptQuickClickEvent(), Lcom/xh/smartclassstu/hometask/StuRecentNewTaskActivity;->checkClassroomStatus(Ljava/lang/String;)
+
+=== smali_classes14|com|xh|smartclassstu|searchclassroom|ui|impl|SearchClassRoomActivity.smali :1359 ===
+actions: <font color=\'#333333\'>\u786e\u5b9a\u7533\u8bf7\u52a0\u5165\u8be5\u8bfe\u5802\u5417?<font>, \u53d6\u6d88, \u786e\u5b9a, apply_into_classroom, real_enter_class_detail, schoolmode_student_update_classlist
+danger : 
+calls  : Lcom/xh/business_module/db/TaskDetail;->getClassroomId(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/dialog/CommonDialogHelper;->getInstance(), Lcom/xh/common/dialog/CommonDialogHelper;->setCallBackListener(Lcom/xh/common/dialog/CommonDialogHelper$IDialogButtonOnClickListener;), Lcom/xh/common/dialog/CommonDialogHelper;->setFirstButtonText(Ljava/lang/String;), Lcom/xh/common/dialog/CommonDialogHelper;->setMsgContent(Ljava/lang/String;)
+
+=== smali_classes14|com|xh|smartclassstu|startpage|ui|impl|StartPageActivity.smali :1065 ===
+actions: action_monitor_net_speed
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes14|com|xh|stu|weiget|AllTaskSetSendTimeDialog.smali :2072 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/AllTaskSetSendTimeDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|ChangeTimeDocumentDialog.smali :2028 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/ChangeTimeDocumentDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|CloudBeanDownloadingDialog.smali :125 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/CloudBeanDownloadingDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|PermissionOpenTimeDialog.smali :475 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/PermissionOpenTimeDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|PublishCloudBeanDialog.smali :968 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/PublishCloudBeanDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|RaiseHandTaskDialog.smali :891 ===
+actions: \u5b66\u751f\u6ca1\u6709\u8fde\u63a5\u670d\u52a1\u5668, \u6559\u5e08\u7aef\u4e0b\u7ebf, action_socket_tea_end_vote, action_socket_tea_open_or_close_audio, action_socket_tea_update_vote_result, action_socket_update_remarker, sign_close_handle_up, teacher_outline_action, update_student_noconnection_status
+danger : 
+calls  : Lcom/xh/business_module/db/TaskDetail;->setIsShowResult(I), Lcom/xh/business_module/db/TaskDetail;->setIsVote(I), Lcom/xh/business_module/db/TaskDetail;->setNegative(I), Lcom/xh/business_module/db/TaskDetail;->setPositive(I), Lcom/xh/business_module/dbhelper/TaskDetailDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/TaskDetailDaoHelper;->queryTaskDetailById(Ljava/lang/String;)
+
+=== smali_classes14|com|xh|stu|weiget|RemindNewTaskDialog.smali :167 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/RemindNewTaskDialog;->dismissAllowingStateLoss()
+
+=== smali_classes14|com|xh|stu|weiget|RemindSynchronousDialog.smali :286 ===
+actions: student_close_fragmentdialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/stu/weiget/RemindSynchronousDialog;->dismissAllowingStateLoss()
+
+=== smali_classes2|com|xh|studesktop|ui|impl|AiStudentDeskTopActivity.smali :2969 ===
+actions:  \u5f53\u524d\u65f6\u95f4time: ,  \u5f53\u524d\u8bfe\u5802id: ,  \u662f\u5426\u81ea\u4e3b\u5b66\u4e60createByStudent\uff1a , AI_COURSE_STU_UPDATE_VIEW_PROGRESS, AiStudentDeskTopActivity, \u4e0a\u4f20\u5fae\u8bfe\u9884\u89c8\u65f6\u95f4\uff1a, \u4e0b\u4e00\u4e2a\u4efb\u52a1\uff0c\u81ea\u7531\u5b66, \u5b66\u751f\u8df3\u8f6c\u4e91\u4f5c\u4e1a\u5b66\u60c5\u62a5\u544a\u9875\u9762: workId = , \u5df2\u7ecf\u53cd\u9988\u4e86, \u5f53\u524d\u65f6\u95f4\u8bfe\u7a0b\u6682\u672a\u5f00\u653e, action_code_tea_change_ai_class_time, action_socket_create_new_task, action_socket_download_ppt_resource, action_socket_task_revoke, action_socket_update_remarker, action_stu_report_preview_time, activity_resumed, ai\u8bfe\u6536\u5230\u8001\u5e08\u4fee\u6539\u5f00\u653e\u65f6\u95f4\u6d88\u606fmsg\uff1a, classroomId, classroom_item_click, connect_faild_tag, connect_success_tag, courseEndTIme, courseStartTime, nowProgress, stu_ai_mode_report_player_progress, stu_ai_mode_report_task_cloud_finish, stu_ai_mode_report_task_finish, stu_ai_task_finish_task_next_task, stu_enter_yzy_study_report, taskId, time, update_student_connect_status, update_student_noconnection_status, wwz, yzy_is_create_by_student, yzy_is_teacher, yzy_word_id
+danger : save, startActivity
+calls  : Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getClassRoomId(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getTeacherId(), Lcom/xh/business_module/db/TaskDetail;->getDesktopId(), Lcom/xh/business_module/db/TaskDetail;->getTaskId(), Lcom/xh/business_module/db/TaskDetail;->getTaskType()
+
+=== smali_classes2|com|xh|studesktop|ui|impl|StudentDeskTopActivity.smali :1724 ===
+actions: \u5207\u6362\u6821\u5185\u6a21\u5f0f\u5931\u8d25!
+danger : 
+calls  : Lcom/xh/common/util/ToastUtils;->showShort(Ljava/lang/CharSequence;)
+
+=== smali_classes2|com|xh|stusynplayer|stu|ui|StuPreviewRecordActivity.smali :2742 ===
+actions: \u9884\u89c8\u65f6\uff0c\u6536\u5230\u540c\u6b65\u6d88\u606f\uff0c\u9000\u51fa\u9884\u89c8\uff01, action_code_teacher_start_syn_activity
+danger : 
+calls  : Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/stusynplayer/stu/ui/StuPreviewRecordActivity;->finish()
+
+=== smali_classes2|com|xh|stusynplayer|stu|ui|SynSimplePlayerActivity.smali :102 ===
+actions: action_code_big_screen_play_progress, action_code_big_screen_play_state, action_syn_lock
+danger : 
+calls  : Lcom/xh/business_module/synchronous/synplayer/bean/SpeedBean;->getProgress(), Lcom/xh/business_module/synchronous/synplayer/bean/SpeedBean;->isPlay(), Lcom/xh/common/util/GsonUtil;->fromJson(Ljava/lang/Class;Ljava/lang/String;), Lcom/xh/player/presenter/IPlayerController;->pausePlayer(I), Lcom/xh/stusynplayer/stu/ui/SynSimplePlayerActivity;->onLock(), Lcom/xh/stusynplayer/stu/ui/SynSimplePlayerActivity;->onUnLock()
+
+=== smali_classes2|com|xh|stusynplayer|stu|ui|SynStuPlayerActivity.smali :1327 ===
+actions:  \u4e4b\u524d\u7684 sourceId: ,  \u8bfe\u4ef6 \u6536\u5230\u4e0b\u8f7d\u5b8c\u6210\u5e7f\u64ad  \u4e0b\u8f7d\u7684 sourceId\uff1a  ,  this:, , sourceId:, \u5b66\u751f\u8fd8\u672a\u5f00\u59cb\u540c\u6b65\u72b6\u6001 isStartSyn: false  taskId: , \u5f00\u59cb\u68c0\u67e5\u4e0b\u8f7d mTaskId:, \u63a5\u6536\u5230\u8001\u5e08\u7684\u63a7\u5236\u72b6\u6001: , action:, action_changed_quick_write_status_for_activity, action_code_changed_course_teacher_start_syn_activity, action_code_tea_speed_player, action_new_syn_task, code_send_syn_play_show_explain, notifi_doanload_resource_success, prepare_tool_class_syn, stu_screen_shoot_num, stu_screenshoot_num, stu_start_screen_shot, taskId:, xhhyj
+danger : downloadFile, save, write
+calls  : Lcom/xh/business_module/db/ResourceInfo;->getDownloadFilePath(), Lcom/xh/business_module/db/ResourceInfo;->getType(), Lcom/xh/business_module/dbhelper/ResourceInfoDaoHelper;->getInstance(), Lcom/xh/business_module/dbhelper/ResourceInfoDaoHelper;->getResourceById(Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/helper/SynRecoverHelper;->recoverComplete()
+
+=== smali_classes2|com|xh|syncclass|ChooseSyncClassDialog.smali :228 ===
+actions: close_choose_sync_classroom
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/syncclass/ChooseSyncClassDialog;->dismissAllowingStateLoss()
+
+=== smali_classes2|com|xh|syncclass|ChooseSyncClassDialog1.smali :435 ===
+actions: close_choose_sync_classroom
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/syncclass/ChooseSyncClassDialog1;->dismissAllowingStateLoss()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|SynChoiceAnswerFragment.smali :1356 ===
+actions: \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u53d1\u7684\u533a\u57df\u64cd\u4f5c, \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u53d1\u7684\u56fe\u5f62\u7b14\u8ff9, \u5b66\u751f\u6536\u5230\u4e86\u8001\u5e08\u7684\u8bf7\u6c42, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_tea_send_scroll_view_position, action_socket_topic_simple_change_student_answer, action_start_choice_detail, action_syn_channel_action, cb, online_handwriting_download_complete
+danger : 
+calls  : Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getScareSize(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->query(Ljava/lang/String;), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuName()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|SynCompletionCheckFragment2.smali :552 ===
+actions: action_recover_start_send
+danger : 
+calls  : Lcom/xh/common/util/ContextMessage;->sendMsg(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|SynCompletionSingleStuCheckFragment.smali :1500 ===
+actions: SynCompletionCheckFragment, \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u53d1\u7684\u533a\u57df\u64cd\u4f5c, \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u53d1\u7684\u56fe\u5f62\u7b14\u8ff9, action_socket_completion_check_correct_answer, action_socket_completion_recycle_view_scroll_to_position, action_socket_student_syn_feedback_to_teacher, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_tea_send_scroll_view_position, action_socket_topic_simple_change_student_answer, action_syn_channel_action
+danger : 
+calls  : Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getInstance(), Lcom/xh/business_module/classroomconfig/StudentClassRoomConfig;->getScareSize(), Lcom/xh/business_module/synchronous/bean/SocketSendCompletionPosBean;->getTaskId(), Lcom/xh/business_module/synchronous/bean/SynStuFeedbackToTeaBean;->getStuIds(), Lcom/xh/business_module/synchronous/bean/SynTransferDataBean;->getTaskId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuId()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|SynStuActivity.smali :3800 ===
+actions:  \u6765\u6e90=,  channel mTaskId=,  mStuId=,  score=,  this:, \u53f3\u4fa7\u6309\u94ae\u72b6\u6001isPlaying: , \u83b7\u53d6\u5e95\u56fe\u4e3a\u7a7a..., action:, action_changed_quick_write_status_for_activity, action_new_syn_task, action_restart_sign_stu_activity, action_socket_syn_attach_material_open_or_close, action_socket_syn_teacher_transfer_hand_writing_stroke, action_socket_tea_open_or_close_scratch_paper, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_tea_send_handwriting_tool_more_config_change, action_socket_tea_send_material_page_scale_info, action_socket_tea_send_one_page_all_info, action_socket_tea_send_one_student_score, action_socket_topic_simple_change_student_answer, action_syn_channel_action_syn_material, action_syn_lock, action_tea_send_revoke_strokes, action_tea_start_explain, code_syn_start_sign, handwriting_callback_data_action, handwriting_callback_data_action_syn_material, onMsgEvent: \u5207\u6362\u4e86viewpager \u5f53\u524d\u662f=, onMsgEvent: \u5b66\u751f\u6536\u5230\u8001\u5e08\u6253\u5f00or\u5173\u95ed\u8349\u7a3f\u7eb8\u7684\u52a8\u4f5c , onMsgEvent: channelStokesBean=, onMsgEvent: hw.canBackward()=, onMsgEvent: mTaskId=, onMsgEvent: synchronousBean=, prepare_tool_class_syn, stu_screen_shoot_num, stu_screenshoot_num, stu_start_screen_shot, syn_tea_start_right_tools, taskId:, tea_send_can_not_found_student_answer_msg, wwz
+danger : save, write
+calls  : Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->doChangedStatus(Z), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->getInstance(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/helper/SynRecoverHelper;->recoverComplete(), Lcom/xh/business_module/synchronous/bean/ChannelPageInfoBean;->getTaskId(), Lcom/xh/business_module/synchronous/bean/ChannelPageInfoBean;->isS()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|SynTeaActivity.smali :4068 ===
+actions: 
+danger : 
+calls  : Lcom/xh/business_module/synchronous/manager/SynChannelManager;->getInstance(), Lcom/xh/business_module/synchronous/manager/SynChannelManager;->sendToolConfigChange(Lcom/xh/handwritingtool/bean/HandWritingToolMoreConfig;), Lcom/xh/handwritingtool/weiget/HandWritingToolView;->getHandWritingConfig()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|base|SynImageFragment.smali :788 ===
+actions: online_handwriting_download_complete
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->query(Ljava/lang/String;), Lcom/xh/synchronous/base/BaseSynSimpleFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/base/SynImageFragment;->showMaterialInfo(Lcom/xh/business_module/db/MaterialInfoEntity;), Lcom/xh/synchronous/ui/impl/base/SynImageFragment;->updateTeaDataLayout(Lcom/xh/business_module/db/MaterialInfoEntity;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|base|SynLargeImageFragment.smali :1623 ===
+actions: online_handwriting_download_complete
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->query(Ljava/lang/String;), Lcom/xh/synchronous/base/BaseSynSimpleFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/base/SynLargeImageFragment;->showMaterialInfo(Lcom/xh/business_module/db/MaterialInfoEntity;), Lcom/xh/synchronous/ui/impl/base/SynLargeImageFragment;->updateTeaDataLayout(Lcom/xh/business_module/db/MaterialInfoEntity;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|base|SynSimpleTopicFragment.smali :1202 ===
+actions: online_handwriting_download_complete
+danger : 
+calls  : Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->query(Ljava/lang/String;), Lcom/xh/synchronous/base/BaseSynSimpleFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/base/SynSimpleTopicFragment;->showMaterialInfo(Lcom/xh/business_module/db/MaterialInfoEntity;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|stu|SynStuChoiceDetailAnswerFragment.smali :522 ===
+actions: action_choice_recovery, action_choice_recycler_detail, action_click_chart_choice_detail, action_filed_choice_detail, action_remove_choice_detail, action_select_choice_detail, action_switch_choice_detail
+danger : 
+calls  : Lcom/xh/synchronous/ui/impl/SynStuActivity;->synChoiceRemove(), Lcom/xh/synchronous/ui/impl/base/BaseSynChoiceDetailAnswerFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/stu/SynStuChoiceDetailAnswerFragment;->getActivity(), Lcom/xh/synchronous/ui/impl/stu/SynStuChoiceDetailAnswerFragment;->teaClickChart(Lcom/xh/business_module/synchronous/bean/SynChoiceChartClickBean;), Lcom/xh/synchronous/ui/impl/stu/SynStuChoiceDetailAnswerFragment;->teaDataFiled(Lcom/xh/business_module/synchronous/bean/SynChoiceDetailFiledAnswerBean;), Lcom/xh/synchronous/ui/impl/stu/SynStuChoiceDetailAnswerFragment;->teaDataSuccess(Lcom/xh/business_module/synchronous/bean/SynChoiceDetailAnswerBean;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|stu|SynStuCompletionDetailFragment.smali :1952 ===
+actions: action_click_completion_detail, action_completion_scroll_detail, action_recover_completion_detail, action_remove_completion_detail, action_stu_completion_detail, action_switch_completion_detail, action_wrong_completion_detail
+danger : 
+calls  : Lcom/xh/synchronous/ui/impl/SynStuActivity;->synCompletionDetailRemove(), Lcom/xh/synchronous/ui/impl/base/BaseSynCompletionDetailFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/stu/SynStuCompletionDetailFragment;->getActivity(), Lcom/xh/synchronous/ui/impl/stu/SynStuCompletionDetailFragment;->teaClick(Lcom/xh/business_module/synchronous/bean/SynCompletionDetailClickBean;), Lcom/xh/synchronous/ui/impl/stu/SynStuCompletionDetailFragment;->teaRecovery(Lcom/xh/business_module/synchronous/bean/SynRecoveryCompletionDetailBean;), Lcom/xh/synchronous/ui/impl/stu/SynStuCompletionDetailFragment;->teaScroll(Lcom/xh/business_module/synchronous/bean/SynCommonDetailBean$SynScrollBean;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|stu|SynStuImageFragment.smali :391 ===
+actions: action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_topic_simple_change_student_answer, action_syn_channel_action, onMsgEvent: \u6536\u5230\u8001\u5e08\u53d1\u7684\u533a\u57df\u64cd\u4f5c\u7b14\u8ff9, onMsgEvent: \u6536\u5230\u8001\u5e08\u53d1\u7684\u56fe\u5f62\u7b14\u8ff9
+danger : 
+calls  : Lcom/xh/business_module/customview/SynHeadBar;->isLock(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getSendReplyStrokesList(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuName(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getTaskId(), Lcom/xh/business_module/synchronous/manager/SynChannelManager;->getInstance()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|stu|SynStuLargeImageFragment.smali :881 ===
+actions: action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_topic_simple_change_student_answer, action_socket_view_pager_enable, action_syn_channel_action, onMsgEvent: \u6536\u5230\u8001\u5e08\u53d1\u7684\u533a\u57df\u64cd\u4f5c\u7b14\u8ff9, onMsgEvent: \u6536\u5230\u8001\u5e08\u53d1\u7684\u56fe\u5f62\u7b14\u8ff9, sendReplyStrokesList
+danger : 
+calls  : Lcom/xh/business_module/customview/SynHeadBar$Companion;->isLock(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getSendReplyStrokesList(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuName(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getTaskId(), Lcom/xh/business_module/synchronous/manager/SynChannelManager;->getInstance()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|stu|SynStuSimpleTopicFragment.smali :793 ===
+actions: \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u5207\u6362\u5b66\u751f\u7b54\u6848\u7684\u901a\u77e5 synchronousBean=, \u540c\u6b65: \u5b66\u751f\u6536\u5230\u8001\u5e08\u53d1\u7684\u56fe\u5f62\u7b14\u8ff9, action_simple_topic_all_clear, action_socket_tea_send_area_stokes, action_socket_tea_send_geometry_stokes_gs, action_socket_topic_simple_change_student_answer, action_syn_channel_action, allClear
+danger : 
+calls  : Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getImageRatioBean(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getSendReplyStrokesList(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getStuName(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getTaskId(), Lcom/xh/business_module/synchronous/bean/SynchronousBean;->getUnSendReplyStrokesList()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|tea|SynTeaChoiceDetailAnswerFragment.smali :654 ===
+actions: \u8001\u5e08\u53d1\u5b66\u751f\u6062\u590d\u7684\u6570\u636e\u4e86\uff01\uff01, action_Recover_choice_detail, cb
+danger : 
+calls  : Lcom/xh/synchronous/ui/impl/base/BaseSynChoiceDetailAnswerFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/tea/SynTeaChoiceDetailAnswerFragment;->sendPageAnswerInfo(Ljava/lang/String;), Lcom/xh/xhcore/common/http/strategy/LogUtils;->e(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|tea|SynTeaCompletionDetailFragment.smali :1781 ===
+actions: \u5b66\u751f\u586b\u7a7a\u8be6\u60c5\u9875\u590d\u539f, action_click_completion_detail, action_click_completion_detail_simple, action_completion_scroll_detail, action_recover_start_send, action_remove_completion_detail_simple, action_switch_completion_detail_simple, action_wrong_completion_detail, cb
+danger : 
+calls  : Lcom/xh/business_module/synchronous/bean/SynCommonDetailBean$SynSwitchBean;->isNext(), Lcom/xh/common/log/HLog;->d(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/synchronous/ui/impl/base/BaseSynCompletionDetailFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/synchronous/ui/impl/tea/SynTeaCompletionDetailFragment;->close(), Lcom/xh/synchronous/ui/impl/tea/SynTeaCompletionDetailFragment;->goLast(), Lcom/xh/synchronous/ui/impl/tea/SynTeaCompletionDetailFragment;->goNext()
+
+=== smali_classes2|com|xh|synchronous|ui|impl|tea|SynTeaImageFragment.smali :875 ===
+actions: 
+danger : 
+calls  : Lcom/xh/comm/weiget/SyncHandWritingView;->restoreToImage(Ljava/lang/String;), Lcom/xh/synchronous/ui/impl/tea/SynTeaImageFragment;->sendPageAnswerInfo(Ljava/lang/String;)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|tea|SynTeaLargeImageFragment.smali :1861 ===
+actions: action_create_callback_suc, action_teacher_syn_single_upload_reply_files_end, close_explain_merging_strokes, explain_micro_record_status_msg, handwriting_callback_data_action, recover_current_page_handwriting, recover_note_cache_success
+danger : save, startService, write
+calls  : Lcom/xh/business_module/notemanager/bean/GetNoteCacheDataResponseBean;->getTaskId(), Lcom/xh/business_module/notemanager/bean/RecoverNoteCache;->getHandWrite(), Lcom/xh/business_module/notemanager/bean/RecoverNoteCache;->getPageNo(), Lcom/xh/business_module/notemanager/bean/RecoverNoteCache;->getTaskId(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->startCollectRecoverOnePageNoteService(Ljava/lang/String;Ljava/lang/String;IZZ)
+
+=== smali_classes2|com|xh|synchronous|ui|impl|tea|SynTeaSimpleTopicFragment.smali :1646 ===
+actions: action_teacher_syn_single_upload_reply_files_end, recover_current_page_handwriting, recover_note_cache_success
+danger : startService, write
+calls  : Lcom/xh/business_module/notemanager/bean/RecoverNoteCache;->getHandWrite(), Lcom/xh/business_module/notemanager/bean/RecoverNoteCache;->getPageNo(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->startCollectRecoverOnePageNoteService(Ljava/lang/String;Ljava/lang/String;IZZ), Lcom/xh/comm/weiget/SyncHandWritingView;->cancelGeometryView(), Lcom/xh/synchronous/ui/impl/stu/SynStuSimpleTopicFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes2|com|xh|tea|choice|choice|ui|impl|ChoiceChartAnswerFragment.smali :493 ===
+actions: \u6536\u5230\u5b66\u751f\u7684\u83b7\u53d6\u6570\u636e\u8bf7\u6c42, action_socket_student_in_syn_get_data_from_tea, send_choice_basic_info
+danger : 
+calls  : Lcom/xh/business_module/synchronous/bean/SynStuFeedbackToTeaBean;->getStuIds(), Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/tea/choice/choice/ui/impl/ChoiceChartAnswerFragment;->sendTotalDataToStu(Ljava/lang/String;), Lcom/xh/xhcore/common/util/XHLog;->d(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes2|com|xh|tea|weiget|CreateRaiseHandDialog.smali :906 ===
+actions: CreateRaiseHandDialog, action_socket_stu_get_sync_task_action, action_socket_stu_vote, onMsgEvent: PREPARE_CLOSE_FRAGMENT_ACTION=prepare_close_fragment_action SIGN_CLOSE_HANDLE_UP=sign_close_handle_up, prepare_close_fragment_action, sign_close_handle_up
+danger : startService
+calls  : Lcom/xh/business_module/bean/ClassRoomTaskSyncRecovery;->getClassRoomId(), Lcom/xh/business_module/bean/ClassRoomTaskSyncRecovery;->getUserIds(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getClassRoomId(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->getInstance(), Lcom/xh/business_module/startservicehelper/StartServiceHelper;->sendSocketMsgTeacherToMoreStudent(Lcom/xh/ws/socketrelation/bean/SocketMessage;Ljava/lang/String;)
+
+=== smali_classes3|com|xh|wenda|record|common|presenter|ISingleQuestionAnswerPresenter.smali :13 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes3|com|xh|wenda|record|common|presenter|impl|SingleQuestionAnswerPresenter.smali :1525 ===
+actions: action_down_question_answer_stroke_file_success
+danger : exec
+calls  : Lcom/xh/wenda/record/common/presenter/impl/SingleQuestionAnswerPresenter$1;->execute()
+
+=== smali_classes3|com|xh|wenda|record|common|ui|impl|SingleQuestionAnswerActivity.smali :698 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/wenda/record/common/presenter/impl/SingleQuestionAnswerPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes3|com|xh|wenda|record|stu|presenter|IStuTotalQuestionAnswerPresenter.smali :13 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes3|com|xh|wenda|record|stu|presenter|impl|StuTotalQuestionAnswerPresenter.smali :93 ===
+actions: action_view_pager_on_page_selected
+danger : 
+calls  : Lcom/xh/wenda/record/stu/presenter/impl/StuTotalQuestionAnswerPresenter;->queryFirstPageQuestionAnswerList()
+
+=== smali_classes3|com|xh|wenda|record|stu|ui|impl|StuQuestionAnswerFragment.smali :513 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/wenda/record/stu/presenter/impl/StuTotalQuestionAnswerPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes3|com|xh|wenda|record|stu|ui|impl|StuTotalQuestionAnswerActivity.smali :178 ===
+actions: action_change_tab_num
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/wenda/record/common/bean/TabNumChannelBean;->getMyAskAnswerCount(), Lcom/xh/wenda/record/common/bean/TabNumChannelBean;->getSchoolmateCount(), Lcom/xh/wenda/record/stu/StuQuestionAnswerFragmentPagerAdapter;->setTabNum([J)
+
+=== smali_classes3|com|xh|wenda|record|tea|presenter|ITeaTotalQuestionAnswerPresenter.smali :13 ===
+actions: 
+danger : 
+calls  : 
+
+=== smali_classes3|com|xh|wenda|record|tea|presenter|impl|TeaTotalQuestionAnswerPresenter.smali :106 ===
+actions: action_select_class, action_view_pager_on_page_selected
+danger : 
+calls  : Lcom/xh/wenda/record/common/bean/SelectClassChannelBean;->getClassModel(), Lcom/xh/wenda/record/common/bean/SelectClassChannelBean;->getDesktopId(), Lcom/xh/wenda/record/tea/presenter/impl/TeaTotalQuestionAnswerPresenter;->queryFirstPageQuestionAnswerList(), Lcom/xh/wenda/record/tea/ui/ITeaTotalQuestionAnswerView;->queryFirstPageListWhenVisible()
+
+=== smali_classes3|com|xh|wenda|record|tea|ui|impl|TeaQuestionAnswerFragment.smali :516 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/wenda/record/tea/presenter/impl/TeaTotalQuestionAnswerPresenter;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes3|com|xh|wenda|record|tea|ui|impl|TeaTotalQuestionAnswerActivity.smali :327 ===
+actions: action_change_tab_num
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/wenda/record/common/bean/TabNumChannelBean;->getAuditedNum(), Lcom/xh/wenda/record/common/bean/TabNumChannelBean;->getJudgeNum(), Lcom/xh/wenda/record/common/bean/TabNumChannelBean;->getOtherNum(), Lcom/xh/wenda/record/tea/TeaQuestionAnswerFragmentPagerAdapter;->setTabNum([I)
+
+=== smali_classes3|com|xh|yktwebview|ui|impl|ChoiceAttachmentActivity.smali :365 ===
+actions: ACTION_RESOURCE_DOWNLOAD_COMPLETE
+danger : downLoadResource
+calls  : Lcom/xh/business_module/pushmsgservice/PptProgressBean;->getResourceId(), Lcom/xh/yktwebview/ui/impl/ChoiceAttachmentActivity;->downLoadResource(Ljava/lang/String;)
+
+=== smali_classes3|com|xh|yktwebview|ui|impl|WebViewActivity.smali :317 ===
+actions: ACTION_RESOURCE_DOWNLOAD_COMPLETE
+danger : downLoadResource
+calls  : Lcom/xh/business_module/pushmsgservice/PptProgressBean;->getResourceId(), Lcom/xh/yktwebview/presenter/impl/YktWebViewPresenter;->downLoadResource(Ljava/lang/String;Z), Lcom/xh/yktwebview/ui/impl/base/BaseWebViewActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes8|com|xh|aiqa|qacollect|ui|BaseAiQACollectActivity.smali :686 ===
+actions: ai_detail_handle_collect_status, f0, f1
+danger : 
+calls  : Lcom/xh/aiqa/qacollect/ui/BaseAiQACollectActivity;->swipeRefreshFragment(Ljava/lang/String;Ljava/lang/String;), Lcom/xh/aiqa/qacollect/weiget/CollectSearchBoxLayout;->getSearchText(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes8|com|xh|aiqa|qacollect|ui|StuAiQACollectActivity.smali :198 ===
+actions: action_copy_collect_title_msg, action_new_syn_task
+danger : 
+calls  : Lcom/xh/aiqa/qacollect/ui/BaseAiQACollectActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qacollect/ui/StuAiQACollectActivity;->finish(), Lcom/xh/aiqa/qacollect/ui/StuAiQACollectActivity;->getMTaskId()
+
+=== smali_classes8|com|xh|aiqa|qadetail|ui|BaseAiQADetailActivity.smali :2116 ===
+actions: 
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;)
+
+=== smali_classes8|com|xh|aiqa|qadetail|ui|StuAiQADetailActivity.smali :514 ===
+actions: action_new_syn_task
+danger : 
+calls  : Lcom/xh/aiqa/qadetail/ui/BaseAiQADetailActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qadetail/ui/StuAiQADetailActivity;->finish(), Lcom/xh/aiqa/qadetail/ui/StuAiQADetailActivity;->getTaskId()
+
+=== smali_classes8|com|xh|aiqa|qadetail|ui|TeaAiQADetailActivity.smali :2844 ===
+actions: TEA_GET_AI_ASK_IMAGE_URL, action_enable_ai_msg, action_enable_take_photo_msg, action_enable_voice_msg, action_new_syn_task, answer_height_change
+danger : 
+calls  : Lcom/xh/aiqa/qadetail/ui/BaseAiQADetailActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qadetail/ui/TeaAiQADetailActivity;->checkIfScrolledToBottom(), Lcom/xh/aiqa/qadetail/ui/TeaAiQADetailActivity;->finish(), Lcom/xh/aiqa/qadetail/ui/TeaAiQADetailActivity;->getDetailQuestionBoxLayout(), Lcom/xh/aiqa/qadetail/ui/TeaAiQADetailActivity;->getTaskId(), Lcom/xh/aiqa/qalist/weiget/AiQuestionBoxLayout;->setAttachmentImage(Ljava/lang/String;)
+
+=== smali_classes8|com|xh|aiqa|qalist|ui|BaseAiQAListActivity.smali :1645 ===
+actions: TEA_GET_AI_ASK_IMAGE_URL, action_copy_collect_msg, action_newly_add_ask_msg
+danger : 
+calls  : Lcom/xh/aiqa/qalist/adapter/BaseAiQAListAdapter;->getData(), Lcom/xh/aiqa/qalist/manager/IAiQAListReqUrl$AiQAAskBean;->getAskId(), Lcom/xh/aiqa/qalist/weiget/AiQuestionBoxLayout;->setAttachmentImage(Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/comm/bean/channel/IAiQASocketCode$NewlyAddAskMsgBean;->getAskId(), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes8|com|xh|aiqa|qalist|ui|StuAiQAListActivity.smali :397 ===
+actions: action_copy_collect_title_msg, action_enable_ai_msg, action_enable_send_ask, action_enable_take_photo_msg, action_enable_voice_msg, action_new_syn_task, action_tea_clear_ask_list, action_tea_set_enable_visible, null cannot be cast to non-null type com.xh.aiqa.qacollect.manager.IAiQACollectReqUrl.QACollectContent
+danger : 
+calls  : Lcom/xh/aiqa/qacollect/manager/IAiQACollectReqUrl$QACollectContent;->getPhotoUrl(), Lcom/xh/aiqa/qacollect/manager/IAiQACollectReqUrl$QACollectContent;->getTitle(), Lcom/xh/aiqa/qalist/ui/BaseAiQAListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qalist/ui/StuAiQAListActivity;->finish(), Lcom/xh/aiqa/qalist/ui/StuAiQAListActivity;->getMAiQAMenuPopup(), Lcom/xh/aiqa/qalist/ui/StuAiQAListActivity;->getMQuestionBoxLayout()
+
+=== smali_classes8|com|xh|aiqa|qalist|ui|SynStuAiQAListActivity.smali :288 ===
+actions: action_new_syn_task
+danger : 
+calls  : Lcom/xh/aiqa/qalist/ui/StuAiQAListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qalist/ui/SynStuAiQAListActivity;->getTaskId(), Lcom/xh/aiqa/qalist/ui/SynStuAiQAListActivity;->onMyDestroy()
+
+=== smali_classes8|com|xh|aiqa|qalist|ui|SynTeaAiQAListActivity.smali :366 ===
+actions: action_socket_stu_get_sync_task_action, classRoomTaskSyncRecovery.userIds, null cannot be cast to non-null type com.xh.business_module.bean.ClassRoomTaskSyncRecovery
+danger : 
+calls  : Lcom/xh/aiqa/qalist/manager/AiQAChannelHelper;->sendSynToSingleStu(ILjava/lang/String;ILjava/lang/String;), Lcom/xh/aiqa/qalist/ui/SynTeaAiQAListActivity;->getMTaskId(), Lcom/xh/aiqa/qalist/ui/TeaAiQAListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/business_module/bean/ClassRoomTaskSyncRecovery;->getClassRoomId(), Lcom/xh/business_module/bean/ClassRoomTaskSyncRecovery;->getUserIds(), Lcom/xh/business_module/classroomconfig/ClassRoomConfig;->getClassRoomId()
+
+=== smali_classes8|com|xh|aiqa|qalist|ui|TeaAiQAListActivity.smali :320 ===
+actions: action_newly_add_ask_msg
+danger : 
+calls  : Lcom/xh/aiqa/qalist/manager/AiQAChannelHelper;->sendNewlyAddAskMsg(Ljava/lang/String;Ljava/lang/Long;), Lcom/xh/aiqa/qalist/ui/BaseAiQAListActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/aiqa/qalist/ui/TeaAiQAListActivity;->getMTaskId(), Lcom/xh/comm/bean/channel/IAiQASocketCode$NewlyAddAskMsgBean;->getAskId()
+
+=== smali_classes8|com|xh|aiqa|qashare|ui|BaseAiShareActivity.smali :829 ===
+actions: ai_detail_share_recommend_status
+danger : 
+calls  : Lcom/xh/aiqa/qashare/ui/BaseAiShareActivity;->swipeRefreshFragment(I), Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes8|com|xh|blackboard|simple|ui|SimpleBlackboardActivity.smali :1414 ===
+actions: action_create_callback_suc, action_new_syn_task
+danger : 
+calls  : Lcom/xh/blackboard/simple/BlackboardSimpleManager;->close(), Lcom/xh/blackboard/simple/BlackboardSimpleManager;->getInstance(), Lcom/xh/blackboard/simple/ui/SimpleBlackboardActivity;->onMyDestroy(), Lcom/xh/business_module/db/ScreenshotBean;->setColor(I), Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/business_module/upload/manager/ScreenshotManager;->startScreenShot(Landroid/view/View;Lcom/xh/business_module/db/ScreenshotBean;)
+
+=== smali_classes8|com|xh|blackboard|stu|ui|StuBlackboardSyncActivity.smali :723 ===
+actions: StuBlackboardSyncActivity1, action_new_syn_task, onMsgEvent: ACTION_NEW_SYN_TASK, onMsgEvent: SHOW_OR_HIDE_SYN_HEAD_BAR isShow: 
+danger : save
+calls  : Lcom/xh/blackboard/stu/BlackboardStuManager$StuBlackboardCallback;->screenShot(Landroid/graphics/Bitmap;), Lcom/xh/blackboard/stu/BlackboardStuManager;->close(), Lcom/xh/blackboard/stu/BlackboardStuManager;->getBlackboardCallback(), Lcom/xh/blackboard/stu/BlackboardStuManager;->getInstance(), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->doChangedStatus(Z), Lcom/xh/business_module/askanswer/StuPlayerStatusHelper;->getInstance()
+
+=== smali_classes8|com|xh|blackboard|tea|ui|TeaBlackboardActivity.smali :1317 ===
+actions: 
+danger : 
+calls  : Lcom/xh/blackboard/tea/BlackboardTeaManager;->checkToAutoUpload(), Lcom/xh/blackboard/tea/BlackboardTeaManager;->getInstance()
+
+=== smali_classes8|com|xh|input|tea|teacher|ui|impl|CompletionCheckActivity.smali :1425 ===
+actions: action_action_down_audio_success, action_attach_material_update, action_socket_student_submit_choice_or_completion_topic_done, go_home_page_from_choice_chart, online_handwriting_download_complete
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getMaterialId(), Lcom/xh/business_module/db/MaterialInfoEntity;->getType(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->insert(Lcom/xh/business_module/db/MaterialInfoEntity;I), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;)
+
+=== smali_classes8|com|xh|input|tea|teacher|ui|impl|CompletionCheckFragment.smali :1212 ===
+actions: completion_student_get_student_finish_info, completion_student_get_student_un_finish_info, completion_student_send_student_finish_info, completion_student_send_student_un_finish_info
+danger : 
+calls  : Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/util/ContextMessage;->sendMsg(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/input/tea/teacher/presenter/impl/CompletionCheckPresenter;->getFinishStuList(), Lcom/xh/input/tea/teacher/presenter/impl/CompletionCheckPresenter;->getUnFinishStuList()
+
+=== smali_classes8|com|xh|input|tea|teacher|ui|impl|CompletionSingleCheckActivity.smali :1591 ===
+actions: completion_student_class_name
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes9|com|xh|business_module|customview|SendTaskDialog.smali :927 ===
+actions: 
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes9|com|xh|choice|stu|choice|ui|impl|ChoiceStudentActivity.smali :1585 ===
+actions: \u8001\u5e08\u8bbe\u7f6e\u4e86\u7b54\u6848!, action:, action_action_down_audio_success, action_attach_material_update, action_socket_choice_set_correct_answer, cb, mTaskId:, online_handwriting_download_complete, prePareTaskId:, prepare_tool_class_syn, this:
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getMaterialId(), Lcom/xh/business_module/db/MaterialInfoEntity;->getType(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->insert(Lcom/xh/business_module/db/MaterialInfoEntity;I), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;)
+
+=== smali_classes9|com|xh|choice|tea|choice|ui|impl|ChoiceAnswerFragment.smali :1317 ===
+actions: choice_tea_detail_answer_activity, get_choice_basic_info, send_choice_basic_info
+danger : 
+calls  : Lcom/xh/choice/tea/choice/ui/impl/ChoiceAnswerFragment;->getActivity(), Lcom/xh/choice/tea/choice/ui/impl/ChoiceAnswerFragment;->getStudentAnswer(), Lcom/xh/choice/tea/choice/ui/impl/ChoiceDetailAnswerActivity;->launchChoiceDetailAnswerActivity(Landroid/content/Context;Ljava/lang/String;II), Lcom/xh/common/base/BaseFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/util/ContextMessage;->sendMsg(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes9|com|xh|choice|tea|choice|ui|impl|ChoiceCheckAnswerActivity.smali :1401 ===
+actions: USER_SUBMITTED, \u6709\u5b66\u751f\u4e0a\u4ea4\u4e86\u9009\u62e9\u9898!, action_action_down_audio_success, action_attach_material_update, action_socket_student_submit_choice_or_completion_topic_done, go_home_page_from_choice_chart, online_handwriting_download_complete, prepare_existence_syn, prepare_tool_class_syn, submitNum, taskId
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getMaterialId(), Lcom/xh/business_module/db/MaterialInfoEntity;->getType(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->insert(Lcom/xh/business_module/db/MaterialInfoEntity;I), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;), Lcom/xh/business_module/division_class/PrePareToolManager;->prepareSynFinish(Ljava/lang/String;)
+
+=== smali_classes9|com|xh|choice|tea|choice|ui|impl|ChoiceStudentAnswerActivity.smali :1505 ===
+actions: choice_student_class_name
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes9|com|xh|classrecord|common|BaseClassRecordActivity.smali :937 ===
+actions: teacher_score
+danger : 
+calls  : Lcom/xh/classrecord/common/BaseClassRecordPresenter;->updateDateBaseUnscore(Ljava/lang/String;I), Lcom/xh/classrecord/common/StuScoreInfoAdapter;->notifyItemChanged(I), Lcom/xh/classrecord/common/bean/MsgTeacherScoreBean;->getScore(), Lcom/xh/classrecord/common/bean/MsgTeacherScoreBean;->getStuId(), Lcom/xh/classrecord/common/bean/MsgTeacherScoreBean;->getUnScoredCount(), Lcom/xh/classrecord/common/bean/StuScoreInfo;->getStuId()
+
+=== smali_classes9|com|xh|classrecord|stu|ui|StuClassRecordActivity.smali :670 ===
+actions: stu_correct_note_change
+danger : 
+calls  : Lcom/xh/classrecord/common/BaseClassRecordActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/classrecord/stu/ui/StuClassRecordActivity;->recordNoteChange()
+
+=== smali_classes9|com|xh|classrecord|tea|ui|TeaClassRecordActivity.smali :1749 ===
+actions: tea_correct_note_change
+danger : 
+calls  : Lcom/xh/classrecord/common/BaseClassRecordActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/classrecord/tea/ui/TeaClassRecordActivity;->recordNoteChange()
+
+=== smali_classes9|com|xh|classrecord|tea|ui|UploadFailDialog.smali :1169 ===
+actions: upload_delete, upload_fail, upload_suc
+danger : 
+calls  : Lcom/xh/business_module/db/ScreenshotBean;->getId(), Lcom/xh/business_module/db/ScreenshotBean;->setLoadType(I), Lcom/xh/classrecord/common/UploadFailAdapter;->notifyDataSetChanged(), Lcom/xh/classrecord/tea/ui/UploadFailDialog;->dataChange(Ljava/lang/String;), Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;)
+
+=== smali_classes9|com|xh|common|base|BaseActivity.smali :1379 ===
+actions: net_work_status
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->netWorkChange(ZI)
+
+=== smali_classes9|com|xh|common|base|BaseDialogFragment.smali :1099 ===
+actions: net_work_status, null cannot be cast to non-null type kotlin.Int
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->netWorkChange(ZI)
+
+=== smali_classes9|com|xh|common|base|BaseDialogFragment2.smali :1286 ===
+actions: net_work_status, null cannot be cast to non-null type kotlin.Int
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment2;->netWorkChange(ZI)
+
+=== smali_classes9|com|xh|common|base|BaseFragment.smali :379 ===
+actions: net_work_status
+danger : 
+calls  : 
+
+=== smali_classes9|com|xh|common|dialog|SdCardFreeSpaceDialog.smali :447 ===
+actions: close_Sdcard_free_space_dialog
+danger : 
+calls  : Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/dialog/SdCardFreeSpaceDialog;->dismissAllowingStateLoss()
+
+=== smali_classes9|com|xh|comm|weiget|PreviewAudioActivity.smali :1128 ===
+actions: PreviewAudioActivity, \u4efb\u52a1\u8df3\u8f6c\u4e86\u554a\uff0cfinish\u5427___tempTaskId:, __mTaskId:, action_stu_stop_audio_preview, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/comm/weiget/PreviewAudioActivity;->stopPreview(), Lcom/xh/common/base/AppManager;->finishOnlyDeskTopActivity(Z), Lcom/xh/common/base/AppManager;->getAppManager(), Lcom/xh/common/log/HLog;->e(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes9|com|xh|comm|weiget|PreviewRelevanceAudioDialog.smali :1377 ===
+actions: \u4efb\u52a1\u8df3\u8f6c\u4e86\u554a\uff0cdismiss\u5427___tempTaskId:, __mTaskId:, action_stu_click_watch_new_task_button, cb, prepare_tool_class_syn
+danger : 
+calls  : Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/comm/weiget/PreviewRelevanceAudioDialog;->dismiss(), Lcom/xh/comm/weiget/PreviewRelevanceAudioDialog;->dismissAllowingStateLoss(), Lcom/xh/common/base/BaseDialogFragment;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/common/log/HLog;->e(Ljava/lang/String;Ljava/lang/String;)
+
+=== smali_classes9|com|xh|cropscreen|ui|impl|CropScreenActivity.smali :508 ===
+actions: action_task_create_success
+danger : 
+calls  : Lcom/xh/common/base/BaseActivity;->onMsgEvent(Ljava/lang/String;Ljava/lang/Object;), Lcom/xh/cropscreen/ui/impl/CropScreenActivity;->finish()
+
+=== smali|com|xh|input|stu|ui|impl|CompletionStudentActivity.smali :2057 ===
+actions: action:, action_action_down_audio_success, action_attach_material_update, action_donw_key, action_socket_completion_set_correct_answer, cb, mTaskId:
+danger : 
+calls  : Lcom/xh/business_module/db/MaterialInfoEntity;->getMaterialId(), Lcom/xh/business_module/db/MaterialInfoEntity;->getType(), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->insert(Lcom/xh/business_module/db/MaterialInfoEntity;I), Lcom/xh/business_module/dbhelper/MaterialInfoEntityDaoHelper;->newInstance(), Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;->getTaskId(), Lcom/xh/business_module/division_class/PrePareToolManager;->classSynFinish(Lcom/xh/common/base/BaseActivity;Lcom/xh/business_module/division_class/PrePareToolAction$PrePareToolTaskModule;Ljava/lang/String;)
