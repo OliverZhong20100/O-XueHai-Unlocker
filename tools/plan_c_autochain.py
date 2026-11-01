@@ -34,7 +34,7 @@ HITS = os.path.join(BASE, "plan_c_hits.log")
 OUR = "192.168.137.1"
 PAD = "192.168.137.77"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 
 _st = {"ws_seen": 0, "inject": 0, "srv2": 0, "apkhijack": 0, "proxy_hit": 0, "agent4711": 0}
 
