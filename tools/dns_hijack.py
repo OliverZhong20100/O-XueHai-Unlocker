@@ -28,7 +28,7 @@ from scapy.arch.windows import get_windows_if_list
 BASE = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(BASE, "dns_hijack.log")
 
-PAD_MAC = "80:20:fd:8b:4b:fa"
+PAD_MAC = "<DEVICE_MAC>"
 # IFINDEX 会随热点重建而变(曾 12/13, 2026-10-16 为 11) => 用环境变量覆盖
 IFINDEX = int(os.environ.get("DNS_IFINDEX") or 11)
 WATCH = int(sys.argv[1]) if len(sys.argv) > 1 else 86400
