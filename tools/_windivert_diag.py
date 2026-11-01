@@ -29,7 +29,7 @@ try:
 except Exception as e:
     log("layers enum: " + str(e))
 
-PAD = "192.168.137.10"
+PAD = "<PAD_IP>"
 LOCAL = "192.168.137.1"
 
 tests = [
