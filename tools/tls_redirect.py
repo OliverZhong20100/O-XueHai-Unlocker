@@ -21,7 +21,7 @@ import pydivert
 from pydivert import Layer
 from pydivert.consts import Direction
 
-PAD = "192.168.137.10"
+PAD = "<PAD_IP>"
 LOCAL = "192.168.137.1"
 LOG_PATH = os.path.join(_HERE, "tls_redirect.log")
 
