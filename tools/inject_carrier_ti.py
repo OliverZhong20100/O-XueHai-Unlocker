@@ -13,7 +13,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 INJ = os.path.join(BASE, "ws_inject.txt")
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 
 
 def env_full(mtype, data, cid, tag, cmd=0, frm="teacher"):
