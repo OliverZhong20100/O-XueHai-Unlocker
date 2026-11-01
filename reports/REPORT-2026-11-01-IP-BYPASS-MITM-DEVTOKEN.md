@@ -166,3 +166,32 @@ TCP    : 192.168.137.1:443 <- 192.168.137.10:60706 CloseWait pid=34040(MITM)
 | `pad_sni_capture.log` | 平板 ClientHello 抓包（含 `<NO-SNI>` 证据） |
 | `_devtoken_fix.py` | 修正 year/mday 顺序后的令牌生成器 |
 | `_windivert_diag.py` | WinDivert 层/过滤器诊断 |
+
+---
+
+## 七、12:52 更新：IP 别名方案跑通（推翻前述「ClientHello 未到」卡点）
+
+前述用 WinDivert 在 FORWARD 层改 dst 重注入的方案，包不会进入本地监听队列（仍在转发路径）。
+改用 **网卡 IP 别名** 方案后自测通过：
+
+```
+netsh interface ipv4 add address "本地连接* 17" 47.99.85.219 255.255.255.255
+netsh interface ipv4 add address "本地连接* 17" 47.111.87.154 255.255.255.255
+netsh interface ipv4 add address "本地连接* 17" 47.110.67.143 255.255.255.255
+```
+
+本机模拟平板的 IP 直连自测结果：
+
+```
+HANDSHAKE OK  proto=TLSv1.3  cipher=TLS_AES_256_GCM_SHA384
+cert subject: CN=oliversmcserver.site
+cert issuer : O=Let's Encrypt, CN=YE2
+response: HTTP/1.1 200 OK
+  Content-Type: application/json; charset=UTF-8
+  X-Content-Sign-Token: 93c3b89a0cbaa61120984219f9f9363f
+  {}
+```
+
+⇒ **MITM 链路（IP 别名 + Let's Encrypt 证书 + IP 绕过 + 伪造响应）已完全就绪，等平板恢复热点连接即可抓登录明文。**
+
+当前状态：平板 Wi-Fi 掉线（ping 不通、30 秒零出站流量），恢复后继续。
