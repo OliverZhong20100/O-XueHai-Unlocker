@@ -18,7 +18,7 @@ import sys
 
 R = r'C:\Users\Olive\AppData\Roaming\Tencent\Marvis\User\oAN1i2VRVDeZQaMsrRqanPxYuhcU\workspace\conv_19f78e04910_fcda16370b95\output\sm-p200-takeover'
 PT = os.path.join(R, 'pentest')
-PAD = '192.168.137.73'
+PAD = '<PAD_IP>'
 ADB = r'C:\Users\Olive\AppData\Local\Microsoft\WinGet\Packages\Google.PlatformTools_Microsoft.Winget.Source_8wekyb3d8bbwe\platform-tools\adb.exe'
 
 
@@ -73,7 +73,7 @@ def cmd_check():
     print('  %s \u66f4\u65b0\u68c0\u67e5 %s' % ('[OK] ' if b'999999' in b else '[!!] ', b[:90]))
     b = http(8099, '/note.html')
     print('  %s \u5f39\u7a97\u9875\u9762 %d B (getToken=%s)' % ('[OK] ' if b'getToken' in b else '[!!] ', len(b), b'getToken' in b))
-    b = http(8000, '/api/v1/users/2112229/devices/R52N9067SSF/assists/assist_marvis_0001/tasks')
+    b = http(8000, '/api/v1/users/<USER_ID>/devices/<DEVICE_SERIAL>/assists/assist_marvis_0001/tasks')
     print('  %s \u534f\u52a9\u4efb\u52a1 %s' % ('[OK] ' if b'executeCmd' in b else '[!!] ', b[:80]))
     for f, need in (('agent.apk', 1000000), ('zipslip.bin', 100), ('note.html', 100)):
         sz = os.path.getsize(os.path.join(PT, f)) if os.path.exists(os.path.join(PT, f)) else -1
