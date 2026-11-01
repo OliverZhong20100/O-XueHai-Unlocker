@@ -22,7 +22,7 @@ INJ = os.path.join(BASE, "ws_inject.txt")
 WSLOG = os.path.join(BASE, "ws8889.log")
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 DESK_ID = "1349658"          # 端侧消息里的固定 id
 PAYLOAD = "lab2.7z"
 
@@ -66,7 +66,7 @@ def main():
         "attendClass": 2,            # 2 = UP_CLASS
         "setClassTime": True,        # 已设课堂时间
         "signType": 1, "classroomId": ROOM, "roomId": "LAB_ROOM1",
-        "taskId": "LAB_T9", "userId": 2112229, "desktopId": "LAB_D9",
+        "taskId": "LAB_T9", "userId": <USER_ID>, "desktopId": "LAB_D9",
         "isPlay": 0, "isSilent": 1, "isSignFinish": 1,
         "isTeaStartSignTask": 1, "openAdvanceSignOut": 0, "classMode": 0,
         "childTaskId": {},
