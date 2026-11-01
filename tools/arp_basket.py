@@ -37,7 +37,7 @@ LOG = os.path.join(BASE, "arp_basket.log")
 HIT = os.path.join(BASE, "night_watch_HIT.txt")
 
 IFINDEX = int(os.environ.get("IFINDEX", "12"))
-PAD_MAC = os.environ.get("PAD_MAC", "80:20:fd:8b:4b:fa").lower()
+PAD_MAC = os.environ.get("PAD_MAC", "<DEVICE_MAC>").lower()
 ALIAS_IFACE = os.environ.get("ALIAS_IFACE", "\u672c\u5730\u8fde\u63a5* 17")
 DO_ALIAS = os.environ.get("ARP_ALIAS", "1") == "1"
 HOURS = float(sys.argv[1]) if len(sys.argv) > 1 else 10.0
