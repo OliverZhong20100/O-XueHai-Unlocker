@@ -11,11 +11,11 @@ ROOT = os.path.dirname(BASE)  # sm-p200-takeover
 
 REPL = [
     # 设备标识
-    ("80:20:fd:8b:4b:fa", "<MAC>"),
-    ("80-20-fd-8b-4b-fa", "<MAC>"),
-    ("R52N9067SSF", "<序列号>"),
-    ("2112229", "<userId>"),
-    ("zhonghaoyang7", "<账号>"),
+    ("<DEVICE_MAC>", "<MAC>"),
+    ("<DEVICE_MAC>", "<MAC>"),
+    ("<DEVICE_SERIAL>", "<序列号>"),
+    ("<USER_ID>", "<userId>"),
+    ("<ACCOUNT>", "<账号>"),
     ("zhonghaoyang", "<账号>"),
     ("UXHOVJJF", "<课堂ID>"),
     # 令牌
