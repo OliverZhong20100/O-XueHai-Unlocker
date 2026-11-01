@@ -29,7 +29,7 @@ import time
 import pydivert
 from pydivert import Direction, Layer
 
-def _detect_pad(mac="80:20:fd:8b:4b:fa"):
+def _detect_pad(mac="<DEVICE_MAC>"):
     """按平板 MAC 从 ARP 表解析其当前 IP, 解决 DHCP 漂移导致写死 IP 失效。"""
     import re as _re
     import subprocess as _sp
@@ -43,11 +43,11 @@ def _detect_pad(mac="80:20:fd:8b:4b:fa"):
                     return m.group(1)
     except Exception:
         pass
-    return "192.168.137.73"
+    return "<PAD_IP>"
 
 
 PAD = _detect_pad()
-PAD_MAC = "80:20:fd:8b:4b:fa"
+PAD_MAC = "<DEVICE_MAC>"
 MY_IP = "192.168.137.1"
 LAN = "192.168.137."
 IF_INDEX = 12
