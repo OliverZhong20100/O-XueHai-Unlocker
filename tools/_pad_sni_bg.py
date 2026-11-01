@@ -5,7 +5,7 @@ import time
 
 from scapy.all import IP, TCP, Raw, AsyncSniffer
 
-PAD = "192.168.137.10"
+PAD = "<PAD_IP>"
 LOG = r"C:\Users\Olive\AppData\Roaming\Tencent\Marvis\User\oAN1i2VRVDeZQaMsrRqanPxYuhcU\workspace\conv_19f78e04910_fcda16370b95\output\sm-p200-takeover\pentest\pad_sni_capture.log"
 t0 = time.time()
 
@@ -68,7 +68,7 @@ def cb(p):
 
 
 sn = AsyncSniffer(iface=r"\Device\NPF_{6E5C648D-1355-4F48-B5BA-047951DDDFA3}",
-                  prn=cb, store=False, filter="host 192.168.137.10 and tcp")
+                  prn=cb, store=False, filter="host <PAD_IP> and tcp")
 sn.start()
 time.sleep(90)
 sn.stop()
