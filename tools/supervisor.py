@@ -21,11 +21,11 @@ import time
 BASE = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(BASE, "supervisor.log")
 HITS = os.path.join(BASE, "supervisor_hits.log")
-PAD_MAC = "80:20:fd:8b:4b:fa"
-PAD_MAC_DASH = "80-20-fd-8b-4b-fa"
+PAD_MAC = "<DEVICE_MAC>"
+PAD_MAC_DASH = "<DEVICE_MAC>"
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 PYW = r"D:\Program Files\Tencent\Marvis\MarvisAgent\1.60.3000.716\runtime\python311\pythonw.exe"
 PYS = r"D:\Program Files\Tencent\Marvis\MarvisAgent\1.60.3000.716\runtime\python311\python.exe"
 
