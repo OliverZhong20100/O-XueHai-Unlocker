@@ -137,7 +137,7 @@ class Captive:
         return True
 
     def discover(self):
-        want = (self.tab_mac or "80:20:fd:8b:4b:fa").lower()
+        want = (self.tab_mac or "<DEVICE_MAC>").lower()
         prefix = self.local_ip.rsplit(".", 1)[0]
         log(f"[i] 扫描 {prefix}.0/24 寻找 {want} ...")
         try:
@@ -222,7 +222,7 @@ def main():
     ap.add_argument("--local-ip", default="192.168.3.26")
     ap.add_argument("--gateway-ip", default="192.168.3.1")
     ap.add_argument("--target-ip", default=None)
-    ap.add_argument("--target-mac", default="80:20:fd:8b:4b:fa")
+    ap.add_argument("--target-mac", default="<DEVICE_MAC>")
     ap.add_argument("--iface", default=None)
     ap.add_argument("--interval", type=float, default=1.5)
     ap.add_argument("--hijack", default=None)
