@@ -105,13 +105,13 @@ except Exception as e:
     say(BAD, "\u66f4\u65b0\u68c0\u67e5\u89e3\u6790\u5931\u8d25 %s %r" % (e, b[:120]))
 
 # 5 assist chain (8000)
-h, b = http(8000, '/api/v1/users/2112229/devices/R52N9067SSF/assists')
+h, b = http(8000, '/api/v1/users/<USER_ID>/devices/<DEVICE_SERIAL>/assists')
 try:
     o = json.loads(b.decode('utf-8'))
     say(OK if o.get('id') else BAD, "\u534f\u52a9\u4f1a\u8bdd -> %s" % o.get('id'))
 except Exception as e:
     say(BAD, "\u534f\u52a9\u4f1a\u8bdd\u5931\u8d25 %s %r" % (e, b[:120]))
-h, b = http(8000, '/api/v1/users/2112229/devices/R52N9067SSF/assists/assist_marvis_0001/tasks')
+h, b = http(8000, '/api/v1/users/<USER_ID>/devices/<DEVICE_SERIAL>/assists/assist_marvis_0001/tasks')
 try:
     o = json.loads(b.decode('utf-8'))
     n = len(o) if isinstance(o, list) else -1
