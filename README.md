@@ -1,5 +1,27 @@
 # O-XueHai-Unlocker
 
+> ## 🎯 项目状态（2026-11-01 更新）：**已找到 100% 全自动接管链路**
+>
+> 经过多轮逆向与实机验证，本项目的核心研究目标已达成——**在「平板连接实验热点并启动 App」的默认行为下，无需任何用户交互即可完成对设备的控制**：
+>
+> 1. **App 的默认业务基址被证明是 `http://192.168.137.1:80`**（明文 http）
+>    - `UrlCache.<clinit>` 的 `position` 初始值为 **-1**，首次 `getHttpUrl()` → `nextHttpUrl()` → `position=0` → `list[0]`
+>    - `list[0] = getAddressList("SA106003")[0]`，而 `SA106003` 的地址来自明文服务表（嗅探器可控）
+> 2. **登录请求默认发往该明文基址**，被嗅探器返回伪造 `activated:true + accessToken`（响应签名密钥已知）
+> 3. **App 写入登录态后，assist 请求同样走该明文基址**，返回伪造会话与任务
+> 4. **App 执行任务中的命令（`executeCmd`）→ 设备控制**
+>
+> 关键代码证据：
+> - `UrlCache.<clinit>`：`position = -1`；轮转错误码仅 `0x660b0c6/0x660b4b4/0x660c061`
+> - `nextHttpUrl()`：`list = getAddressList("SA106003") + Configuration.getHttpUrlArray()`
+> - `npcap_http80.py`：`OUR_IP=192.168.137.1`、`_FULL_CLOUD_PORT=80`、`SA106003` 在 `MANDATORY_TYPES`
+> - `AssistRemoteDataSource`：`/api/v1/users/{uid}/devices/{did}/assists` 与 `.../tasks`
+> - 13:54 实机日志：`assist_hits.log` + `npcap_http80.log` 真实命中伪造会话
+>
+> **唯一前提：平板连接实验热点（即测试环境本身），设备侧无额外条件。**
+> 完整链路见 [`reports/REPORT-2026-11-01-IP-BYPASS-MITM-DEVTOKEN.md`](reports/REPORT-2026-11-01-IP-BYPASS-MITM-DEVTOKEN.md) 第十四节。
+
+
 学海教育平板三星SM-P200逆向破解项目
 
 ⚖️ 免责声明（Disclaimer）
