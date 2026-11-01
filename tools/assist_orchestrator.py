@@ -22,7 +22,7 @@ import sys
 import time
 
 # === PAD-AUTODETECT (patch_pad_ip.py): 按 MAC 找平板当前 IP, 免受 DHCP 换址影响 ===
-_PAD_MAC = "80:20:fd:8b:4b:fa"
+_PAD_MAC = "<DEVICE_MAC>"
 _pad_cache = {"ip": None, "t": 0.0}
 
 
@@ -45,7 +45,7 @@ def _p200_ip():
                     return m.group(1)
     except Exception:
         pass
-    _pad_cache["ip"] = _pad_cache["ip"] or "192.168.137.154"
+    _pad_cache["ip"] = _pad_cache["ip"] or "<PAD_IP>"
     _pad_cache["t"] = now
     return _pad_cache["ip"]
 # === /PAD-AUTODETECT ===
