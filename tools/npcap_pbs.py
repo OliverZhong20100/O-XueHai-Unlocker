@@ -43,7 +43,7 @@ from scapy.all import Ether, IP, TCP, Raw, conf, AsyncSniffer
 from scapy.arch.windows import get_windows_if_list
 
 MAGIC = 2103345
-PAD_MAC = "80:20:fd:8b:4b:fa"
+PAD_MAC = "<DEVICE_MAC>"
 ICS_MAC = "52:bb:b5:4f:7f:3e"
 IFINDEX = 12
 PORT = 8106
@@ -59,16 +59,16 @@ PKG = "com.olive.agent"
 DEFAULT_APPID = os.environ.get("PBS_APPID") or "zty_stu"
 # 候选 userId。**首位 316724 已从代码确认**: ControlManager 把
 # (SessionData.getSchoolId(), SessionData.getUserId()) 交给 3200 控制通道, 而注册帧里
-# 两个数字是 2112229(schoolId) 与 "2112229,316724" -> userId = 316724。
+# 两个数字是 <USER_ID>(schoolId) 与 "<USER_ID>,316724" -> userId = 316724。
 # 其余为兜底。端侧探测连接 EST 后约 5ms 即 FIN, 故首位那一帧最可能落地。
-CAND_UIDS = [x for x in (os.environ.get("PBS_UIDS") or "316724,2112229,10001,0").split(",") if x]
+CAND_UIDS = [x for x in (os.environ.get("PBS_UIDS") or "316724,<USER_ID>,10001,0").split(",") if x]
 
 # clientId 候选。onReceiver 的**第一道门禁**就是 verifyClientId:
 #   XHStringUtil.equals(pushMessage.clientId, this.clientId) 不匹配 → 静默 return,
 #   不回执、不处理 —— 这正是我们观察到"零回包"的最可能原因。
 # deviceId(32hex) 与 SN 均来自 3200 注册帧实测值; 末尾空串是"双方皆 null"的兜底。
 CAND_CIDS = [x for x in (os.environ.get("PBS_CIDS") or
-             "3f025ad519274a6795aaf5161efd7726,R52N9067SSF,").split(",")]
+             "3f025ad519274a6795aaf5161efd7726,<DEVICE_SERIAL>,").split(",")]
 # uid 优先: 先试已确认的 316724 配全部 clientId 候选, 再退到其它 uid。
 _PUSH_ORDER = [(u, c) for u in CAND_UIDS for c in CAND_CIDS]
 
@@ -90,7 +90,7 @@ def _detect_pad(mac=PAD_MAC):
                     return m.group(1)
     except Exception:
         pass
-    return "192.168.137.73"
+    return "<PAD_IP>"
 
 
 PAD = _detect_pad()
