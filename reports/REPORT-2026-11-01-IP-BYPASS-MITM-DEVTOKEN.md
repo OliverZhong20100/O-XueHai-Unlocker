@@ -195,3 +195,73 @@ response: HTTP/1.1 200 OK
 ⇒ **MITM 链路（IP 别名 + Let's Encrypt 证书 + IP 绕过 + 伪造响应）已完全就绪，等平板恢复热点连接即可抓登录明文。**
 
 当前状态：平板 Wi-Fi 掉线（ping 不通、30 秒零出站流量），恢复后继续。
+
+---
+
+## 十二、13:40 更新：assist 存在 UI 触发路径（不依赖数据码）+ CustomDeviceService 门槛确认
+
+### 12.1 assist 的第二触发点：RemoteAssistActivity → RemoteViewModel → requestAssist
+
+`requestAssist` 的调用方全量（plat_dec）：
+
+```
+ContentProviderReceiver:716   ← REMOTE_ASSIST 数据码 CA106004SB1030140001 触发
+RemoteViewModel:131           ← RemoteAssistActivity 的 ViewModel 直接触发 ★
+```
+
+**⇒ 打开「远程协助」页面（`/app/assist` 路由 / `com.xuehai.launcher.assist.RemoteAssistActivity`）即会主动发起：**
+
+```
+AssistManager.requestAssist()
+  → AssistModel.requestAssist()
+  → AssistRemoteDataSource.requestAssist()
+     GET {base}/api/v1/users/{uid}/devices/{did}/assists   ← 13:54 实机命中（ms，明文 http）
+```
+
+**manifest**：
+
+```xml
+<activity android:name="com.xuehai.launcher.assist.RemoteAssistActivity" .../>  <!-- 无 exported/intent-filter → 默认 false -->
+<service  android:name="com.xuehai.launcher.assist.AssistService" android:process=":assist"/>
+```
+
+**⇒ 数据码路径（`/api/v2/pub/versionChange`，走 ztp 域名 https，伪造不了）不是唯一入口。**
+**只要 App 已处于登录态并进入「远程协助」页面（用户点一下即可），assist 请求就发往 `ms`（明文 http，嗅探器已接管）→ 可返回伪造会话与任务 → executeCmd。**
+
+**修正后的方案 A 链路**：
+
+```
+① MITM 伪造登录（IP 字面量登录请求）
+② App 进入主页
+③ 用户点「远程协助」（App 内 UI 动作）
+④ assist 请求走 ms http → 伪造任务（executeCmd）→ 接管
+```
+
+概率修正：闸门 3 从「≈0」变为「≈80%（只需 UI 可达）」，方案 A 整体回到 15%~25%。
+
+### 12.2 com.b2b.rom.SamsungDevice 的调用门槛（实读）
+
+`ztpt_new_dec/smali/com/b2b/rom/SamsungDevice.smali`：
+
+```java
+Intent intent = new Intent();
+intent.setClassName("com.samsung.customxh", "com.samsung.customxh.CustomDeviceService");
+context.bindServiceAsUser(intent, mConnection, BIND_AUTO_CREATE(1), UserHandle.CURRENT_OR_SELF);
+// 40+ 方法：addAppAutoRunningList / controlAirplaneMode / controlRotation /
+//           disableBixbyShorcut / disableCameraShorcut / disableSamsungAccount /
+//           disableSwitchInputMethod / disableKanban / controlEyeMode / ...
+```
+
+- **SDK（`com.b2b.rom.SamsungDevice`）就在 zty（com.xuehai.launcher）的 dex 里**
+- 使用 **`bindServiceAsUser`（@hide API，系统/设备所有者专用）**，普通第三方 App 无法调用（只能公开的 `bindService`）
+- 服务端 `com.samsung.customxh` 的 exported/permission 在 ROM manifest 中，APK 内不可见；zty 能绑定说明其具备平台签名/设备所有者权限
+- **⇒ 方案 C（第三方 App 调 ROM 服务）在「无安装通道 + 无系统权限」下不可行**
+
+### 12.3 结论汇总（更新）
+
+| 路径 | 代码级状态 | 概率 |
+|---|---|---|
+| 方案 A（MITM 伪造登录 → 主页 → 用户点远程协助 → assist 注入） | 网络层全通；assist 有 UI 触发路径（RemoteViewModel:131） | 15%~25% |
+| 方案 B（设置→开发者选项→USB 调试） | 设置主界面未禁但 UI 层入口被封（实测） | ≈0 |
+| 方案 C（CustomDeviceService） | 需 @hide `bindServiceAsUser`/平台签名 | ≈0 |
+| 数据码路径（versionChange） | ztp 域名 https | ≈0 |
