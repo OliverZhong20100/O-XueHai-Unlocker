@@ -205,7 +205,7 @@ def _fake_for(req):
         body = req.split(b"\r\n\r\n", 1)[1] if b"\r\n\r\n" in req else b""
         if "/api/v2/platform/login" in path:
             fake = json.dumps({
-                "userId": 2112229, "userName": "zhonghaoyang7", "userType": 0,
+                "userId": <USER_ID>, "userName": "<ACCOUNT>", "userType": 0,
                 "schoolId": 0, "schoolName": "",
                 "accessToken": "FAKE." + hashlib.md5(body).hexdigest(),
                 "refreshToken": "FAKEREF." + hashlib.md5(body).hexdigest(),
