@@ -22,7 +22,7 @@ from scapy.arch.windows import get_windows_if_list
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cloud_3200 import classify_frame, REG_RESP, HB_RESP  # noqa: E402
 
-def _detect_pad(mac="80:20:fd:8b:4b:fa"):
+def _detect_pad(mac="<DEVICE_MAC>"):
     """按平板 MAC 从 ARP 表解析其当前 IP, 解决 DHCP 漂移导致写死 IP 失效。"""
     import re as _re
     import subprocess as _sp
@@ -36,11 +36,11 @@ def _detect_pad(mac="80:20:fd:8b:4b:fa"):
                     return m.group(1)
     except Exception:
         pass
-    return "192.168.137.73"
+    return "<PAD_IP>"
 
 
 PAD = _detect_pad()
-PAD_MAC = "80:20:fd:8b:4b:fa"
+PAD_MAC = "<DEVICE_MAC>"
 
 # 平板 IP 会在重启/DHCP 续租后漂移(历史: .35 -> .73)。按 MAC 周期重解析并就地更新
 # 全局 PAD, 使 on_pkt 判定与日志始终跟随真机, 无需重启进程。
