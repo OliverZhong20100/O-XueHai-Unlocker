@@ -3,8 +3,8 @@
 
 已实测的完整握手(2026-10-04 18:58, 被动抓取):
     GET / HTTP/1.1
-    Auth: {"boundId":"UXHOVJJF","role":1,"tags":["RWYZKUIF"],"userId":"2112229","v":"ztkt4"}
-    DeviceId: R52N9067SSF
+    Auth: {"boundId":"UXHOVJJF","role":1,"tags":["RWYZKUIF"],"userId":"<USER_ID>","v":"ztkt4"}
+    DeviceId: <DEVICE_SERIAL>
     Host: 47.99.214.197:8889
     Sec-WebSocket-Key: 8Y3V3Qp+PR1WE+AUi7XIyQ==
     Sec-WebSocket-Version: 13
