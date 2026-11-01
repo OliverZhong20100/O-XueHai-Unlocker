@@ -63,7 +63,7 @@ verifyDevelopToken(accountName, 1)
 `npcap3200.log`（端口 3200 课堂/盒子 UDP 协议）中平板发出的认证帧明文：
 
 ```
-v 3f025ad519274a6795aaf5161efd7726 R52N9067SSF X47AyBaQo+QIMtyqHc
+v 3f025ad519274a6795aaf5161efd7726 <DEVICE_SERIAL> X47AyBaQo+QIMtyqHc
   ↑ uv（32 hex）                     ↑ 设备号     ↑ randomStr（16 位）
 ```
 
@@ -98,7 +98,7 @@ verify(v6, session)
 
 ### 3.2 实机证据：平板确实存在 IP 字面量 URL 连接
 
-抓包（2026-11-01 11:41，平板 192.168.137.10）：
+抓包（2026-11-01 11:41，平板 <PAD_IP>）：
 
 ```
 11:41:36  SYN dst=192.168.137.1:443   CH sni=ztp.yunzuoye.net    ← 走 DNS 劫持到本机
@@ -115,7 +115,7 @@ verify(v6, session)
 
 ### 4.1 证书获取（公共 CA，无需在平板装 CA）
 
-- 来源：`\\192.168.3.10\C$\Users\Administrator\BtSoft\panel\vhost\letsencrypt\oliversmcserver.site\`
+- 来源：`\\<CERT_SERVER>\C$\Users\Administrator\BtSoft\panel\vhost\letsencrypt\oliversmcserver.site\`
 - 证书：`CN=oliversmcserver.site`，`Issuer=CN=YE2, O=Let's Encrypt, C=US`，有效期至 2026-11-18
 - 链条：`leaf ← YE2 ← Root YE ← ISRG Root X2 ← ISRG Root X1`（Android 9 系统信任 ISRG Root X1）
 - 提取方式：WinRM + `Export-PfxCertificate` → PFX → PEM（`mitm_server.crt/key` + `mitm_fullchain.pem`）
@@ -130,8 +130,8 @@ verify(v6, session)
 ### 4.3 实测进展
 
 ```
-12:03:39 [REDIR] pad 192.168.137.10:38260 -> 47.111.87.154:443 => 192.168.137.1:443
-TCP    : 192.168.137.1:443 <- 192.168.137.10:60706 CloseWait pid=34040(MITM)
+12:03:39 [REDIR] pad <PAD_IP>:38260 -> 47.111.87.154:443 => 192.168.137.1:443
+TCP    : 192.168.137.1:443 <- <PAD_IP>:60706 CloseWait pid=34040(MITM)
 ```
 
 **重定向成功、平板 TCP 连接已落到 MITM**。但平板在 TCP 握手后**未发送 TLS ClientHello 即关闭**（CloseWait），MITM 的 `recv` 读到空数据静默返回。
@@ -275,13 +275,13 @@ context.bindServiceAsUser(intent, mConnection, BIND_AUTO_CREATE(1), UserHandle.C
 **① `assist_hits.log`（2026-11-01 13:54 真实命中）**：
 
 ```
-13:54:15 ASSISTS ms.yunzuoye.net /api/v1/users/2112229/devices/R52N9067SSF/assists
+13:54:15 ASSISTS ms.yunzuoye.net /api/v1/users/<USER_ID>/devices/<DEVICE_SERIAL>/assists
 ```
 
 配合 `npcap_http80.log:92708`：
 
 ```
-13:54:15.660 !!!!!! [ASSIST] 设备请求协助会话 -> 回 id=assist_marvis_0001 | Host=ms.yunzuoye.net | /api/v1/users/2112229/devices/R52N9067SSF/assists
+13:54:15.660 !!!!!! [ASSIST] 设备请求协助会话 -> 回 id=assist_marvis_0001 | Host=ms.yunzuoye.net | /api/v1/users/<USER_ID>/devices/<DEVICE_SERIAL>/assists
 ```
 
 **⇒ 平板的 assist 请求走 `ms.yunzuoye.net` 的明文 http（端口 80），已被嗅探器抓到并回了伪造会话。**
@@ -290,7 +290,7 @@ context.bindServiceAsUser(intent, mConnection, BIND_AUTO_CREATE(1), UserHandle.C
 
 ```
 tls_relay.log:82   [RELAY-BLOCK] sni='ms.yunzuoye.net' forced-drop -> expect plaintext http fallback
-tls_drop.log:29    [DROP] 192.168.137.10 sni=ms.yunzuoye.net -> 主动断链(逼回退明文)
+tls_drop.log:29    [DROP] <PAD_IP> sni=ms.yunzuoye.net -> 主动断链(逼回退明文)
 ```
 
 **③ ms 通道曾被 MITM 命中**：
