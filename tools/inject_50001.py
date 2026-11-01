@@ -15,7 +15,7 @@ OUR = "192.168.137.1"
 HTTP_PORT = 8080
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "/mnt/sdcard/xhproxy"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 
 
 def build(room, root, port=HTTP_PORT):
