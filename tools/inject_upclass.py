@@ -19,7 +19,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 INJ = os.path.join(BASE, "ws_inject.txt")
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 
 
 def env(mtype, data, cid, tag, cmd=2, frm="teacher"):
@@ -44,7 +44,7 @@ def main():
     sign = {
         "attendClass": 2, "setClassTime": True, "signType": 1,
         "classroomId": ROOM, "roomId": "LAB_ROOM1",
-        "taskId": "LAB_T9", "userId": 2112229, "desktopId": "LAB_D9",
+        "taskId": "LAB_T9", "userId": <USER_ID>, "desktopId": "LAB_D9",
         "isPlay": 0, "isSilent": 1, "isSignFinish": 1,
         "isTeaStartSignTask": 1, "openAdvanceSignOut": 0, "classMode": 0,
         "childTaskId": {},
