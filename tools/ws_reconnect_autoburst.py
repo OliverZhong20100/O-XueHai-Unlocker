@@ -16,7 +16,7 @@ INJ = os.path.join(BASE, "ws_inject.txt")
 LOG = os.path.join(BASE, "autoburst.log")
 OUR = "192.168.137.1"
 ROOM = "UXHOVJJF"
-UID = "2112229"
+UID = "<USER_ID>"
 
 
 def W(m):
