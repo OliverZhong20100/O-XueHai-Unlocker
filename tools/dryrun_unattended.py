@@ -21,8 +21,8 @@ import socket
 R = r'C:\Users\Olive\AppData\Roaming\Tencent\Marvis\User\oAN1i2VRVDeZQaMsrRqanPxYuhcU\workspace\conv_19f78e04910_fcda16370b95\output\sm-p200-takeover'
 PT = os.path.join(R, 'pentest')
 UA = 'okhttp/3.12.1'
-UID = '2112229'
-DID = 'R52N9067SSF'
+UID = '<USER_ID>'
+DID = '<DEVICE_SERIAL>'
 PKG = 'com.xh.zhitongyunstu'
 AID = 'assist_marvis_0001'
 
