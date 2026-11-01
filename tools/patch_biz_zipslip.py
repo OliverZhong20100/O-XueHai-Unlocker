@@ -77,7 +77,7 @@ BLOCK = r'''
             "code": 200, "message": "success",
             "data": {
                 "userInfo": {
-                    "userId": 2112229, "username": "student",
+                    "userId": <USER_ID>, "username": "student",
                     "userType": 2, "schoolId": 1000, "schoolName": "学校",
                     "token": "bearer_fake_token_for_lab",
                     "phone": "", "role": 1, "environment": 1,
