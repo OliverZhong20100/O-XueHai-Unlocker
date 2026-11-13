@@ -170,3 +170,18 @@ ports: {'tcp:3200': 23}    dns: {}
 3. 备用：若能用白名单状态类消息把"大屏在线"打成离线，`type=3/4` 通道即恢复
 
 **判定点（下一窗口）**：`lab_server.log` 出现 `GET /..7z`，或 8889 上出现后续帧（`type=2` 更新任务等）。
+
+### 8.1 全卡点离线修复台账（2026-11-13 夜）
+
+| 卡点 | 修复/结论（按已有资产） |
+|---|---|
+| 拦截白名单 | 注入改白名单 `type=0`；`TaskDetail` 内嵌 `resourceInfo.zipUrl` |
+| 下载触发 | **已代码级确认**：`StudentDeskTopPresenter.recivieNewTask` 入库后调用 `StartServiceHelper.startDownLoadPptService(TaskDetail)`（4 参重载），由 `AutoDownloadManager.isDownloading(sourceId,...)` 去重；Intent `download_ppt_action` → `ResourceDownLoadService` → `downloadResourceOnly(null,...)` → 本地无记录 → `/api/v4/resource/single` |
+| 字段映射 | `ResourceInfo` 字段与伪造响应逐字对齐：`appSubType/convertStatus/createTime/downloadFilePath/extend/localPath/name/numberInLine/sourceId/taskId/type/zipUrl` |
+| 解压判定 | `needDecode` 参数为原始 URL，`zipUrl` 以 `..7z` 结尾命中 `endsWith("7z")`；`baseName=".."` → `destDir=/sdcard/xuehai/ztktv4_resource/..` |
+| 房间号门禁 | `recivieNewTask` 还校验 `task.classroomId == StudentClassRoomConfig.getClassRoomId()`；注入模板 `__ROOM__` 由握手 `Auth.boundId` 自动填充 |
+| desktopId 门禁 | `parentDeskTopId == task.desktopId`；注入器从平板自己的帧学习真实值（实测 `1349658`/`1594128`） |
+| 任务去重 | `arm_chain` 每阶段用唯一 `taskId/sourceId`（`make_task(n)`），避免 `isDownloading` 去重短路 |
+| schema 版本 | 生成库 `user_version=96`，18 表，`integrity_check=ok` |
+| 生效时机 | launcher 持句柄 → 需进程重启或 `clearDbSession`（登录流程）；列为残余风险 |
+| 安装腿 | DB 任务 → `executeAppUpdateTask`(0x20 默认授予) → `installApplication`；已绕开 `SysAuthority.preDownloadApp` |
