@@ -1,0 +1,53 @@
+name: Bug 报告
+description: 报告本仓库工具自身的问题（请先阅读 SECURITY.md）
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请勿在此粘贴：真实设备序列号、学校/校园标识、账号凭据、抓包原文。
+  - type: input
+    id: env
+    attributes:
+      label: 运行环境
+      description: 操作系统、Python 版本、scapy 版本、是否有 Npcap/管理员权限
+      placeholder: "Windows 11 23H2 / Python 3.11.9 / scapy 2.8.0 / Npcap 1.78 / 管理员=是"
+    validations:
+      required: true
+  - type: input
+    id: tool
+    attributes:
+      label: 涉及的脚本
+      placeholder: "tools/push_frame_tool.py"
+    validations:
+      required: true
+  - type: textarea
+    id: cmd
+    attributes:
+      label: 实际执行的命令与环境变量
+      description: 只贴命令，不要贴真实 IP/账号（用 192.0.2.x / REDACTED 代替）
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expect
+    attributes:
+      label: 期望结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果（完整报错）
+      render: text
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我已阅读 SECURITY.md，且不涉及第三方漏洞披露
+          required: true
+        - label: 我确认内容中不含真实环境敏感信息
+          required: true
