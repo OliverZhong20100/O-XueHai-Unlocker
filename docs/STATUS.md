@@ -53,3 +53,100 @@
 - 接入点为 Windows 移动热点时，虚拟网卡在部分无线网卡上无法启动，需要外置支持 AP 模式的 USB 无线网卡；
 - 观测进程必须提权，否则链路层收发与单播抓取均不可用；
 - 应答器与注入器必须同进程维护字节序号。
+
+## 6. 2026-11-13 复核：运行时开关测算与「盒子门」代码级定位
+
+### 6.1 开关测算（只用既有资产 + 反编译代码，不新增实验）
+
+| 开关 | 代码默认/门禁 | 既有资产证据 | 测算结论 |
+| --- | --- | --- | --- |
+| 消息接收器是否注册 | 注册调用位于「连接推送」之前，且无权限/无过滤条件 | 注入帧均获回执（只证解析）；空载荷探针未见进程终止，但推送为 6 秒短连接轮询，重连节奏会掩盖一次进程重启 ⇒ 探针二义 | 未定（代码上应注册；探针不可用） |
+| `getPreDownloadApp()` | 实体构造默认 false，仅登录响应可置真 | 全部抓包/落盘资产中无该字段明文（登录面全程 TLS，中继为 passthrough 不供 body） | 无法离线测定 |
+| 盒子可用 `isBoxEnable()` | 地址解析失败即静默 `setEnable(false)`，不发任何请求 | 全部日志中 `_check.xh` 命中数为 0；历史服务表下发时 body 为 0B 或 V1 对象格式 | 失败原因已定位（见 6.2），且可外部满足 |
+| MDM 安装是否收外部署名包 | 权限位 `0x20` 在学生端默认授予 | 无安装成功信标 | 无法离线测定 |
+
+### 6.2 盒子门：为什么历史上从未触发，以及如何满足
+
+代码级链路（`com.xh.zhitongyunstu` 构建）：
+
+1. `BoxManager.createCheckBoxChain()` 以 **classId = 0** 构造 `RealCheckBoxInterceptor`；
+2. `BaseService.syncCheckStatus(0)` → `FileService.checkStatus(ServiceUrl, cb)`；
+3. `ServiceUrl.getDomainOrIp()` → `AddressLoader.getServiceUrl(serverType, 0)`；因 `classId <= 0`，走 **V2** 路径 `XHMicroServerV2.getServerUrl(serverType)`；
+4. V2 的缓存键为 **纯 serverType**（不含 classId 后缀）；未命中时回退 `getMicroServerCache()`；
+5. V2 的 RESTful 默认地址为**明文** `http://ms.yunzuoye.net/api/v2/pub/microServer/list/`；
+6. 响应被 `parseMicroUrl()` 解析为 `List<ServerUrlUnify>`（元素含 `microServerNewDtoList[]`），写入内存表并持久化；
+7. `ServiceUrl` 对结果执行 `formatUrl()`：非 `http` 开头则**强制补 `http://`**；
+8. `FileService.checkStatus()` 拼出 `http://<地址>/0_check.xh` 并下载落盘；**地址为空则直接 `setEnable(false)`，不发出任何网络请求**；
+9. `FileService$1.success()` 要求正文 **恰好等于 `xh`** 才 `setEnable(true)`。
+
+⇒ 历史上「盒子始终不可用」的两个成因：
+
+- 内置默认表里 `FILE_BOX` 被显式置为空串，盒子没有内置地址，只能来自服务表或缓存；
+- 此前下发的服务表 body 为 0B / V1 对象格式，V2 解析器（要求数组）无法消费，缓存从未写入 ⇒ 第 8 步静默失败，因此抓包中 `_check.xh` 命中数为 0。
+
+⇒ 外部满足条件（已落到应答器）：服务表按 V2 数组格式下发并包含盒子类型，同时新增 `_check.xh` 应答（正文 2 字节 `xh`）。
+
+### 6.3 本次改动
+
+- `tools/plaintext_http_responder.py`：新增 `*_check.xh` 应答（`200`，正文 `xh`，`Content-Length: 2`）；
+- 服务表分支已按 V2/V3 数组格式构表并包含盒子服务类型（既有逻辑，本次核对通过）。
+
+### 6.4 结论
+
+链路每一跳的代码路径已完成代码级确认（见 [CHAIN.md](CHAIN.md)）。仍有两个只能在设备上取值的运行时开关：接收器注册状态、`getPreDownloadApp()`。二者可在一次联网会话内同时判定：
+
+1. 服务表投毒成功 → 出现 `GET /0_check.xh` ⇒ 盒子门已开；
+2. 随后注入预下载消息 → 出现对 `agent.apk` 的下载请求 ⇒ 接收器已注册且 `getPreDownloadApp()` 为真。
+
+---
+
+## 7. 现场复核（2026-11-13，真机，研究者侧采集）
+
+### 7.1 网络位置
+
+- 设备通过研究者主机热点接入，主机为设备网关/DNS；
+- 设备地址由 DHCP 分配，入口 IP 每次可能变化，需以 ARP 表为准；
+- 抓包接口为热点虚拟网卡的 NPF 设备；**BPF 过滤器必须用 `ip`**（端口过滤在本适配器上抓不到包），端口在用户态过滤。
+
+### 7.2 推送通道（3200）实测
+
+| 注入类型 | 帧状态 | 下游观测（30–40 s） |
+| --- | --- | --- |
+| `app-notification` + `payload=null` | ACK | 进程未崩溃 |
+| `app-upgrade` | ACK | 无新连接 |
+| `app-upgrade-prepare` | ACK | 无新连接 |
+| `app-syncMessage` | ACK | 无新连接 |
+| `control-service` | ACK（含重传） | 无新连接 |
+| `assist-notify`（ENTRY，含 assistId） | ACK `msgId` 对应 | 无协助心跳请求 |
+
+结论：帧可送达并取得回执，但没有任何业务副作用 ⇒ **不作为主链入口**。
+
+### 7.3 设备空闲态判定（决定性）
+
+对设备源 IP 做 120 秒端口聚合：
+
+```
+ports: {'tcp:3200': 23}    dns: {}
+```
+
+即除推送短连接外，设备**零 DNS、零 80/443、零 8889**。说明当前没有课堂 App 或 launcher 业务在跑，链 A 的触发面（8889 长连接）不存在。
+
+### 7.4 设备唤醒/触发手段核对
+
+- 课堂 App 的 service 全部 `exported=false`，外部无法拉起；
+- 唯一静态 receiver 为 `CONNECTIVITY_CHANGE`，`onReceive` 只发本地 `ContextMessage("net_work_status")`，不建连；
+- launcher 拉课堂 App 的唯一映射是首页图标点击（`course://com.xh.smartclassstu/open?...`）；
+- 结论：无用户操作时，网络侧无法让课堂 App 启动。
+
+### 7.5 已布设的自动响应
+
+- 明文 HTTP 应答（80）：服务表、`*_check.xh`（正文 `xh`）、`/box/file`、APK 下载；
+- 推送应答（3200）：AUTH/心跳/`MESSAGE` 注入；
+- 课堂 WS 冒充（8889）：明文 Upgrade 应答 + 帧注入；
+- 守候进程：一旦观测到设备的 8889/8888 连接，自动触发注入帧。
+
+### 7.6 结论
+
+- 链路本身（01→23 跳）代码级闭合；
+- 端到端自动执行的前置条件是"课堂 App 处于运行态"，该条件无法由网络侧单独满足；
+- 剩余需真机确认的两点：7z 越界落盘结果、库替换后的句柄重开时机。
