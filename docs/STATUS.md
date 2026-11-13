@@ -150,3 +150,23 @@ ports: {'tcp:3200': 23}    dns: {}
 - 链路本身（01→23 跳）代码级闭合；
 - 端到端自动执行的前置条件是"课堂 App 处于运行态"，该条件无法由网络侧单独满足；
 - 剩余需真机确认的两点：7z 越界落盘结果、库替换后的句柄重开时机。
+
+## 8. 卡点 1 根因：课堂端消息拦截白名单（2026-11-13 夜间，代码级）
+
+**现象**：WS 已接管、注入帧全部被端侧 TCP 确认（`ws8889.log` 中 `[ACK] ... OK(端侧已确认我们注入的数据)` 占 94%），但 App 零动作；同一注入在 20:33 成功过一次（平板主动 `GET /..7z`），之后全部失败。
+
+**根因**：`HandleSocketMsgService.onHandleIntent` 在处理消息前先过一道拦截门：
+
+- `sget-boolean v1, HandleSocketMsgService->interceptMsgEnable:Z`
+- 为 `true` 时只放行 `UN_INTERCEPT_TYPE_LIST` 内的 type，其余 `return-void`
+- 开关唯一写入点：`BigScreenOnLineStatusHelper.setOnline(Z)` → `setInterceptMsgEnable(Z)`，即**大屏在线状态直接控制拦截**
+- 白名单（`BusinessApp.initUnInterceptMsgType()`，10 项）：`0, 1, 2, 1007, 2021, 1031005, 1031006, 1031007, 1031008, 1000004`
+
+⇒ 短语 `type=3` 与 PPT 同步 `type=4` **不在白名单**：课堂内大屏在线时被服务层静默丢弃，TCP 仍正常 ACK；20:33 成功那次恰逢拦截未开启（大屏不在线）。此前"房间号/前台 Activity/序号空间"三个假设均可撤回。
+
+**修复方向（已落地代码，待课堂窗口验证）**：
+1. 改用白名单 `type=0`（TaskDetail 新建）：`action_socket_create_new_task` → `StudentDeskTopPresenter.recivieNewTask(TaskDetail)`，门禁只有 `parentDeskTopId == task.desktopId` 与 `classRoomId` 非空；`TaskDetail` 内嵌 `resourceInfo.zipUrl` 可直接携带下载源
+2. 注入器新增自学习：从平板自己的帧里抓 `desktopId`（实测值 `1349658`/`1594128`）、从握手 `Auth.boundId` 抓房间号，模板用 `__DESKTOP__` / `__ROOM__` 占位替换
+3. 备用：若能用白名单状态类消息把"大屏在线"打成离线，`type=3/4` 通道即恢复
+
+**判定点（下一窗口）**：`lab_server.log` 出现 `GET /..7z`，或 8889 上出现后续帧（`type=2` 更新任务等）。
