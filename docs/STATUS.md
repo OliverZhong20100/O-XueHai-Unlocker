@@ -185,3 +185,39 @@ ports: {'tcp:3200': 23}    dns: {}
 | schema 版本 | 生成库 `user_version=96`，18 表，`integrity_check=ok` |
 | 生效时机 | launcher 持句柄 → 需进程重启或 `clearDbSession`（登录流程）；列为残余风险 |
 | 安装腿 | DB 任务 → `executeAppUpdateTask`(0x20 默认授予) → `installApplication`；已绕开 `SysAuthority.preDownloadApp` |
+
+## 9. 2026-11-14 课堂 WS 通道实测与终局边界
+
+本轮把目标从推送通道切换到**课堂实时通道**（`47.99.214.197:8889`），完成真机闭环验证。以下结论全部来自线上字节与设备侧可观测行为。
+
+### 9.1 已确证能力
+
+| 能力 | 结论 | 证据 |
+| --- | --- | --- |
+| 课堂 WS 确定性接管 | 成立 | 双向 RST 风暴 + 伪造 SYNACK，回执 `端侧ack == 我们mine` |
+| 任意消息注入 | 成立 | 端侧逐帧回执，`/..7z` 累计 95 次拉取 |
+| `type=3` 短语：任意内容落盘 | 成立 | 受控 HTTP 源 → `/sdcard/xuehai/ztktv4_resource/<URL 末段>` |
+| `type=3` 自动播放 | 成立 | 下载完成回调 → `MediaPlayerUnits.playVoice` → `MediaPlayer.setDataSource/prepare/start` |
+| `type=2` 无门禁写课堂库 | 成立 | `TaskDetailDaoHelper.updateTaskDetail` → `insertOrReplace`；写入残缺行可稳定复现桌面崩溃，删除后恢复 |
+| `type=1` 按 taskId 删目录 | 成立 | `getMicroRecordPath(taskId)` 裸拼接 → `FileUtils.deleteDir` |
+| `type=6` 写 teacherLocalAddress | 成立 | 原始字符串直写 `StudentClassRoomConfig`，但无外连副作用 |
+
+### 9.2 接管配方（关键经验）
+
+- 单发 nudge RST 不够：真服务器 SYNACK 先到，端侧会采用真服务器序号，注入帧被当乱序丢弃（回执出现 `落后(未确认我们注入的数据)`）；
+- 必须同时运行双向 RST 风暴（对 `pad→server` 与 `server→pad` 两个方向都回 RST 给平板），把真服务器 SYNACK 打掉，才能拿到 `OK`；
+- 无管理员权限时 `pydivert` 不可用（`WinError 5`），无法做内核层 SYN 抑制。
+
+### 9.3 终局边界（为什么无法闭环）
+
+1. **资源内容由服务端授权**：所有下载腿最终都经 `GET /api/v4/resource/single?sourceUrl=...`，服务端只认自有资源，不代理抓取任意 URL；已用公网隧道实测——请求确实到达服务端，返回「资料中心该文件已被删除或不可用」，我方服务器零外部访问。
+2. **文件服务全 HTTPS**：`XHDownloadOkHttpProxy.replaceFileServerEnvironment` 每次请求强制 `http://` → `https://`；targetSdk 25 不信任用户 CA；MITM 不可行。
+3. **解压原语不可达**：`Z7Extractor` 唯一调用者 `ResourceHelper.doHandDownLoadSuccess` 需要 `ResourceInfo`（服务端/DB 授予）。
+4. **安装腿需要任务行**：`AppUpdateTask` 只来自 launcher 私有库或 HTTPS 下发，远程无写入原语。
+5. **无代码执行原语**：双 App 全树 `DexClassLoader`/`PathClassLoader` 零命中；Tinker 补丁证书必须等于 App 自身签名；无目录扫描安装器；全设备无 APK `intent-filter`。
+6. **客户端 0day 入口缺失**：我方字节唯一能进入的进程内解析器是 `MediaPlayer`，其解码在 `mediaserver`（uid `media`，无 `sdcard_rw`），碰不到 `/sdcard/xuehai/...`；pdfium/MyScript/CWP 的输入路径全部来自 `ResourceInfo` 或 UI。
+7. **物理/调试入口关闭**：MDM 关闭开发者选项，无法开启 USB 调试。
+
+### 9.4 结论
+
+> 在「无教师端操作、无用户点按、无物理调试入口」的约束下，远程链路的能力边界是：**完全控制课堂实时通道，能写入任意内容到固定目录、写任意任务行到课堂库、删除任意目录，但无法让设备安装任何程序**。安装所需的最后一道门由服务端资源授权把守，属于服务端信任边界，不是客户端缺陷。
