@@ -1,6 +1,6 @@
 # O-XueHai-Unlocker
 
-**学海终端破解项目**
+**面向教育平板 kiosk 的授权安全研究工具集：从明文协议应答、推送通道构造，到管控链路逐跳验证的整套本地实验脚本。**
 
 [![license](docs/assets/badge-license.svg)](LICENSE)
 [![python](docs/assets/badge-python.svg)](requirements.txt)
@@ -9,6 +9,11 @@
 [![scope](docs/assets/badge-scope.svg)](SECURITY.md)
 
 [English](README.en.md) · 中文
+
+> ## ⚠️ 使用前必读
+> 本项目仅限**自有设备**或**已取得书面授权**的隔离环境使用。
+> 开始之前请完整阅读：**[免责声明 DISCLAIMER.md](DISCLAIMER.md)** · **[使用协议 TERMS.md](TERMS.md)** · **[NOTICE](NOTICE)**（许可范围与限制澄清）。
+> 不同意上述条款请立即停止使用并删除全部副本。
 
 ---
 
@@ -40,6 +45,9 @@
 
 **不做什么**（重要）：
 
+- 不提供一键"破解"按钮，也不是面向普通用户的工具；
+- 不包含针对第三方服务的攻击代码、拒绝服务代码；
+- 不承诺端到端可用——链路中仍有真机未验证的环节，见 [Roadmap 与状态](#roadmap-与状态)；
 - 不收集、不上传任何数据；所有脚本只在你本地网络内运行。
 
 ## 为什么选它
@@ -243,14 +251,18 @@ A：这一版刻意保持"单文件 + 环境变量"的最小形态以减少依�
 **Q：为什么文档说"日志不算证据"？**
 A：日志会被缓存、截断、重放，也无法证明"字节真的到达对方"。本项目只采纳代码行、字节流与可复现命令输出，详见 `docs/METHODOLOGY.md`。
 
+**Q：能直接拿去接管一台学校的平板吗？**
+A：不能，也不应该。工具仅用于你拥有或已获书面授权的设备；未授权使用可能违法，本项目不提供任何绕过授权的手段。
+
 ## 安全披露
 
-见 [SECURITY.md](SECURITY.md)。
+见 [SECURITY.md](SECURITY.md)。涉及第三方产品的漏洞请不要提交到本仓库 Issue。
 
 ## 许可证与致谢
 
-[MIT](LICENSE)。
-
-特别鸣谢：@Kuinone醌酱 @薛定谔的zhang @Chidc 以及所有对此项目做出过贡献的人
+- **代码**：[MIT](LICENSE)
+- **文档与研究记录**：CC BY 4.0（署名转载，保留原文链接）
+- **使用限制**：见 [DISCLAIMER.md](DISCLAIMER.md) 与 [TERMS.md](TERMS.md)；许可只涉及著作权，**不构成对任何系统的访问授权**
+- **许可覆盖范围**：[NOTICE](NOTICE)
 
 致谢：Android/Linux 开源社区、scapy 项目，以及所有公开讨论 kiosk 管控与移动设备取证的研究者。
