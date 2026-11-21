@@ -12,6 +12,13 @@ English · [中文](README.md)
 
 ---
 
+> ## Before you start
+> This project is for **devices you own** or are **explicitly authorized in writing** to test, in an isolated lab.
+> Read first: **[DISCLAIMER.md](DISCLAIMER.md)** · **[TERMS.md](TERMS.md)** · **[NOTICE](NOTICE)** (license scope and limits).
+> If you do not agree, stop using it and delete all copies.
+
+---
+
 ## Table of contents
 
 - [Overview](#overview)
@@ -253,6 +260,9 @@ See [SECURITY.md](SECURITY.md). Do not file vulnerabilities in third-party produ
 
 ## License and credits
 
-[MIT](LICENSE).
+- **Code**: [MIT](LICENSE)
+- **Docs & research notes**: CC BY 4.0
+- **Use restrictions**: [DISCLAIMER.md](DISCLAIMER.md) · [TERMS.md](TERMS.md) — a copyright license grants **no authorization to access any system**
+- **License coverage map**: [NOTICE](NOTICE)
 
 Credits: the Android/Linux open-source community, the scapy project, and every researcher who discusses kiosk management and mobile forensics in public.
