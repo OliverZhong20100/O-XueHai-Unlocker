@@ -1,0 +1,23 @@
+# NOTICE
+
+本仓库包含两类内容，许可与约束分别适用：
+
+| 内容 | 覆盖范围 | 许可 |
+|---|---|---|
+| 代码 | `tools/`、`payloads/`（脚本部分）、`.github/`、构建与实验代码 | **MIT**（见 `LICENSE`） |
+| 文档与研究记录 | `README*.md`、`docs/`、`disclosure/`、`DISCLAIMER.md`、`TERMS.md`、`CHANGELOG.md` | **CC BY 4.0**（署名转载） |
+
+## 重要澄清
+
+1. **MIT 只解决著作权**。它不授予你访问、控制、测试任何设备的权限；对设备的使用授权来自设备所有者，不来自本仓库。
+2. **使用前必须阅读** [DISCLAIMER.md](DISCLAIMER.md) 与 [TERMS.md](TERMS.md)。两者中的限制（仅限自有/书面授权设备、禁止生产环境、禁止再分发载荷、禁止商业使用等）**优先于** MIT 的宽松条款。
+3. 本仓库**不包含**任何第三方闭源二进制（含目标应用 APK）、商业密钥、真实师生个人信息；文中出现的设备标识/账号/路径均已脱敏。
+4. 文中提及的产品名、商标、包名归各自权利人所有；本项目与学海教育及其关联公司**无关联、未获授权或背书**。
+
+## 引用格式
+
+```
+O-XueHai-Unlocker contributors. (2026). O-XueHai-Unlocker:
+Security research notes on an education-terminal kiosk (SM-P200, Android 9).
+https://github.com/OliverZhong20100/O-XueHai-Unlocker
+```
