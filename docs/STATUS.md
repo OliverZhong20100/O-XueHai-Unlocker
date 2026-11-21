@@ -221,3 +221,63 @@ ports: {'tcp:3200': 23}    dns: {}
 ### 9.4 结论
 
 > 在「无教师端操作、无用户点按、无物理调试入口」的约束下，远程链路的能力边界是：**完全控制课堂实时通道，能写入任意内容到固定目录、写任意任务行到课堂库、删除任意目录，但无法让设备安装任何程序**。安装所需的最后一道门由服务端资源授权把守，属于服务端信任边界，不是客户端缺陷。
+
+
+## 7. 2026-11-21 现场实验：安装链端到端打通（本节取代第 1~4 节的「待闭合」结论）
+
+### 7.1 结论
+
+推送接收器路线仍是死角；**改用「写应用数据库 → 让应用自己消费安装任务」后，安装链、零点击自启、代码执行、远端控制、读原语全部在真机上成立**。
+真正剩下的唯一卡点是**进程存活**：每次安装后有约 7 秒窗口，随后被平台静默回收，包转入 stopped 态。
+
+### 7.2 八段链路与证据级别
+
+| # | 段 | 状态 | 证据 |
+| --- | --- | --- | --- |
+| 1 | 课堂 WebSocket `:8889` 明文劫持 | 成立 | 端侧逐帧 ACK（`端侧ack == 我们mine`） |
+| 2 | `type=4` + `sourceId=MOCK_*` 直连下载 | 成立 | 设备侧对受控 HTTP 源持续发起 `GET`（UA=课堂端） |
+| 3 | 7z 任意路径写 | 成立 | `libun7zip` 的 `OutFile_OpenUtf16` 无 `..` 过滤；换库后应用表现变化 |
+| 4 | 应用消费 `app_update_task`（`status=25`） | 成立 | 受控 HTTP 源出现 **launcher 自身 UA** 的 `GET /agent.apk`，同日 8 次 |
+| 5 | MDM 静默安装（无签名校验） | 成立 | `pm path` 指向 `/data/app/<pkg>-*/base.apk`；安装后应用自打印启动标记 |
+| 6 | 零点击自启 | 成立 | `HomeViewModel$loadData$1` 无条件调 `SpecialApp.wakeUpResponse`，隐式 action 命中我们 |
+| 7 | 代码执行 + 远端控制 + 读原语 | 成立 | 设备侧 shell banner 回显；应用数据库（143,360 B）被完整回传 |
+| 8 | 持久化（存活） | **未闭合** | 约 7 秒后静默消失（无 `onDestroy`、无崩溃记录），重启后不再启动 |
+
+### 7.3 关键代码坐标（均可复核）
+
+| 环节 | 位置 |
+| --- | --- |
+| 任务行消费入口 | `HomeViewModel.returnTop()` → `resumeInstall()` → `AppUpdateModelImpl.getInstallPauseAppUpdateTask()`（`WHERE Status == 25`）|
+| 下载链 | `AppUpdateManager.pushDownloadTask` → `downloadAndInstall` → `realDownloadApp` → `DownloadManager.downloadFromBox` → `BoxDownload`（盒子不可用则回落普通 HTTP，URL 不改写）|
+| 安装 | `AppInstallManager.installApp` → `PolicyManager.getApplicationPolicyProxy().installApplication(path)` → MDM 特权侧（无 md5/签名校验）|
+| 自启 | `SpecialApp.wakeUp(ctx, "com.xh.arespunc", "com.xh.arespunc.wakeup")`：隐式 action + `FLAG_ACTIVITY_NEW_TASK`，异常被吞 |
+| 数据库路径 | `<外部存储>/xuehai/<schoolId>/databases/<运行时包名>/<userId>/xh_launcher.db` |
+| 安装落盘路径 | `<外部存储>/xuehai/download/app/<pkg>/<versionCode>/<pkg>.apk` |
+
+### 7.4 为什么「7 秒后必死」
+
+逐项排除后（`disableApps`、`killBackgroundProcesses`、同进程 `killProcess`、固定包禁用表、我方崩溃处理器均不匹配），最吻合的是**场景管控**：
+
+- `SceneControlStatus.executeThisTime()`：当服务端开关打开时，计算「第三方应用 − 场景白名单」，对结果逐个 `setDisableApplication(pkg)`；
+- `setApplicationEnabledSetting(DISABLED)` 会当场 SIGKILL 且令包进入 stopped ⇒ 与「无 `onDestroy`、闹钟被清、重启不启动、隐式 intent 失效」全部吻合；
+- 场景白名单持久化在**外部存储可写**的 `sceneControl.ini`，且存在无需权限的「清缓存」广播（`com.xuehai.control.action_clear_scene_cache`）。
+
+验证版载荷在启动窗口内改写该白名单并广播清缓存；判据是设备侧独立采样器记录的「进程消失那一秒包是否处于 disabled 集合」。
+
+### 7.5 本轮澄清的死路（勿重复）
+
+| 方向 | 判死原因 |
+| --- | --- |
+| 用本地 NTP / hosts 绕过夜间管控 | 设备开机不发 `UDP/123`（被动抓包 79 包全 TCP），DNS 亦 0；PC hosts 不影响热点 DHCP 下发的 DNS 答案 |
+| WebView JS 桥 → 命令执行 | 70 个桥方法全是读信息/上报/下载，无 install/exec/loadUrl |
+| 靠应用数据库里的「应用清单行」让平台启用自己 | 该行会被服务端应用目录同步原地改写；且当时包并未被 disable |
+| 自装下一版续命 | 安装自身会杀掉正在运行的进程 |
+| 精确闹钟 / JobScheduler 自愈 | 被强杀后系统清除闹钟与作业调度 |
+| stopped 态后再靠隐式 intent 拉起 | 隐式 intent flags 不含 `FLAG_INCLUDE_STOPPED_PACKAGES`，只有重新安装能清 stopped |
+
+### 7.6 下一步
+
+1. 验证场景白名单写入是否成立（设备侧采样：死亡瞬间 `disabled` 标志）；
+2. 若归因成立 → 固化白名单，存活问题闭合，链路 8/8；
+3. 若归因不成立 → 转向 force-stop 类机制（MDM 侧保活数据源、系统设置类特权接口）；
+4. 存活后：用读原语改真库（只改一行、保留会话）、用 MDM 自装与保活、关闭夜间管控。
