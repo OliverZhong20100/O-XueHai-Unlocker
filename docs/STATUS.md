@@ -281,3 +281,22 @@ ports: {'tcp:3200': 23}    dns: {}
 2. 若归因成立 → 固化白名单，存活问题闭合，链路 8/8；
 3. 若归因不成立 → 转向 force-stop 类机制（MDM 侧保活数据源、系统设置类特权接口）；
 4. 存活后：用读原语改真库（只改一行、保留会话）、用 MDM 自装与保活、关闭夜间管控。
+
+## 8. 2026-11-28 复核：第 8 段（存活）根因纠正
+
+第 7 节的「场景管控 `setDisableApplication`」归因被后续采样推翻：设备侧 `pm list packages -d | grep arespunc` 为空 ⇒ 死时包并不是 disabled 状态自身。
+
+**代码级定论（逐行）**：
+
+1. `device_samsung_v3`（`res/values/arrays.xml`）含 `SM-P200/SM-P615C/SM-P620` ⇒ `SamsungV3Configuration.isSDKSupport()` 返回 `true`；
+2. `DeviceConfiguration.getAppBlackList()` = 全部非系统应用 ∪ `un_keep_app`（Samsung 变体再加 `samsung_un_keep_app_p615/p620`）；
+3. `HomeViewModel.clearBlackApp()`（`:3299`，由 `HomeActivity.onPlatformUpdate` → `:1389` 触发）⇒ `clearBlackAppBySdk`；
+4. 该分支遍历 `ApplicationManager.getInstalledApps()`：命中黑名单的非系统应用 ⇒ **`uninstallApplication(pkg)`**（Knox，SIGKILL、无 `onDestroy`）；
+5. `getInstalledApps()` 的数据源是 `queryIntentActivities(MAIN+LAUNCHER)` ⇒ 只有带 LAUNCHER 的包才会被看见 ⇒ **带 LAUNCHER 的第三方包必被卸载**；
+6. `loadData` 序列（`initMdmRules`→`enableApps`→`checkMicroServer`→`wakeUpResponse`）不含 `clearBlackApp` ⇒ 卸载由平台表更新事件驱动，与安装/启动不同时间线。
+
+**同时被真机否证的启动腿**：新装包处于 stopped 态，`SpecialApp.wakeUp` 的隐式 intent（flags `0x10a00000`，无 `FLAG_INCLUDE_STOPPED_PACKAGES`）、`BOOT_COMPLETED`、`MY_PACKAGE_REPLACED`、持久化 Job 均不投递；无 LAUNCHER 版（仅 wakeup filter）下载成功但零事件。
+
+**结构免疫设计（待窗口验证）**：resident（`com.olive.svc`，无 LAUNCHER、无 activity filter）+ decoy（`com.xh.arespunc`，仅 `com.xh.arespunc.wakeup` filter，启动后 10 次重试显式拉起 resident）；投递件为两行任务，另配单行补件与自动判据。
+
+**新增死路**（详表见仓库私有版 `docs/DEAD-ENDS.md` 增补节）：私钥冒充（本机 `sslv3 alert certificate unknown`）、整域 DNS 冻结（`loadData` 断在云端同步）、写 `app_black_roster`（会让平台卸载自己）、带 LAUNCHER 追求可点图标、服务器黑名单接口网络层屏蔽（黑名单为本地计算）。
