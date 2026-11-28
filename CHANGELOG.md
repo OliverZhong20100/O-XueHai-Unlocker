@@ -65,3 +65,12 @@
 ## 0.1.0
 
 - 初始: 设备信息收集、组件枚举、导出组件清单
+
+## 1.3.0
+
+- 更正: 第 8 段（存活）根因由「场景管控 disable」改为「`clearBlackAppBySdk` → `uninstallApplication`」：设备命中 `SamsungV3Configuration`（`isSDKSupport()=true`），黑名单 = 全部非系统应用，且迭代集合只含带 LAUNCHER 的包 ⇒ 带 LAUNCHER 的第三方包必被卸载（SIGKILL、无 `onDestroy`）
+- 更正: 零点击 `SpecialApp.wakeUp` / `BOOT_COMPLETED` / `MY_PACKAGE_REPLACED` / 持久化 Job 对新装 stopped 包一律不投递（真机否证）
+- 新增: 结构免疫设计（resident 无 LAUNCHER + decoy 仅 wakeup filter + 10 次重试显式拉起），与两段式重启验证流程
+- 新增: `docs/STATUS.md` §8（根因纠正与设计）、`docs/CHAIN.md` 第 8 段重写
+- 新增: 本轮死路（私钥冒充被拒、整域 DNS 冻结、`app_black_roster` 自伤、带 LAUNCHER 的可点图标、黑名单接口网络层屏蔽）
+- 说明: 现场账号/序列号/学校 ID 等标识仍全部不出现在本仓库
