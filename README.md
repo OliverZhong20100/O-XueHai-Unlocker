@@ -212,7 +212,7 @@ python -m py_compile tools/*.py tools/analysis/*.py
 
 ## Roadmap 与状态
 
-**当前状态：Live-Fire Validated（v1.2.0）——链路 7/8 段真机成立，唯一缺口是进程存活**
+**当前状态：Live-Fire Validated（v1.3.0）——链路 7/8 段真机成立，唯一缺口是进程存活（根因已更正）**
 
 | 阶段 | 内容 | 状态 |
 |---|---|---|
@@ -221,13 +221,13 @@ python -m py_compile tools/*.py tools/analysis/*.py
 | 3 | 写原语：WS 注入 → 直连下载 → 7z 越界写 | **已完成（真机）** |
 | 4 | 安装：写应用数据库任务行 → 应用自消费 → MDM 静默安装 | **已完成（真机，同日 8 次）** |
 | 5 | 零点击自启 → 代码执行 → 远端控制 → 读原语 | **已完成（真机）** |
-| 6 | 持久化（进程存活） | **进行中**：窗口约 7 秒，归因指向场景管控（见 `docs/STATUS.md` §7） |
+| 6 | 持久化（进程存活） | **进行中**：约 7 秒后被平台 `uninstallApplication` 卸载（不是 disable）；已设计结构免疫版（无 LAUNCHER + 显式拉起），待窗口验证。见 `docs/STATUS.md` §8 |
 
 > **破坏性变更风险**：`1.x` 期间 `tools/` 脚本名、环境变量名、`docs/` 结构都可能调整；复现请固定 commit。
 
 后续方向（不承诺时间）：
 
-- 验证场景管控白名单写入能否消除「7 秒回收」（程序化判据：进程消失那一秒的 disabled 标志）；
+- 验证结构免疫版：resident（无 LAUNCHER）+ decoy（仅 wakeup filter、显式拉起 resident）；
 - 把「写任务行 → 应用消费 → 静默安装 → 自启」的观测点做成一条可重放脚本；
 - 视需要增加英文文档同步检查脚本。
 
