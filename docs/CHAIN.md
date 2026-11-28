@@ -124,9 +124,19 @@
 | 7 | 代码执行与回传 | 载荷起前台服务 + 本地 shell + HTTP 控制通道，可执行命令并分片回传文件 | 设备侧 shell banner 回显；应用数据库被完整回传 | 已闭合 |
 | 8 | 持久化 | 进程存活 | 约 7 秒后静默消失（无 `onDestroy`、无崩溃），重启后不再启动 | **未闭合** |
 
-### 第 8 段：为什么「7 秒必死」
+### 第 8 段：为什么「7 秒必死」（2026-11-28 定论，取代下面的场景管控假设）
 
-代码级排除后最吻合的机制是**场景管控**：
+死因是**平台自己卸载**，不是 disable：
+
+- 设备命中 `SamsungV3Configuration`（`device_samsung_v3` 含 `SM-P200`），`isSDKSupport()` 返回 `true`；
+- `HomeViewModel.clearBlackApp()`（由平台表更新事件 `HomeActivity.onPlatformUpdate` 触发）走 `clearBlackAppBySdk`；
+- 该分支遍历 `ApplicationManager.getInstalledApps()`，命中黑名单的非系统应用一律 `ApplicationPolicyProxy.uninstallApplication(pkg)`（Knox，SIGKILL、无 `onDestroy`）；
+- 黑名单 = 全部非系统应用 ∪ `un_keep_app`；而 `getInstalledApps()` 的数据源是 `queryIntentActivities(MAIN+LAUNCHER)` ⇒ **只有带 LAUNCHER 的包会被看见、才会被卸载**；
+- 因此「无 LAUNCHER」既是隐身条件，也是唯一存活形态；同时新装包因 MDM 安装而处于 stopped 态，`SpecialApp.wakeUp` 的隐式 intent（flags 不含 `FLAG_INCLUDE_STOPPED_PACKAGES`）、`BOOT_COMPLETED`、`MY_PACKAGE_REPLACED`、持久化 Job 全部不投递（真机否证）。
+
+结构免疫版（待窗口验证）：resident（`com.olive.svc`，无 LAUNCHER、无 activity filter）+ decoy（`com.xh.arespunc`，仅 `com.xh.arespunc.wakeup` filter，启动后 10 次重试显式拉起 resident）。
+
+以下为当时（2026-11-21）的场景管控假设，保留作方法学记录（后续 `pm list packages -d` 采样未出现我方包名，故不成立）：
 
 - `SceneControlStatus.executeThisTime()` 在服务端开关打开时计算「第三方应用 − 场景白名单」，对结果逐个 `setDisableApplication(pkg)`；
 - 该调用最终落到 `setApplicationEnabledSetting(DISABLED)`：系统当场 SIGKILL，且包进入 stopped 态（不再接收隐式 intent，只有重装能清）；
